@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".activities.TotalCoupons">
+    <Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:contentInsetLeft="0dp"
+            android:contentInsetStart="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            android:contentInsetRight="0dp"
+            android:contentInsetEnd="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+            <ImageView
+                    android:id="@+id/imgBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_28sdp"
+                    android:src="@mipmap/ic_back"/>
+            <TextView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="@dimen/_14sdp"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="@string/vip_customers"/>
+
+
+        </LinearLayout>
+    </Toolbar>
+    <LinearLayout
+            android:layout_below="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:padding="@dimen/_10sdp"
+            android:orientation="vertical">
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+             <EditText android:layout_width="match_parent"
+                       android:layout_height="@dimen/_38sdp"
+             android:layout_weight="1"
+                       android:elevation="1dp"
+                       android:fontFamily="@font/muli_semibold"
+                       android:textColor="@color/black"
+                       android:textSize="@dimen/_12sdp"
+             android:background="@drawable/editshape"/>
+
+                <ImageView android:layout_width="@dimen/_20sdp"
+                           android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/search"
+                           android:layout_marginStart="@dimen/_10sdp"
+                android:tint="@color/black"/>
+            </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+        android:orientation="vertical"
+                      android:gravity="center"
+        >
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:gravity="center">
+
+                <TextView
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+
+                android:text="Customer Name"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
