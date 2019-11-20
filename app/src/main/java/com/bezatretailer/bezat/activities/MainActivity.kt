@@ -1,11 +1,11 @@
 package com.bezatretailer.bezat.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.bezatretailer.bezat.utils.SharedPrefs
 import com.bezatretailer.bezat.utils.URLS
 import com.github.kittinunf.fuel.core.FuelManager
@@ -25,8 +25,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, Homepage::class.java))
             }
             else {
-//                startActivity(Intent(this, Intro::class.java))
-                startActivity(Intent(this, Homepage::class.java))
+                startActivity(Intent(this, Intro::class.java))
 
             }
             finish()

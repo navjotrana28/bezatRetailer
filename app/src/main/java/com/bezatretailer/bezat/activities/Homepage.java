@@ -38,10 +38,9 @@ public class Homepage extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
+
                 case R.id.navigation_dashboard:
-
                     viewPager.setCurrentItem(0);
-
                     return true;
                 case R.id.navigation_bell:
 
@@ -50,13 +49,11 @@ public class Homepage extends AppCompatActivity {
                 case R.id.navigation_profile:
 
                     viewPager.setCurrentItem(2);
-
                     return true;
 
                 case R.id.navigation_settings:
 
                     viewPager.setCurrentItem(3);
-
                     return true;
             }
             return false;
@@ -106,7 +103,26 @@ public class Homepage extends AppCompatActivity {
         ft.commit();
         viewPager = findViewById(R.id.viewPagerhome);
         addTabs(viewPager);
+        setPageChangeListener(navView);
 
+    }
+
+    private void setPageChangeListener(BottomNavigationView navView) {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                navView.getMenu().getItem(position).setChecked(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private void addTabs(ViewPager viewPager) {
@@ -126,7 +142,5 @@ public class Homepage extends AppCompatActivity {
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
-
     }
-
 }
