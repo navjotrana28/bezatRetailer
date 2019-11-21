@@ -226,7 +226,6 @@ public class Settings extends Fragment implements View.OnClickListener {
         {
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, new MyScanHistory());
-
             ft.addToBackStack(null);
             ft.commit();
         }

@@ -42,24 +42,23 @@ public class Homepage extends AppCompatActivity {
             switch (item.getItemId()) {
 
                 case R.id.navigation_dashboard:
-                    frameLayout.setVisibility(View.GONE);
+                    getSupportFragmentManager().popBackStack();
                     viewPager.setCurrentItem(0);
                     return true;
                 case R.id.navigation_bell:
-                    frameLayout.setVisibility(View.GONE);
+                    getSupportFragmentManager().popBackStack();
 
                     viewPager.setCurrentItem(1);
                     return true;
                 case R.id.navigation_profile:
-                    frameLayout.setVisibility(View.GONE);
+                    getSupportFragmentManager().popBackStack();
 
                     viewPager.setCurrentItem(2);
                     return true;
 
                 case R.id.navigation_settings:
-                    if (frameLayout.getVisibility() == View.GONE) {
-                        frameLayout.setVisibility(View.VISIBLE);
-                    }
+                    getSupportFragmentManager().popBackStack();
+
                     viewPager.setCurrentItem(3);
                     return true;
             }
