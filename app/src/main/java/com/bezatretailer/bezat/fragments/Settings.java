@@ -111,6 +111,7 @@ public class Settings extends Fragment implements View.OnClickListener {
         layoutLanguage=rootView.findViewById(R.id.layoutLanguage);
         txtLogout=rootView.findViewById(R.id.txtLogout);
         txtMyFav=rootView.findViewById(R.id.txtMyFav);
+
         txtChangePassword.setOnClickListener(this);
         txtMyScan.setOnClickListener(this);
         txtAbout.setOnClickListener(this);
@@ -225,13 +226,15 @@ public class Settings extends Fragment implements View.OnClickListener {
         {
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, new MyScanHistory());
-             ft.addToBackStack(null);
+
+            ft.addToBackStack(null);
             ft.commit();
         }
         if (view.getId()==R.id.txtChangePassword)
         {
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, new ChangePassword());
+
             ft.addToBackStack(null);
             ft.commit();
         }
@@ -242,6 +245,7 @@ public class Settings extends Fragment implements View.OnClickListener {
             Pages pages=new Pages();
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, pages);
+
             pages.setArguments(bundle);
             ft.addToBackStack(null);
 

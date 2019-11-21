@@ -84,7 +84,7 @@ public class MainHomeActivty extends AppCompatActivity
         setContentView(R.layout.activity_main_home_activty);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -115,51 +115,51 @@ public class MainHomeActivty extends AppCompatActivity
 
     private void setDashboardData() {
 
-        recycle=findViewById(R.id.recycle);
+        recycle = findViewById(R.id.recycle);
         dashBoardItem.add(new DashBoardItem(
                 R.drawable.get_coupon,
-                getString(R.string.get_coupon)+""
+                getString(R.string.get_coupon) + ""
         ));
         dashBoardItem.add(new DashBoardItem(
                 R.drawable.fav_offers,
-                getString(R.string.fav_offers)+""
+                getString(R.string.fav_offers) + ""
         ));
 
 
         dashBoardItem.add(new DashBoardItem(
                 R.drawable.prizes,
-                getString(R.string.prizes)+""
+                getString(R.string.prizes) + ""
         ));
         dashBoardItem.add(new DashBoardItem(
                 R.drawable.total_coupon,
-                getString(R.string.total_coupon)+""
+                getString(R.string.total_coupon) + ""
         ));
 
         dashBoardItem.add(new DashBoardItem(
                 R.drawable.partners,
-                getString(R.string.partners)+""
+                getString(R.string.partners) + ""
         ));
-        dashBoardItem.add(new  DashBoardItem(
+        dashBoardItem.add(new DashBoardItem(
                 R.drawable.winners,
-                getString(R.string.winners)+""
+                getString(R.string.winners) + ""
         ));
 
         dashBoardItem.add(new DashBoardItem(
                 R.drawable.my_profile,
-                getString(R.string.my_profile)+""
+                getString(R.string.my_profile) + ""
         ));
 
         dashBoardItem.add(new DashBoardItem(
                 R.drawable.vip_offers,
-                getString(R.string.vip_offers)+""
+                getString(R.string.vip_offers) + ""
         ));
 
         dashBoardItem.add(new DashBoardItem(
                 R.drawable.logout,
-                getString(R.string.sign_out)+""
+                getString(R.string.sign_out) + ""
         ));
 
-        PostAdapter postAdapter=new PostAdapter(dashBoardItem);
+        PostAdapter postAdapter = new PostAdapter(dashBoardItem);
 
         recycle.setLayoutManager(new GridLayoutManager(MainHomeActivty.this, 3));
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(MainHomeActivty.this, R.dimen._1sdp);

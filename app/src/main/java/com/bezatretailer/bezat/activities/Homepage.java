@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class Homepage extends AppCompatActivity {
     FragmentTransaction ft;
     ViewPagerAdapter adapter;
     ViewPager viewPager;
+    FrameLayout frameLayout;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -40,19 +42,24 @@ public class Homepage extends AppCompatActivity {
             switch (item.getItemId()) {
 
                 case R.id.navigation_dashboard:
+                    frameLayout.setVisibility(View.GONE);
                     viewPager.setCurrentItem(0);
                     return true;
                 case R.id.navigation_bell:
+                    frameLayout.setVisibility(View.GONE);
 
                     viewPager.setCurrentItem(1);
                     return true;
                 case R.id.navigation_profile:
+                    frameLayout.setVisibility(View.GONE);
 
                     viewPager.setCurrentItem(2);
                     return true;
 
                 case R.id.navigation_settings:
-
+                    if (frameLayout.getVisibility() == View.GONE) {
+                        frameLayout.setVisibility(View.VISIBLE);
+                    }
                     viewPager.setCurrentItem(3);
                     return true;
             }
@@ -95,6 +102,7 @@ public class Homepage extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         BottomNavigationView navView = findViewById(R.id.navigation);
+        frameLayout = findViewById(R.id.container);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         currentFragment = new Dashboard();
@@ -115,6 +123,9 @@ public class Homepage extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
+                if (position == 3) {
+                    frameLayout.setVisibility(View.VISIBLE);
+                }
                 navView.getMenu().getItem(position).setChecked(true);
             }
 
