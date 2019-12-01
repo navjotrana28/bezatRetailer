@@ -61,7 +61,7 @@
 					android:id="@+id/profile_constraint_layout"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:background="@color/white">
+					android:background="@color/colorPrimary">
 
 				<androidx.cardview.widget.CardView
 						android:id="@+id/front_edit"
@@ -71,7 +71,7 @@
 						android:layout_marginTop="@dimen/spacing_small"
 						android:layout_marginEnd="@dimen/spacing_small"
 						android:layout_marginBottom="@dimen/spacing_small"
-						android:background="@color/white"
+						android:background="@color/colorPrimary"
 						android:clickable="true"
 						android:focusable="true"
 						android:padding="@dimen/spacing_normal"
@@ -87,7 +87,7 @@
 							android:id="@+id/edit_profile"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:background="@color/white">
+							android:background="@color/colorPrimary">
 
 						<androidx.appcompat.widget.AppCompatImageView
 								android:id="@+id/front_edit_icon"
@@ -95,6 +95,7 @@
 								android:layout_height="@dimen/icon_size_normal"
 								android:layout_gravity="center"
 								android:padding="6dp"
+								android:background="@color/white"
 								android:src="@drawable/ic_edit_borderless_8dp"
 								app:layout_constraintStart_toStartOf="parent"
 								app:layout_constraintTop_toTopOf="parent" />
@@ -107,7 +108,7 @@
 						android:layout_width="170dp"
 						android:layout_height="wrap_content"
 						android:visibility="visible"
-						android:background="@color/white"
+						android:background="@color/colorPrimary"
 						app:layout_constraintBottom_toBottomOf="parent"
 						app:layout_constraintEnd_toEndOf="parent"
 						app:layout_constraintStart_toStartOf="parent"
@@ -115,14 +116,13 @@
 
 					<androidx.constraintlayout.widget.ConstraintLayout
 							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:background="@color/white">
+							android:layout_height="wrap_content">
 
 						<androidx.appcompat.widget.AppCompatImageView
 								android:id="@+id/imgProfile"
 								android:layout_width="wrap_content"
 								android:layout_height="@dimen/_124sdp"
-								android:background="@color/white"
+								android:background="@color/colorPrimary"
 								android:scaleType="fitCenter"
 								android:src="@drawable/maleicon"
 								app:layout_constraintBottom_toBottomOf="parent"
