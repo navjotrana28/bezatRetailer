@@ -5,7 +5,7 @@
 		xmlns:tools="http://schemas.android.com/tools"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:background="@color/divider_grey"
+		android:background="@color/white"
 		tools:context=".activities.ContactUs">
 	<Toolbar
 			android:id="@+id/toolbar"
@@ -45,12 +45,12 @@
 
 	<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/imgProfile"
-			android:layout_width="140dp"
-			android:layout_height="140dp"
+			android:layout_width="150dp"
+			android:layout_height="150dp"
 			android:layout_marginTop="5dp"
 			android:background="@color/white"
 			android:scaleType="fitCenter"
-			android:src="@drawable/maleicon"
+			android:src="@drawable/bezat_contact_logo"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
@@ -58,71 +58,102 @@
 	<androidx.constraintlayout.widget.ConstraintLayout
 			android:layout_width="0dp"
 			android:layout_height="0dp"
-			android:layout_marginStart="30dp"
+			android:layout_marginStart="20dp"
 			android:layout_marginTop="10dp"
-			android:layout_marginEnd="30dp"
+			android:layout_marginEnd="20dp"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.0"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/imgProfile">
+			app:layout_constraintTop_toBottomOf="@+id/imgProfile"
+			app:layout_constraintVertical_bias="0.0">
 
-		<EditText
+		<androidx.cardview.widget.CardView
 				android:id="@+id/contact_name"
-				android:layout_width="0dp"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="10dp"
-				android:background="@drawable/round_corners"
-				android:hint="NAME:"
-				android:paddingStart="15dp"
-				android:paddingTop="5dp"
-				android:paddingBottom="5dp"
-				android:textColorHint="@color/divider_grey"
-				android:textSize="18sp"
+				android:elevation="@dimen/card_elevation"
+				app:cardBackgroundColor="@color/white"
+				app:cardCornerRadius="@dimen/corner_radius"
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toTopOf="parent"
-		/>
-		<EditText
+				app:layout_constraintTop_toTopOf="parent">
+			<EditText
+					android:id="@+id/contact_name_edit_text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@color/transparent"
+					android:hint="NAME:"
+					android:paddingStart="15dp"
+					android:paddingTop="5dp"
+					android:singleLine="true"
+					android:paddingBottom="5dp"
+					android:textColor="@color/black"
+					android:textColorHint="@color/dark_grey"
+					android:textSize="14sp"
+
+			/>
+		</androidx.cardview.widget.CardView>
+		<androidx.cardview.widget.CardView
 				android:id="@+id/contact_email"
-				android:layout_width="0dp"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="15dp"
-				android:background="@drawable/round_corners"
-				android:hint="EMAIL:"
-				android:paddingStart="15dp"
-				android:paddingTop="5dp"
-				android:paddingBottom="5dp"
-				android:textColorHint="@color/divider_grey"
-				android:textSize="18sp"
+				android:layout_marginTop="10dp"
+				android:elevation="@dimen/card_elevation"
+				app:cardBackgroundColor="@color/white"
+				app:cardCornerRadius="@dimen/corner_radius"
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toBottomOf="@+id/contact_name"
-		/>
-		<EditText
+				app:layout_constraintTop_toBottomOf="@+id/contact_name">
+			<EditText
+					android:id="@+id/contact_email_edit_text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@color/transparent"
+					android:hint="EMAIL:"
+					android:paddingStart="15dp"
+					android:paddingTop="5dp"
+					android:paddingBottom="5dp"
+					android:singleLine="true"
+					android:textColor="@color/black"
+					android:textColorHint="@color/dark_grey"
+					android:textSize="14sp"/>
+
+		</androidx.cardview.widget.CardView>
+		<androidx.cardview.widget.CardView
 				android:id="@+id/contact_comments"
-				android:layout_width="0dp"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="15dp"
-				android:background="@drawable/round_corners"
-				android:ems="10"
-				android:gravity="start"
-				android:hint="COMMENTS:"
-				android:lines="3"
-				android:maxLength="140"
-				android:paddingStart="15dp"
-				android:paddingTop="5dp"
-				android:singleLine="false"
-				android:textColorHint="@color/divider_grey"
-				android:textSize="18sp"
+				android:layout_marginTop="10dp"
+				android:elevation="@dimen/card_elevation"
+				app:cardBackgroundColor="@color/white"
+				app:cardCornerRadius="@dimen/corner_radius"
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toBottomOf="@+id/contact_email"
-		/>
+				app:layout_constraintTop_toBottomOf="@+id/contact_email">
+			<EditText
+					android:id="@+id/contact_comments_edit_text"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:background="@color/transparent"
+					android:ems="10"
+					android:gravity="start"
+					android:hint="COMMENTS:"
+					android:lines="4"
+					android:maxLength="140"
+					android:paddingStart="15dp"
+					android:paddingTop="5dp"
+					android:textColor="@color/black"
+					android:textColorHint="@color/dark_grey"
+					android:textSize="14sp"
+			/>
+		</androidx.cardview.widget.CardView>
 		<Button
 				android:id="@+id/contact_button"
 				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="20dp"
+				android:layout_height="30dp"
+				android:layout_marginTop="10dp"
 				android:background="@drawable/round_edge_and_color_background"
 				android:text="SEND"
 				android:textColor="@color/white"
@@ -130,23 +161,23 @@
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toBottomOf="@+id/contact_comments"
-				app:layout_goneMarginTop="10dp"
 		/>
 		<ImageView
 				android:id="@+id/contact_dialer"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="20dp"
-				android:src="@drawable/fb"
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:layout_marginStart="30dp"
+				android:layout_marginTop="30dp"
+				android:src="@drawable/dialer1"
 				app:layout_constraintEnd_toStartOf="@+id/contact_whattsApp"
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toBottomOf="@+id/contact_button"
 		/>
 		<ImageView
 				android:id="@+id/contact_whattsApp"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:src="@drawable/fb"
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:src="@drawable/whatsapp_logo"
 				app:layout_constraintBottom_toBottomOf="@+id/contact_dialer"
 				app:layout_constraintEnd_toStartOf="@+id/contact_insta"
 				app:layout_constraintStart_toEndOf="@+id/contact_dialer"
@@ -154,9 +185,9 @@
 		/>
 		<ImageView
 				android:id="@+id/contact_insta"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:src="@drawable/fb"
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:src="@drawable/instagram_logo"
 				app:layout_constraintBottom_toBottomOf="@+id/contact_whattsApp"
 				app:layout_constraintEnd_toStartOf="@+id/contact_snapchat"
 				app:layout_constraintStart_toEndOf="@+id/contact_whattsApp"
@@ -164,9 +195,10 @@
 		/>
 		<ImageView
 				android:id="@+id/contact_snapchat"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:src="@drawable/fb"
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:layout_marginEnd="30dp"
+				android:src="@drawable/snapchat_logo"
 				app:layout_constraintBottom_toBottomOf="@+id/contact_insta"
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintStart_toEndOf="@+id/contact_insta"
@@ -174,34 +206,36 @@
 		/>
 		<ImageView
 				android:id="@+id/contact_twitter"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+				android:layout_width="40dp"
+				android:layout_height="40dp"
 				android:layout_marginTop="10dp"
-				android:src="@drawable/fb"
-				app:layout_constraintEnd_toStartOf="@+id/contact_fb"
-				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toBottomOf="@+id/contact_dialer"
+				android:src="@drawable/twitter_logo"
+				app:layout_constraintEnd_toStartOf="@id/contact_whattsApp"
+				app:layout_constraintStart_toEndOf="@id/contact_dialer"
+				app:layout_constraintTop_toBottomOf="@+id/contact_whattsApp"
 
 		/>
 		<ImageView
 				android:id="@+id/contact_fb"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:src="@drawable/fb"
-				app:layout_constraintBottom_toBottomOf="@id/contact_twitter"
-				app:layout_constraintEnd_toStartOf="@+id/contact_browser"
-				app:layout_constraintStart_toEndOf="@+id/contact_twitter"
-				app:layout_constraintTop_toTopOf="@+id/contact_twitter"
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:layout_marginTop="10dp"
+				android:src="@drawable/facebook_logo"
+				app:layout_constraintEnd_toStartOf="@+id/contact_insta"
+				app:layout_constraintStart_toEndOf="@+id/contact_whattsApp"
+				app:layout_constraintTop_toBottomOf="@+id/contact_whattsApp"
 		/>
 		<ImageView
 				android:id="@+id/contact_browser"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:src="@drawable/fb"
-				app:layout_constraintBottom_toBottomOf="@id/contact_fb"
-				app:layout_constraintEnd_toEndOf="parent"
-				app:layout_constraintStart_toEndOf="@+id/contact_fb"
-				app:layout_constraintTop_toTopOf="@+id/contact_fb"/>
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:layout_marginTop="10dp"
+				android:src="@drawable/browser_logo"
+				app:layout_constraintEnd_toStartOf="@+id/contact_snapchat"
+				app:layout_constraintStart_toEndOf="@+id/contact_insta"
+				app:layout_constraintTop_toBottomOf="@+id/contact_snapchat"
+
+		/>
 
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
