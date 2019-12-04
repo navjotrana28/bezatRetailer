@@ -25,7 +25,9 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, Homepage::class.java))
             }
             else {
-                startActivity(Intent(this, Intro::class.java))
+                startActivity(Intent(this, Homepage::class.java))
+
+//                startActivity(Intent(this, Intro::class.java))
 
             }
             finish()
