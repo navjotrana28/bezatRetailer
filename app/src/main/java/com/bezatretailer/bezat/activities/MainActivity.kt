@@ -20,18 +20,14 @@ class MainActivity : AppCompatActivity() {
             window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
         }
         Handler(Looper.getMainLooper()).postDelayed({
-            if(SharedPrefs.getKey(this@MainActivity,"LoggedIn").equals("true"))
-            {
+            if (SharedPrefs.getKey(this@MainActivity, "LoggedIn").equals("true")) {
                 startActivity(Intent(this, Homepage::class.java))
-            }
-            else {
-                startActivity(Intent(this, Homepage::class.java))
-
-//                startActivity(Intent(this, Intro::class.java))
+            } else {
+                startActivity(Intent(this, Intro::class.java))
 
             }
             finish()
-        },3000)
+        }, 3000)
         FuelManager.instance.apply {
             basePath = URLS.BASE_PATH
             baseHeaders = mapOf("apiKey" to "12345678")

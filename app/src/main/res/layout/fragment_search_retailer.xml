@@ -4,6 +4,7 @@
 		xmlns:app="http://schemas.android.com/apk/res-auto"
 		xmlns:tools="http://schemas.android.com/tools"
 		android:layout_width="match_parent"
+		android:background="@color/white"
 		android:layout_height="match_parent"
 		tools:context=".fragments.SearchRetailer">
 
@@ -46,7 +47,7 @@
 	<SearchView
 			android:id="@+id/search_view"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
+			android:layout_height="30dp"
 			android:layout_alignParentTop="true"
 			android:layout_marginStart="20dp"
 			android:layout_marginTop="20dp"
@@ -64,23 +65,46 @@
 	<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/recyclerView_horizontal"
 			android:layout_width="0dp"
-			android:layout_height="100dp"
-			android:orientation="horizontal"
+			android:layout_height="90dp"
 			app:layout_constraintEnd_toEndOf="parent"
+			android:layout_marginTop="8dp"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/search_view">
 	</androidx.recyclerview.widget.RecyclerView>
+	<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginTop="8dp"
+			android:layout_marginBottom="20dp"
+			android:background="@color/divider_grey"
+			app:layout_constraintBottom_toTopOf="@id/recyclerView_vertical"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/recyclerView_horizontal"
+
+	/>
 
 	<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/recyclerView_vertical"
 			android:layout_width="0dp"
 			android:layout_height="0dp"
 			android:orientation="vertical"
+			android:layout_marginTop="20dp"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/recyclerView_horizontal">
 	</androidx.recyclerview.widget.RecyclerView>
+
+	<include
+			android:id="@+id/progress_bar_search"
+			layout="@layout/dialog_loader"
+			android:visibility="visible"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+	/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

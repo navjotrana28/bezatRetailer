@@ -9,13 +9,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.widget.*;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.*;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.android.volley.*;
 import com.bezatretailer.bezat.MyApplication;
@@ -48,9 +47,9 @@ public class Settings extends Fragment implements View.OnClickListener {
     private String mParam1;
     private String mParam2;
     Switch switches;
-    TextView txtMyScan,txtChangePassword,txtAbout,txtTerms,
-            txtPrivacy,txtContactUs,txtFaq,txtChangeLanguage,
-            txtLogout,txtMyFav;
+    TextView txtMyScan, txtChangePassword, txtAbout, txtTerms,
+            txtPrivacy, txtContactUs, txtFaq, txtChangeLanguage,
+            txtLogout, txtMyFav;
     Button btnSave;
     View rootView;
     LinearLayout layoutLanguage;
@@ -91,26 +90,26 @@ public class Settings extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        if (SharedPrefs.getKey(getActivity(),"selectedlanguage").contains("ar")) {
+        if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             setLocale("ar");
         } else {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         }
-        rootView=inflater.inflate(R.layout.fragment_settings2, container, false);
+        rootView = inflater.inflate(R.layout.fragment_settings2, container, false);
 
-        txtMyScan=rootView.findViewById(R.id.txtMyScan);
-        txtChangePassword=rootView.findViewById(R.id.txtChangePassword);
-        txtAbout=rootView.findViewById(R.id.txtAbout);
-        txtTerms=rootView.findViewById(R.id.txtTerms);
-        txtPrivacy=rootView.findViewById(R.id.txtPrivacy);
-        txtContactUs=rootView.findViewById(R.id.txtContactUs);
-        txtFaq=rootView.findViewById(R.id.txtFaq);
-        switches=rootView.findViewById(R.id.switches);
-        txtChangeLanguage=rootView.findViewById(R.id.txtChangeLanguage);
-        layoutLanguage=rootView.findViewById(R.id.layoutLanguage);
-        txtLogout=rootView.findViewById(R.id.txtLogout);
-        txtMyFav=rootView.findViewById(R.id.txtMyFav);
+        txtMyScan = rootView.findViewById(R.id.txtMyScan);
+        txtChangePassword = rootView.findViewById(R.id.txtChangePassword);
+        txtAbout = rootView.findViewById(R.id.txtAbout);
+        txtTerms = rootView.findViewById(R.id.txtTerms);
+        txtPrivacy = rootView.findViewById(R.id.txtPrivacy);
+        txtContactUs = rootView.findViewById(R.id.txtContactUs);
+        txtFaq = rootView.findViewById(R.id.txtFaq);
+        switches = rootView.findViewById(R.id.switches);
+        txtChangeLanguage = rootView.findViewById(R.id.txtChangeLanguage);
+        layoutLanguage = rootView.findViewById(R.id.layoutLanguage);
+        txtLogout = rootView.findViewById(R.id.txtLogout);
+        txtMyFav = rootView.findViewById(R.id.txtMyFav);
 
         txtChangePassword.setOnClickListener(this);
         txtMyScan.setOnClickListener(this);
@@ -123,30 +122,26 @@ public class Settings extends Fragment implements View.OnClickListener {
         txtChangeLanguage.setOnClickListener(this);
         txtMyFav.setOnClickListener(this);
 
-        if (SharedPrefs.getKey(getActivity(),"push_notification_status").equalsIgnoreCase("1"))
-        {
+        if (SharedPrefs.getKey(getActivity(), "push_notification_status").equalsIgnoreCase("1")) {
             switches.setChecked(true);
-        }
-        else {
+        } else {
             switches.setChecked(true);
 //            switches.setChecked(false);
         }
         switches.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-               if (isChecked)
-               {
-                   notificationChange("0");
-               }
-               else {
-                   notificationChange("1");
-               }
+                if (isChecked) {
+                    notificationChange("0");
+                } else {
+                    notificationChange("1");
+                }
             }
         });
         return rootView;
     }
 
     private void notificationChange(String status) {
-        Loader loader=new Loader(getContext());
+        Loader loader = new Loader(getContext());
         loader.show();
 
 
@@ -155,8 +150,7 @@ public class Settings extends Fragment implements View.OnClickListener {
             public void onResponse(NetworkResponse response) {
                 loader.dismiss();
                 String res = new String(response.data);
-                Log.v("pushresponse",res);
-
+                Log.v("pushresponse", res);
 
 
             }
@@ -167,16 +161,16 @@ public class Settings extends Fragment implements View.OnClickListener {
                 String json = null;
                 String Message;
                 NetworkResponse response = error.networkResponse;
-                Log.v("response",response.data+"");
+                Log.v("response", response.data + "");
             }
         }) {
             @Override
             public Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("userId",SharedPrefs.getKey(getActivity(),"userId"));
-                params.put("status",status);
+                params.put("userId", SharedPrefs.getKey(getActivity(), "userId"));
+                params.put("status", status);
 
-                System.out.println("object"+params+" ");
+                System.out.println("object" + params + " ");
                 return params;
             }
 
@@ -222,26 +216,23 @@ public class Settings extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId()==R.id.txtMyScan)
-        {
+        if (view.getId() == R.id.txtMyScan) {
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, new MyScanHistory());
             ft.addToBackStack(null);
             ft.commit();
         }
-        if (view.getId()==R.id.txtChangePassword)
-        {
+        if (view.getId() == R.id.txtChangePassword) {
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, new ChangePassword());
 
             ft.addToBackStack(null);
             ft.commit();
         }
-        if (view.getId()==R.id.txtAbout)
-        {
-            Bundle bundle=new Bundle();
+        if (view.getId() == R.id.txtAbout) {
+            Bundle bundle = new Bundle();
             bundle.putString("pages", "about");
-            Pages pages=new Pages();
+            Pages pages = new Pages();
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, pages);
 
@@ -250,11 +241,10 @@ public class Settings extends Fragment implements View.OnClickListener {
 
             ft.commit();
         }
-        if (view.getId()==R.id.txtTerms)
-        {
-            Bundle bundle=new Bundle();
+        if (view.getId() == R.id.txtTerms) {
+            Bundle bundle = new Bundle();
             bundle.putString("pages", "terms");
-            Pages pages=new Pages();
+            Pages pages = new Pages();
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, pages);
             pages.setArguments(bundle);
@@ -262,42 +252,34 @@ public class Settings extends Fragment implements View.OnClickListener {
 
             ft.commit();
         }
-        if (view.getId()==R.id.txtPrivacy)
-        {
-            Bundle bundle=new Bundle();
+        if (view.getId() == R.id.txtPrivacy) {
+            Bundle bundle = new Bundle();
             bundle.putString("pages", "privacy");
-            Pages pages=new Pages();
+            Pages pages = new Pages();
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, pages);
             pages.setArguments(bundle);
             ft.addToBackStack(null);
             ft.commit();
         }
-        if (view.getId()==R.id.txtContactUs)
-        {
-//            Bundle bundle=new Bundle();
-//            bundle.putString("pages", "contactus");
-//           Pages pages=new Pages();
+        if (view.getId() == R.id.txtContactUs) {
             ContactUsFragment fragment = new ContactUsFragment();
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, fragment);
-//            pages.setArguments(bundle);
             ft.addToBackStack(null);
             ft.commit();
         }
-        if (view.getId()==R.id.txtFaq)
-        {
-            Bundle bundle=new Bundle();
+        if (view.getId() == R.id.txtFaq) {
+            Bundle bundle = new Bundle();
             bundle.putString("pages", "faq");
-            Pages pages=new Pages();
+            Pages pages = new Pages();
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, pages);
             pages.setArguments(bundle);
             ft.addToBackStack(null);
             ft.commit();
         }
-        if (view.getId()==R.id.txtLogout)
-        {
+        if (view.getId() == R.id.txtLogout) {
             new AlertDialog.Builder(getActivity(), R.style.DialogTheme)
                     .setMessage(getActivity().getString(R.string.logout_confirm))
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -311,15 +293,13 @@ public class Settings extends Fragment implements View.OnClickListener {
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         }
-        if (view.getId()==R.id.txtChangeLanguage)
-        {
+        if (view.getId() == R.id.txtChangeLanguage) {
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, new ChangeLanguage());
             ft.addToBackStack(null);
             ft.commit();
         }
-        if (view.getId()==R.id.txtMyFav)
-        {
+        if (view.getId() == R.id.txtMyFav) {
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, new MyFavourites());
             ft.addToBackStack(null);
@@ -341,6 +321,7 @@ public class Settings extends Fragment implements View.OnClickListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
     public void setLocale(String lang) {
 
         Locale myLocale = new Locale(lang);

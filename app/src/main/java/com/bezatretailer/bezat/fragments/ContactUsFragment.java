@@ -60,6 +60,7 @@ public class ContactUsFragment extends Fragment {
             @Override
             public void onSuccess(ContactUsResponse response) {
                 Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
+                getActivity().onBackPressed();
             }
 
             @Override

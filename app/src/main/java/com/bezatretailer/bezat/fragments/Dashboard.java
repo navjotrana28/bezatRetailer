@@ -112,7 +112,6 @@ public class Dashboard extends Fragment {
 
         viewPager = rootView.findViewById(R.id.viewPager);
         indicator = rootView.findViewById(R.id.indicator);
-
         getUserBanner();
     }
 
@@ -198,8 +197,8 @@ public class Dashboard extends Fragment {
         ));
 
         dashBoardItem.add(new DashBoardItem(
-                R.drawable.reports,
-                getString(R.string.reports)+""
+                R.drawable.feedback,
+                "Feedback"
         ));
         dashBoardItem.add(new DashBoardItem(
                 R.drawable.createoffer,
@@ -415,11 +414,15 @@ public class Dashboard extends Fragment {
 
                         }
                         else if (dashBoardItems.get(getAdapterPosition())
-                                .getName().equalsIgnoreCase(getString(R.string.reports)))
+                                .getName().equalsIgnoreCase("Feedback"))
                         {
-                            Intent i = new Intent(Intent.ACTION_VIEW);
-                            i.setData(Uri.parse("http://bezatapp.com/manage_App"));
-                            startActivity(i);
+                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.container, new Feedback());
+                            ft.addToBackStack(null);
+                            ft.commit();
+//                            Intent i = new Intent(Intent.ACTION_VIEW);
+//                            i.setData(Uri.parse("http://bezatapp.com/manage_App"));
+//                            startActivity(i);
 
                         }
                         else if (dashBoardItems.get(getAdapterPosition())

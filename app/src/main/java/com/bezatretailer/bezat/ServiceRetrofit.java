@@ -1,14 +1,28 @@
 package com.bezatretailer.bezat;
 
-import com.bezatretailer.bezat.api.contactusResponse.ContactUsRequest;
 import com.bezatretailer.bezat.api.contactusResponse.ContactUsResponse;
-import io.reactivex.Single;
-import retrofit2.http.Body;
+import com.bezatretailer.bezat.models.searchRetailerResponses.SearchResponseResult;
+import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ServiceRetrofit {
 
+//    @POST("user/sendEnquiry")
+//    Observable<ContactUsResponse> getContactSuccess(@Body ContactUsRequest request);
+
+    @FormUrlEncoded
     @POST("user/sendEnquiry")
-    Single<ContactUsResponse> getContactSuccess(@Body ContactUsRequest request);
+    Observable<ContactUsResponse> getContactSuccess(@Field("name") String name,
+                                                    @Field("email") String email,
+                                                    @Field("comments") String comments);
+
+
+    @GET("category/list")
+    Observable<SearchResponseResult> getSearchRetaierSuccess();
+
+
 }
 
