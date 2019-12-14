@@ -3,7 +3,10 @@ package com.bezatretailer.bezat;
 import com.bezatretailer.bezat.api.contactusResponse.ContactUsRequest;
 import com.bezatretailer.bezat.api.contactusResponse.ContactUsResponse;
 import com.bezatretailer.bezat.interfaces.ContactUsSuccessResponse;
+import com.bezatretailer.bezat.interfaces.FeedbackCallback;
 import com.bezatretailer.bezat.interfaces.SearchRetaierInterface;
+import com.bezatretailer.bezat.models.feedbackResponse.FeedbackRequest;
+import com.bezatretailer.bezat.models.feedbackResponse.FeedbackResponse;
 import com.bezatretailer.bezat.models.searchRetailerResponses.SearchResponseResult;
 import com.bezatretailer.bezat.utils.URLS;
 import io.reactivex.Observer;
@@ -86,4 +89,32 @@ public class ClientRetrofit {
                     }
                 });
     }
+
+    public void feedBackRequestApi(FeedbackRequest request, final FeedbackCallback callback) {
+        serviceRetrofit.getFeedbackRequest(request.getUserId(), request.getFeedback(), request.getRetailerId(), request.getRatings())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<FeedbackResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(FeedbackResponse responseResult) {
+                        callback.onSuccess(responseResult);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
 }
