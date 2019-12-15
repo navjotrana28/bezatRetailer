@@ -26,6 +26,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.bezatretailer.bezat.ClientRetrofit;
 import com.bezatretailer.bezat.MyApplication;
 import com.bezatretailer.bezat.R;
 import com.bezatretailer.bezat.activities.*;
@@ -347,6 +348,8 @@ public class Dashboard extends Fragment {
                                     // The dialog is automatically dismissed when a dialog button is clicked.
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
+                                            ClientRetrofit retrofit = new ClientRetrofit();
+                                            retrofit.logOutAPi(SharedPrefs.getKey(getActivity(), "userId"));
                                             SharedPrefs.deleteSharedPrefs(getActivity());
                                             startActivity(new Intent(getActivity(), LoginActivity.class));
                                             getActivity().finish();

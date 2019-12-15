@@ -117,4 +117,8 @@ public class ClientRetrofit {
                 });
     }
 
+    public void logOutAPi(String userID) {
+        serviceRetrofit.getLogoutAPi(userID);
+    }
+
 }

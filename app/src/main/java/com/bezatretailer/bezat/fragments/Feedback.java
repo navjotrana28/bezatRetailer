@@ -77,7 +77,5 @@ public class Feedback extends Fragment {
         text = view.findViewById(R.id.edit_text);
         ratingBar = view.findViewById(R.id.rating_bar);
         button = view.findViewById(R.id.send_button);
-
     }
-
 }
