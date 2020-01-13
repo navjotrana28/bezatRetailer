@@ -74,15 +74,24 @@
 
         </RelativeLayout>
     </Toolbar>
-    <RelativeLayout
-            android:layout_below="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/_50sdp"
-            android:background="@color/white"
-            android:orientation="vertical">
 
-        <com.budiyev.android.codescanner.CodeScannerView
+	<WebView
+			android:id="@+id/help_webview"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_below="@+id/toolbar"/>
+
+	<RelativeLayout
+			android:id="@+id/relative_scan"
+			android:layout_below="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:paddingBottom="@dimen/_50sdp"
+			android:background="@color/white"
+			android:orientation="vertical">
+
+
+		<com.budiyev.android.codescanner.CodeScannerView
                 android:layout_above="@+id/btnScan"
                 android:id="@+id/scanner_view"
                 android:layout_width="match_parent"

@@ -8,8 +8,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,8 +24,11 @@ import android.view.ViewGroup;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.bezatretailer.bezat.ClientRetrofit;
 import com.bezatretailer.bezat.MyApplication;
 import com.bezatretailer.bezat.R;
+import com.bezatretailer.bezat.api.contactusResponse.ContactUsResponse;
+import com.bezatretailer.bezat.interfaces.ContactUsSuccessResponse;
 import com.bezatretailer.bezat.utils.Loader;
 import com.bezatretailer.bezat.utils.SharedPrefs;
 import com.bezatretailer.bezat.utils.URLS;
@@ -56,6 +63,7 @@ public class ScanCoupon extends Fragment {
     private CodeScanner mCodeScanner;
     Button btnScan;
     ImageView imgBack;
+    CodeScannerView scannerView;
     private OnFragmentInteractionListener mListener;
 
     public ScanCoupon() {
@@ -95,7 +103,7 @@ public class ScanCoupon extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_scan_coupon, container, false);
 
-        CodeScannerView scannerView = view.findViewById(R.id.scanner_view);
+        scannerView = view.findViewById(R.id.scanner_view);
         btnScan = view.findViewById(R.id.btnScan);
         mCodeScanner = new CodeScanner(getActivity(), scannerView);
         imgBack = view.findViewById(R.id.imgBack);
@@ -112,7 +120,7 @@ public class ScanCoupon extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        getAutoLogin();
+                        getAutoLogin(view);
                         Toast.makeText(getActivity(), result.getText(), Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -129,56 +137,29 @@ public class ScanCoupon extends Fragment {
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getAutoLogin();
+                getAutoLogin(view);
             }
         });
         return view;
     }
 
-    private void getAutoLogin() {
+    private void getAutoLogin(View hview) {
         Loader loader=new Loader(getContext());
         loader.show();
-        JSONObject object = new JSONObject();
-//        try {
-//            object.put("userId", SharedPrefs.getKey(getActivity(),"userId"));
-//            object.put("storeId", SharedPrefs.getKey(getActivity(),"storeID"));
-//            object.put("device_id","device_id");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-        String Url= URLS.Companion.getAUTOLOGIN()+"userId="+SharedPrefs.getKey(getActivity(),"userId")+
-                "&storeId="+SharedPrefs.getKey(getActivity(),"storeID")+
-                "&device_id=android";
-        Log.v("couponurl",Url+" ");
-        JsonObjectRequest jsonObjectRequest = new
-                JsonObjectRequest(Request.Method.GET,
-                        Url ,
-                        object,
-                        response -> {
-                            loader.dismiss();
-                            Log.v("vipcustomer",response+" ");
-                            try {
-                                String url = response.getJSONObject("result").getString("url");
-                                Intent i = new Intent(Intent.ACTION_VIEW);
-                                i.setData(Uri.parse(url));
-                                startActivity(i);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
 
-                            }
-                        },
-                        error -> {
-                            loader.dismiss();
-                        }) {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        HashMap<String, String> headers = new HashMap<String, String>();
-                        headers.put("apikey", "12345678");
-                        return headers;
-                    }
-                };
-        jsonObjectRequest.setShouldCache(false);
-        MyApplication.getInstance().addToRequestQueue(jsonObjectRequest);
+        String url = "http://bezatapp.com/manage_App/admin/mobile_app/scan_coupon?" + "user_id=" + SharedPrefs.getKey(getActivity(), "userId") +
+                "&customer_code=" + ("storeID");
+        Log.v("couponurl", url + " ");
+
+        WebView view = hview.findViewById(R.id.help_webview);
+        WebSettings webSettings = view.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        view.getSettings().setLoadWithOverviewMode(true);
+        view.getSettings().setUseWideViewPort(true);
+        view.getSettings().setBuiltInZoomControls(true);
+        view.setWebViewClient(new WebViewClient());
+
+        view.loadUrl(url);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
