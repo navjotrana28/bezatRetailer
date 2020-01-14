@@ -5,13 +5,18 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.*;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -21,6 +26,7 @@ import com.bezatretailer.bezat.utils.Loader;
 import com.bezatretailer.bezat.utils.SharedPrefs;
 import com.bezatretailer.bezat.utils.URLS;
 import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +48,6 @@ import java.util.Map;
 public class StoreOffer extends Fragment implements View.OnClickListener {
 
 
-
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -54,12 +59,12 @@ public class StoreOffer extends Fragment implements View.OnClickListener {
     ImageView imgBanner;
     Button btnAllOffer;
     ImageView imgBack;
-    String lang="";
+    String lang = "";
     TextView tvDescrip;
-    ImageButton txtTwitter,txtInsta,txtFb,txtWeb,txtPhone,txtSnap,txtLoc;
+    ImageButton txtTwitter, txtInsta, txtFb, txtWeb, txtPhone, txtSnap, txtLoc;
     TextView txtStoreName;
     private OnFragmentInteractionListener mListener;
-    String phone="",google="",fb="",insta="",twit="",snap="",location="";
+    String phone = "", google = "", fb = "", insta = "", twit = "", snap = "", location = "";
 
     public StoreOffer() {
         // Required empty public constructor
@@ -96,26 +101,26 @@ public class StoreOffer extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        if (SharedPrefs.getKey(getActivity(),"selectedlanguage").contains("ar")) {
+        if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-            lang="_ar";
+            lang = "_ar";
         } else {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
-            lang="";
+            lang = "";
         }
         rootView = inflater.inflate(R.layout.fragment_store_offer, container, false);
 
-        imgBanner=rootView.findViewById(R.id.imgBanner);
-        txtTwitter=rootView.findViewById(R.id.txtTwitter);
-        txtInsta=rootView.findViewById(R.id.txtInsta);
-        tvDescrip=rootView.findViewById(R.id.tvDescrip);
-        txtFb=rootView.findViewById(R.id.txtFb);
-        txtWeb=rootView.findViewById(R.id.txtWeb);
-        txtPhone=rootView.findViewById(R.id.txtPhone);
-        txtStoreName=rootView.findViewById(R.id.txtStoreName);
-        btnAllOffer=rootView.findViewById(R.id.btnAllOffer);
-        imgBack=rootView.findViewById(R.id.imgBack);
-        txtLoc=rootView.findViewById(R.id.txtLoc);
+        imgBanner = rootView.findViewById(R.id.imgBanner);
+        txtTwitter = rootView.findViewById(R.id.txtTwitter);
+        txtInsta = rootView.findViewById(R.id.txtInsta);
+        tvDescrip = rootView.findViewById(R.id.tvDescrip);
+        txtFb = rootView.findViewById(R.id.txtFb);
+        txtWeb = rootView.findViewById(R.id.txtWeb);
+        txtPhone = rootView.findViewById(R.id.txtPhone);
+        txtStoreName = rootView.findViewById(R.id.txtStoreName);
+        btnAllOffer = rootView.findViewById(R.id.btnAllOffer);
+        imgBack = rootView.findViewById(R.id.imgBack);
+        txtLoc = rootView.findViewById(R.id.txtLoc);
         txtSnap = rootView.findViewById(R.id.txtSnap);
 
         imgBack.setOnClickListener(this);
@@ -127,106 +132,93 @@ public class StoreOffer extends Fragment implements View.OnClickListener {
         txtSnap.setOnClickListener(this);
         txtLoc.setOnClickListener(this);
 
-        loader=new Loader(getContext());
-        loader.show();
 
-        getStoreOffer(SharedPrefs.getKey(getActivity(),"storeID"));
+        getStoreOffer(SharedPrefs.getKey(getActivity(), "storeID"));
         return rootView;
     }
 
     private void getStoreOffer(String storeId) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         Date date = new Date();
-        String currentDate=formatter.format(date);
+        String currentDate = formatter.format(date);
         JSONObject object = new JSONObject();
-        String vipUrl= URLS.Companion.getSTORE_BY_OFFER()+"userId="+ SharedPrefs.getKey(getActivity(),"userId")
-                +"&storeId="+storeId
-                +"&currentDate="+currentDate;
-        Log.v("STORE_BY_OFFER",vipUrl+" ");
+        String vipUrl = URLS.Companion.getSTORE_BY_OFFER() + "userId=" + SharedPrefs.getKey(getActivity(), "userId")
+                + "&storeId=" + storeId
+                + "&currentDate=" + currentDate;
+        Log.v("STORE_BY_OFFER", vipUrl + " ");
         JsonObjectRequest jsonObjectRequest = new
                 JsonObjectRequest(Request.Method.GET,
-                        vipUrl ,
+                        vipUrl,
                         object,
                         response -> {
-                            Log.v("storeoffer",response+" ");
-                            loader.dismiss();
+                            Log.v("storeoffer", response + " ");
                             try {
                                 JSONObject jsonObject = response.getJSONObject("result");
                                 Picasso.get().load(jsonObject.getString("store_image")).into(imgBanner);
                                 txtStoreName.setText(jsonObject.getString("storeName" + lang));
                                 if (jsonObject.isNull("twitter")
                                         || jsonObject.getString("twitter").equals("")) {
-                                    txtTwitter.  setBackgroundTintList(getResources().getColorStateList(R.color.btn_cancel_color));
-                                }
-                                else {
+                                    txtTwitter.setBackgroundTintList(getResources().getColorStateList(R.color.btn_cancel_color));
+                                } else {
                                     twit = jsonObject.getString("twitter");
                                 }
                                 if (jsonObject.isNull("instagram")
                                         || jsonObject.getString("instagram").equals("")) {
-                                    txtInsta.  setBackgroundTintList(getResources().getColorStateList(R.color.btn_cancel_color));
-                                }
-                                else {
+                                    txtInsta.setBackgroundTintList(getResources().getColorStateList(R.color.btn_cancel_color));
+                                } else {
                                     insta = jsonObject.getString("instagram");
                                 }
                                 if (jsonObject.isNull("facebook")
                                         || jsonObject.getString("facebook").equals("")) {
-                                    txtFb.  setBackgroundTintList(getResources().getColorStateList(R.color.btn_cancel_color));
-                                }
-                                else {
+                                    txtFb.setBackgroundTintList(getResources().getColorStateList(R.color.btn_cancel_color));
+                                } else {
                                     fb = jsonObject.getString("facebook");
                                 }
                                 if (jsonObject.isNull("website")
                                         || jsonObject.getString("website").equals("")) {
-                                    txtWeb.  setBackgroundTintList(getResources().getColorStateList(R.color.btn_cancel_color));
-                                }
-                                else {
+                                    txtWeb.setBackgroundTintList(getResources().getColorStateList(R.color.btn_cancel_color));
+                                } else {
                                     google = jsonObject.getString("website");
                                 }
                                 if (jsonObject.isNull("snapchat")
                                         || jsonObject.getString("snapchat").equals("")) {
-                                    txtSnap.  setBackgroundTintList(getResources().getColorStateList(R.color.btn_cancel_color));
-                                }
-                                else {
+                                    txtSnap.setBackgroundTintList(getResources().getColorStateList(R.color.btn_cancel_color));
+                                } else {
                                     snap = jsonObject.getString("snapchat");
                                 }
                                 if (jsonObject.isNull("google_location")
                                         || jsonObject.getString("google_location").equals("")) {
-                                    txtLoc.  setBackgroundTintList(getResources().getColorStateList(R.color.btn_cancel_color));
-                                }
-                                else {
+                                    txtLoc.setBackgroundTintList(getResources().getColorStateList(R.color.btn_cancel_color));
+                                } else {
                                     location = jsonObject.getString("google_location");
                                 }
 //                                txtPhone.setText(jsonObject.getString("phone_no"));
                                 if (jsonObject.isNull("phone_no")
                                         || jsonObject.getString("phone_no").equals("")) {
-                                    txtPhone.  setBackgroundTintList(getResources().getColorStateList(R.color.btn_cancel_color));
-                                }
-                                else {
+                                    txtPhone.setBackgroundTintList(getResources().getColorStateList(R.color.btn_cancel_color));
+                                } else {
                                     phone = jsonObject.getString("phone_no");
                                 }
-                                if (jsonObject.isNull("description"+lang)) {
+                                if (jsonObject.isNull("description" + lang)) {
                                     tvDescrip.setText("");
+                                } else {
+                                    tvDescrip.setText(jsonObject.getString("description" + lang));
                                 }
-                                else {
-                                    tvDescrip.setText(jsonObject.getString("description"+lang));
-                                }
-                                JSONArray storeArray=jsonObject.getJSONArray("store_offers");
+                                JSONArray storeArray = jsonObject.getJSONArray("store_offers");
 
                                 btnAllOffer.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        if (storeArray!=null)
-                                        {
-                                            Offers offers=new Offers();
+                                        if (storeArray != null) {
+                                            Offers offers = new Offers();
                                             Bundle args = new Bundle();
-                                            args.putString("storeArray",storeArray.toString() );
+                                            args.putString("storeArray", storeArray.toString());
                                             offers.setArguments(args);
                                             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                                            ft.replace(R.id.container,offers);
+                                            ft.replace(R.id.container, offers);
                                             ft.addToBackStack(null);
                                             ft.commit();
-                                        }
-                                        else {
+                                        } else {
                                             Toast.makeText(getActivity(), "No Offer found", Toast.LENGTH_LONG).show();
                                         }
                                     }
@@ -271,71 +263,50 @@ public class StoreOffer extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId()==R.id.txtInsta)
-        {
-            if (insta!=null && !insta.isEmpty()) {
-                startActivity( new Intent(Intent.ACTION_VIEW,Uri.parse(insta)));
-            }
-            else {
+        if (view.getId() == R.id.txtInsta) {
+            if (insta != null && !insta.isEmpty()) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(insta)));
+            } else {
                 txtInsta.setEnabled(false);
             }
-        }
-        else if (view.getId()==R.id.txtFb)
-        {
-            if (fb!=null &&  !fb.isEmpty()) {
-                startActivity( new Intent(Intent.ACTION_VIEW,Uri.parse(fb)));
-            }
-            else {
+        } else if (view.getId() == R.id.txtFb) {
+            if (fb != null && !fb.isEmpty()) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(fb)));
+            } else {
                 txtFb.setEnabled(false);
             }
-        }
-        else if (view.getId()==R.id.txtWeb)
-        {
-            if (google!=null && !google.isEmpty()) {
-                startActivity( new Intent(Intent.ACTION_VIEW,Uri.parse(google)));
-            }
-            else {
+        } else if (view.getId() == R.id.txtWeb) {
+            if (google != null && !google.isEmpty()) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(google)));
+            } else {
                 txtWeb.setEnabled(false);
             }
-        }
-        else if (view.getId()==R.id.txtSnap)
-        {
-            if (snap!=null && !snap.isEmpty()) {
-                startActivity( new Intent(Intent.ACTION_VIEW,Uri.parse(snap)));
-            }
-            else {
+        } else if (view.getId() == R.id.txtSnap) {
+            if (snap != null && !snap.isEmpty()) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(snap)));
+            } else {
                 txtSnap.setEnabled(false);
             }
-        }
-        else if (view.getId()==R.id.txtLoc)
-        {
-            if (location!=null && !location.isEmpty()) {
+        } else if (view.getId() == R.id.txtLoc) {
+            if (location != null && !location.isEmpty()) {
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("http://maps.google.com/maps?saddr="+location));
+                        Uri.parse("http://maps.google.com/maps?saddr=" + location));
                 startActivity(intent);
-            }
-            else {
+            } else {
                 txtLoc.setEnabled(false);
             }
-        }
-        else if (view.getId()==R.id.txtPhone)
-        {
-            if (phone!=null && phone!="") {
+        } else if (view.getId() == R.id.txtPhone) {
+            if (phone != null && phone != "") {
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
                 startActivity(intent);
             }
-        }
-        else if (view.getId()==R.id.txtTwitter)
-        {
-            if (twit!=null &&  !twit.isEmpty()) {
-                startActivity( new Intent(Intent.ACTION_VIEW,Uri.parse(twit)));
+        } else if (view.getId() == R.id.txtTwitter) {
+            if (twit != null && !twit.isEmpty()) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(twit)));
+            } else {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/")));
             }
-            else {
-                startActivity( new Intent(Intent.ACTION_VIEW,Uri.parse("https://twitter.com/")));
-            }
-        }
-        else if (view.getId() == R.id.imgBack)
-        {
+        } else if (view.getId() == R.id.imgBack) {
             getActivity().onBackPressed();
         }
     }
@@ -354,9 +325,6 @@ public class StoreOffer extends Fragment implements View.OnClickListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-
-
 
 
 }

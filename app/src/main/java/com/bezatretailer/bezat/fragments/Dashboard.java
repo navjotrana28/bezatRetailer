@@ -406,7 +406,6 @@ public class Dashboard extends Fragment {
                             ft.replace(R.id.container, new StoreOffer());
                             ft.addToBackStack(null);
                             ft.commit();
-
                         }
                         else if (dashBoardItems.get(getAdapterPosition())
                                 .getName().equalsIgnoreCase(getString(R.string.add_offer)))

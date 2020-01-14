@@ -1,47 +1,27 @@
 package com.bezatretailer.bezat.fragments;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.SparseArray;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.bezatretailer.bezat.ClientRetrofit;
-import com.bezatretailer.bezat.MyApplication;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.bezatretailer.bezat.R;
-import com.bezatretailer.bezat.api.contactusResponse.ContactUsResponse;
-import com.bezatretailer.bezat.interfaces.ContactUsSuccessResponse;
 import com.bezatretailer.bezat.utils.Loader;
 import com.bezatretailer.bezat.utils.SharedPrefs;
-import com.bezatretailer.bezat.utils.URLS;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -101,7 +81,7 @@ public class ScanCoupon extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_scan_coupon, container, false);
+        View view = inflater.inflate(R.layout.fragment_scan_coupon, container, false);
 
         scannerView = view.findViewById(R.id.scanner_view);
         btnScan = view.findViewById(R.id.btnScan);
@@ -120,8 +100,11 @@ public class ScanCoupon extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        getAutoLogin(view);
+                        getAutoLogin(result.getText());
                         Toast.makeText(getActivity(), result.getText(), Toast.LENGTH_SHORT).show();
+                        Log.d("qrcode", result.getText());
+                        Log.d("qrcodebar", result.getBarcodeFormat().toString());
+                        Log.d("qrcoderaw", result.getRawBytes().toString());
                     }
                 });
             }
@@ -137,29 +120,35 @@ public class ScanCoupon extends Fragment {
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getAutoLogin(view);
+                mCodeScanner.setDecodeCallback(new DecodeCallback() {
+                    @Override
+                    public void onDecoded(@NonNull final Result result) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                getAutoLogin(result.getRawBytes().toString());
+                                Toast.makeText(getActivity(), result.getText(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
             }
         });
         return view;
     }
 
-    private void getAutoLogin(View hview) {
-        Loader loader=new Loader(getContext());
+    private void getAutoLogin(String qr) {
+        Loader loader = new Loader(getContext());
         loader.show();
 
         String url = "http://bezatapp.com/manage_App/admin/mobile_app/scan_coupon?" + "user_id=" + SharedPrefs.getKey(getActivity(), "userId") +
-                "&customer_code=" + ("storeID");
+                "&customer_code=" + qr;
         Log.v("couponurl", url + " ");
-
-        WebView view = hview.findViewById(R.id.help_webview);
-        WebSettings webSettings = view.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        view.getSettings().setLoadWithOverviewMode(true);
-        view.getSettings().setUseWideViewPort(true);
-        view.getSettings().setBuiltInZoomControls(true);
-        view.setWebViewClient(new WebViewClient());
-
-        view.loadUrl(url);
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.container, new WebViewCoupon(url));
+        ft.addToBackStack(null);
+        ft.commit();
+        loader.dismiss();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -168,7 +157,6 @@ public class ScanCoupon extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
 
     @Override
     public void onResume() {
@@ -181,6 +169,7 @@ public class ScanCoupon extends Fragment {
         mCodeScanner.releaseResources();
         super.onPause();
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
