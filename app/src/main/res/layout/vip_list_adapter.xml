@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:id="@+id/layoutContent"
-		android:layout_width="180dp"
+		android:layout_width="190dp"
 		android:layout_height="200dp"
 		android:background="@drawable/vip_list_outline"
 		android:orientation="vertical"
