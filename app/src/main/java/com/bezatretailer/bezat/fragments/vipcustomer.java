@@ -3,30 +3,37 @@ package com.bezatretailer.bezat.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.*;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.OrientationHelper;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import com.android.volley.*;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bezatretailer.bezat.MyApplication;
 import com.bezatretailer.bezat.R;
-import com.bezatretailer.bezat.activities.ChangePassword;
-import com.bezatretailer.bezat.activities.Login;
-import com.bezatretailer.bezat.activities.LoginActivity;
+import com.bezatretailer.bezat.adapter.VipAdapter;
 import com.bezatretailer.bezat.utils.Loader;
 import com.bezatretailer.bezat.utils.SharedPrefs;
 import com.bezatretailer.bezat.utils.URLS;
 import com.bezatretailer.bezat.utils.VolleyMultipartRequest;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -53,10 +60,15 @@ public class vipcustomer extends Fragment {
     Button btnaddVip;
     View rootView;
     LinearLayout layoutContent;
-    ImageView imgSearch,imgBack;
-    TextView txtCustomerName,txtCustomerCode,txtCustomerEmail,txtCustomerPhone;
+    ImageView imgSearch, imgBack;
+    TextView txtCustomerName, txtCustomerCode, txtCustomerEmail, txtCustomerPhone;
     EditText etSearch;
     Loader loader;
+    private VipAdapter adapter;
+    GridLayoutManager layoutManager;
+    private RecyclerView recyclerView;
+
+
     private OnFragmentInteractionListener mListener;
 
     public vipcustomer() {
@@ -96,7 +108,9 @@ public class vipcustomer extends Fragment {
         imgSearch = rootView.findViewById(R.id.imgSearch);
         imgBack = rootView.findViewById(R.id.imgBack);
         layoutContent = rootView.findViewById(R.id.layoutContent);
-        loader=new Loader(getContext());
+        recyclerView = rootView.findViewById(R.id.recycler_view_01);
+        initViews();
+        loader = new Loader(getContext());
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,11 +122,9 @@ public class vipcustomer extends Fragment {
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (etSearch.getText().toString().isEmpty())
-                {
+                if (etSearch.getText().toString().isEmpty()) {
                     etSearch.setError("Field is empty");
-                }
-                else {
+                } else {
                     loader.show();
                     searchData(etSearch.getText().toString());
                 }
@@ -121,14 +133,24 @@ public class vipcustomer extends Fragment {
         btnaddVip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addVipCustomer(customerId, SharedPrefs.getKey(getActivity(),"userId")
-                        , SharedPrefs.getKey(getActivity(),"storeID"));
+                addVipCustomer(customerId, SharedPrefs.getKey(getActivity(), "userId")
+                        , SharedPrefs.getKey(getActivity(), "storeID"));
             }
         });
         return rootView;
     }
 
-    private void addVipCustomer(String customerId,String userId,String storeId) {
+    private void initViews() {
+        adapter = new VipAdapter();
+        layoutManager = new GridLayoutManager(getActivity(), 2);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
+    }
+
+
+    private void addVipCustomer(String customerId, String userId, String storeId) {
         loader.show();
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST,
                 URLS.Companion.getADDVIP(), new Response.Listener<NetworkResponse>() {
@@ -136,9 +158,9 @@ public class vipcustomer extends Fragment {
             public void onResponse(NetworkResponse response) {
                 loader.dismiss();
                 String res = new String(response.data);
-                Log.v("changepassword",res);
+                Log.v("changepassword", res);
                 try {
-                    JSONObject jsonObject=new JSONObject(res);
+                    JSONObject jsonObject = new JSONObject(res);
                     showMessage(jsonObject.getString("message"));
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -153,17 +175,17 @@ public class vipcustomer extends Fragment {
                 String json = null;
                 String Message;
                 NetworkResponse response = error.networkResponse;
-                Log.v("response",response.data+"");
+                Log.v("response", response.data + "");
             }
         }) {
             @Override
             public Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("customerId", customerId);
-                params.put("userId",userId);
-                params.put("storeId",storeId);
+                params.put("userId", userId);
+                params.put("storeId", storeId);
 
-                System.out.println("object"+params+" ");
+                System.out.println("object" + params + " ");
                 return params;
             }
 
@@ -183,24 +205,25 @@ public class vipcustomer extends Fragment {
         MyApplication.getInstance().addToRequestQueue(volleyMultipartRequest);
     }
 
-    String customerId="";
+    String customerId = "";
+
     private void searchData(String data) {
         JSONObject object = new JSONObject();
-        String Url= URLS.Companion.getSEARCH()+data;
+        String Url = URLS.Companion.getSEARCH() + data;
         JsonObjectRequest jsonObjectRequest = new
                 JsonObjectRequest(Request.Method.GET,
-                        Url ,
+                        Url,
                         object,
                         response -> {
                             loader.dismiss();
-                            Log.v("vipcustomer",response+" ");
+                            Log.v("vipcustomer", response + " ");
                             try {
                                 layoutContent.setVisibility(View.VISIBLE);
-                                 customerId=response.getJSONObject("result").getString("customerId");
-                                String customerName=response.getJSONObject("result").getString("customerName");
-                                String customerEmail=response.getJSONObject("result").getString("customerEmail");
-                                String customerCode=response.getJSONObject("result").getString("customerCode");
-                                String customerPhone=response.getJSONObject("result").getString("customerPhone");
+                                customerId = response.getJSONObject("result").getString("customerId");
+                                String customerName = response.getJSONObject("result").getString("customerName");
+                                String customerEmail = response.getJSONObject("result").getString("customerEmail");
+                                String customerCode = response.getJSONObject("result").getString("customerCode");
+                                String customerPhone = response.getJSONObject("result").getString("customerPhone");
                                 txtCustomerName.setText(customerName);
                                 txtCustomerEmail.setText(customerEmail);
                                 txtCustomerCode.setText(customerCode);
@@ -209,7 +232,8 @@ public class vipcustomer extends Fragment {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 layoutContent.setVisibility(View.GONE);
-                                AlertDialog alertDialog = new AlertDialog.Builder(getActivity(),R.style.DialogTheme).create();
+                                btnaddVip.setVisibility(View.GONE);
+                                AlertDialog alertDialog = new AlertDialog.Builder(getActivity(), R.style.DialogTheme).create();
                                 alertDialog.setMessage(getString(R.string.no_result_found));
                                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok),
                                         new DialogInterface.OnClickListener() {
@@ -233,18 +257,21 @@ public class vipcustomer extends Fragment {
         jsonObjectRequest.setShouldCache(false);
         MyApplication.getInstance().addToRequestQueue(jsonObjectRequest);
     }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
     }
-    private void showMessage(String message){
+
+    private void showMessage(String message) {
         android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(getActivity(),
                 R.style.DialogTheme).create();
         alertDialog.setMessage(message);
@@ -256,6 +283,7 @@ public class vipcustomer extends Fragment {
                 });
         alertDialog.show();
     }
+
     @Override
     public void onDetach() {
         super.onDetach();
