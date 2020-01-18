@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -26,9 +27,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.bezatretailer.bezat.ClientRetrofit;
 import com.bezatretailer.bezat.MyApplication;
 import com.bezatretailer.bezat.R;
 import com.bezatretailer.bezat.adapter.VipAdapter;
+import com.bezatretailer.bezat.interfaces.VipListResponse;
+import com.bezatretailer.bezat.models.vip_lists.VipResult;
 import com.bezatretailer.bezat.utils.Loader;
 import com.bezatretailer.bezat.utils.SharedPrefs;
 import com.bezatretailer.bezat.utils.URLS;
@@ -59,7 +63,7 @@ public class vipcustomer extends Fragment {
     private String mParam2;
     Button btnaddVip;
     View rootView;
-    LinearLayout layoutContent;
+    LinearLayout layoutContent, vip_list_linear;
     ImageView imgSearch, imgBack;
     TextView txtCustomerName, txtCustomerCode, txtCustomerEmail, txtCustomerPhone;
     EditText etSearch;
@@ -108,9 +112,11 @@ public class vipcustomer extends Fragment {
         imgSearch = rootView.findViewById(R.id.imgSearch);
         imgBack = rootView.findViewById(R.id.imgBack);
         layoutContent = rootView.findViewById(R.id.layoutContent);
+        vip_list_linear = rootView.findViewById(R.id.vip_list_linear);
         recyclerView = rootView.findViewById(R.id.recycler_view_01);
-        initViews();
         loader = new Loader(getContext());
+        loader.show();
+        initViews();
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,15 +125,12 @@ public class vipcustomer extends Fragment {
             }
         });
 
-        imgSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (etSearch.getText().toString().isEmpty()) {
-                    etSearch.setError("Field is empty");
-                } else {
-                    loader.show();
-                    searchData(etSearch.getText().toString());
-                }
+        imgSearch.setOnClickListener(view -> {
+            if (etSearch.getText().toString().isEmpty()) {
+                etSearch.setError("Field is empty");
+            } else {
+                loader.show();
+                searchData(etSearch.getText().toString());
             }
         });
         btnaddVip.setOnClickListener(new View.OnClickListener() {
@@ -141,12 +144,35 @@ public class vipcustomer extends Fragment {
     }
 
     private void initViews() {
-        adapter = new VipAdapter();
-        layoutManager = new GridLayoutManager(getActivity(), 2);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-//        adapter.notifyDataSetChanged();
+        getVIPLists();
+    }
+
+    private void getVIPLists() {
+        ClientRetrofit clientRetrofit = new ClientRetrofit();
+        clientRetrofit.vipListData(SharedPrefs.getKey(getActivity(), "userId"), new VipListResponse() {
+            @Override
+            public void onSuccess(VipResult response) {
+                if (response.getResult().size() > 0) {
+                    adapter = new VipAdapter();
+                    layoutManager = new GridLayoutManager(getActivity(), 2);
+                    adapter.setData(response);
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                    vip_list_linear.setVisibility(View.VISIBLE);
+                    loader.dismiss();
+                } else {
+                    loader.dismiss();
+                    Toast.makeText(getActivity(), "No Vip List found", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable e) {
+
+            }
+        });
     }
 
 
@@ -166,7 +192,6 @@ public class vipcustomer extends Fragment {
                     e.printStackTrace();
                 }
 
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -184,7 +209,6 @@ public class vipcustomer extends Fragment {
                 params.put("customerId", customerId);
                 params.put("userId", userId);
                 params.put("storeId", storeId);
-
                 System.out.println("object" + params + " ");
                 return params;
             }
@@ -211,14 +235,14 @@ public class vipcustomer extends Fragment {
         JSONObject object = new JSONObject();
         String Url = URLS.Companion.getSEARCH() + data;
         JsonObjectRequest jsonObjectRequest = new
-                JsonObjectRequest(Request.Method.GET,
-                        Url,
-                        object,
+                JsonObjectRequest(Request.Method.GET, Url, object,
                         response -> {
                             loader.dismiss();
                             Log.v("vipcustomer", response + " ");
                             try {
                                 layoutContent.setVisibility(View.VISIBLE);
+                                btnaddVip.setVisibility(View.VISIBLE);
+                                vip_list_linear.setVisibility(View.GONE);
                                 customerId = response.getJSONObject("result").getString("customerId");
                                 String customerName = response.getJSONObject("result").getString("customerName");
                                 String customerEmail = response.getJSONObject("result").getString("customerEmail");

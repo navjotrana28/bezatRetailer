@@ -5,10 +5,14 @@ import com.bezatretailer.bezat.api.contactusResponse.ContactUsResponse;
 import com.bezatretailer.bezat.interfaces.ContactUsSuccessResponse;
 import com.bezatretailer.bezat.interfaces.FeedbackCallback;
 import com.bezatretailer.bezat.interfaces.SearchRetaierInterface;
+import com.bezatretailer.bezat.interfaces.VipListResponse;
 import com.bezatretailer.bezat.models.feedbackResponse.FeedbackRequest;
 import com.bezatretailer.bezat.models.feedbackResponse.FeedbackResponse;
 import com.bezatretailer.bezat.models.searchRetailerResponses.SearchResponseResult;
+import com.bezatretailer.bezat.models.vip_lists.VipResult;
+import com.bezatretailer.bezat.utils.SharedPrefs;
 import com.bezatretailer.bezat.utils.URLS;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -53,6 +57,32 @@ public class ClientRetrofit {
                     @Override
                     public void onError(Throwable e) {
 
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void vipListData(String userId,final VipListResponse vipListResponse) {
+        serviceRetrofit.getVipLists(userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<VipResult>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(VipResult response) {
+                        vipListResponse.onSuccess(response);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        vipListResponse.onFailure(e);
                     }
 
                     @Override

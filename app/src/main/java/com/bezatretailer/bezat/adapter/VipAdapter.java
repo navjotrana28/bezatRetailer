@@ -3,13 +3,16 @@ package com.bezatretailer.bezat.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bezatretailer.bezat.R;
+import com.bezatretailer.bezat.models.vip_lists.VipResult;
 
 public class VipAdapter extends RecyclerView.Adapter<VipAdapter.MyViewHolder> {
+    VipResult vipResult = new VipResult();
 
     @NonNull
     @Override
@@ -20,19 +23,35 @@ public class VipAdapter extends RecyclerView.Adapter<VipAdapter.MyViewHolder> {
         return mHolder;
     }
 
+    public void setData(VipResult result) {
+        vipResult = result;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull final VipAdapter.MyViewHolder viewHolder, int i) {
-
+        viewHolder.customerName.setText(vipResult.getResult().get(i).getCustomerName());
+        viewHolder.code.setText(vipResult.getResult().get(i).getCustomerCode());
+        viewHolder.Email.setText(vipResult.getResult().get(i).getCustomerEmail());
+        viewHolder.phone.setText(vipResult.getResult().get(i).getCustomerPhone());
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        if (vipResult.getResult().size() > 0) {
+            return vipResult.getResult().size();
+        } else
+            return 0;
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView customerName, code, Email, phone;
+
         MyViewHolder(View view) {
             super(view);
+            customerName = view.findViewById(R.id.txtCustomerName);
+            code = view.findViewById(R.id.txtCustomerCode);
+            Email = view.findViewById(R.id.txtCustomerEmail);
+            phone = view.findViewById(R.id.txtCustomerPhone);
 
         }
     }
