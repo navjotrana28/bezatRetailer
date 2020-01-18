@@ -263,6 +263,7 @@ public class vipcustomer extends Fragment {
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 dialog.dismiss();
+                                                vip_list_linear.setVisibility(View.VISIBLE);
                                             }
                                         });
                                 alertDialog.show();
