@@ -91,7 +91,7 @@
 				android:layout_marginTop="10dp"
 				android:background="@drawable/vip_list_outline"
 				android:orientation="vertical"
-				android:visibility="visible">
+				android:visibility="gone">
 
 			<ImageView
 					android:layout_width="150dp"
