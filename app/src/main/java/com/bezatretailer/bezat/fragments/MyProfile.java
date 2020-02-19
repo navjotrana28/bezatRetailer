@@ -16,12 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -29,12 +24,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
+import com.android.volley.*;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bezatretailer.bezat.MyApplication;
 import com.bezatretailer.bezat.R;
@@ -42,7 +32,7 @@ import com.bezatretailer.bezat.utils.Loader;
 import com.bezatretailer.bezat.utils.SharedPrefs;
 import com.bezatretailer.bezat.utils.URLS;
 import com.bezatretailer.bezat.utils.VolleyMultipartRequest;
-
+import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -119,6 +109,7 @@ public class MyProfile extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fargment_profile, container, false);
         loader = new Loader(getContext());
+        getProfile();
         imgProfile = rootView.findViewById(R.id.imgProfile);
         etName = rootView.findViewById(R.id.etName);
         EditText etEmail = rootView.findViewById(R.id.etEmail);
@@ -224,6 +215,7 @@ public class MyProfile extends Fragment implements View.OnClickListener {
                 Bitmap newbitMap = Bitmap.createScaledBitmap(bitmap, ivWidth, newHeight, true);
 
                 imgProfile.setImageBitmap(newbitMap);
+                SharedPrefs.setKey(getActivity(), "image", newbitMap.toString());
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -321,6 +313,8 @@ public class MyProfile extends Fragment implements View.OnClickListener {
                                 SharedPrefs.setKey(getActivity(), "gender", gender);
                                 String dob = userInfo.getString("dob");
                                 SharedPrefs.setKey(getActivity(), "dob", dob);
+                                String path = SharedPrefs.getKey(getActivity(), "image");
+                                Picasso.get().load(path).into(imgProfile);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -453,11 +447,11 @@ public class MyProfile extends Fragment implements View.OnClickListener {
             public void onResponse(NetworkResponse response) {
                 loader.dismiss();
                 String res = new String(response.data);
-                if (gender.equalsIgnoreCase("Male")) {
-                    imgProfile.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.profile));
-                } else {
-                    imgProfile.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_femaleicon));
-                }
+//                if (gender.equalsIgnoreCase("Male")) {
+//                    imgProfile.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.profile));
+//                } else {
+//                    imgProfile.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_femaleicon));
+//                }
                 Log.v("responseprofile", res + "");
             }
         }, new Response.ErrorListener() {
@@ -490,6 +484,7 @@ public class MyProfile extends Fragment implements View.OnClickListener {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("apikey", "12345678");
+                headers.put("Content-Type", "application/json");
                 return headers;
             }
 
