@@ -3,12 +3,15 @@ package com.bezatretailer.bezat;
 import com.bezatretailer.bezat.api.contactusResponse.ContactUsResponse;
 import com.bezatretailer.bezat.models.feedbackResponse.FeedbackResponse;
 import com.bezatretailer.bezat.models.searchRetailerResponses.SearchResponseResult;
+import com.bezatretailer.bezat.models.vip_lists.VipResult;
+
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ServiceRetrofit {
 
@@ -24,6 +27,11 @@ public interface ServiceRetrofit {
 
     @GET("category/list")
     Observable<SearchResponseResult> getSearchRetaierSuccess();
+
+    @GET("user/get_vip?")
+    Observable<VipResult> getVipLists(
+            @Query("userid") String userId);
+
 
     @FormUrlEncoded
     @POST("user/feedback")
