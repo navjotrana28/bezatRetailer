@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -178,6 +179,10 @@ public class Prizes extends Fragment implements View.OnClickListener {
 
                                 if (postAdapter1 != null && postAdapter1.getItemCount() > 0) {
                                     bezatRec.setAdapter(postAdapter1);
+                                }else {
+                                    CardView view = rootView.findViewById(R.id.bezat_raffles);
+                                    view.setVisibility(View.GONE);
+                                    bezatRec.setVisibility(View.GONE);
                                 }
                                 Log.v("prizesresponse", response + "");
                                 PostAdapter postAdapter = new PostAdapter(otherJsonArray);
