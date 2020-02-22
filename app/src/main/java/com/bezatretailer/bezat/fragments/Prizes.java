@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -27,6 +26,7 @@ import com.bezatretailer.bezat.R;
 import com.bezatretailer.bezat.utils.Loader;
 import com.bezatretailer.bezat.utils.SharedPrefs;
 import com.bezatretailer.bezat.utils.URLS;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -158,6 +158,7 @@ public class Prizes extends Fragment implements View.OnClickListener {
                                         objectRaffles.put("draw_date", array.getJSONObject(i).getString("draw_date"));
                                         objectRaffles.put("crcdt", array.getJSONObject(i).getString("crcdt"));
                                         objectRaffles.put("raffle_category", array.getJSONObject(i).getString("raffle_category"));
+                                        objectRaffles.put("img", array.getJSONObject(i).getString("img"));
                                         bezatJsonArray.put(objectRaffles);
                                     } else {
                                         JSONObject objectRaffles = new JSONObject();
@@ -169,6 +170,7 @@ public class Prizes extends Fragment implements View.OnClickListener {
                                         objectRaffles.put("draw_date", array.getJSONObject(i).getString("draw_date"));
                                         objectRaffles.put("crcdt", array.getJSONObject(i).getString("crcdt"));
                                         objectRaffles.put("raffle_category", array.getJSONObject(i).getString("raffle_category"));
+                                        objectRaffles.put("img", array.getJSONObject(i).getString("img"));
                                         otherJsonArray.put(objectRaffles);
 
                                     }
@@ -179,7 +181,7 @@ public class Prizes extends Fragment implements View.OnClickListener {
 
                                 if (postAdapter1 != null && postAdapter1.getItemCount() > 0) {
                                     bezatRec.setAdapter(postAdapter1);
-                                }else {
+                                } else {
                                     CardView view = rootView.findViewById(R.id.bezat_raffles);
                                     view.setVisibility(View.GONE);
                                     bezatRec.setVisibility(View.GONE);
@@ -284,6 +286,7 @@ public class Prizes extends Fragment implements View.OnClickListener {
             try {
                 holder.txtPrizeName.setText(jsonArray.getJSONObject(position).getString("raffle_name" + lang));
                 holder.txtPrizePrice.setText(jsonArray.getJSONObject(position).getString("prize" + lang));
+                Picasso.get().load(jsonArray.getJSONObject(position).getString("img")).into(holder.imageView);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -299,12 +302,14 @@ public class Prizes extends Fragment implements View.OnClickListener {
 
             TextView txtPrizeName;
             TextView txtPrizePrice;
+            ImageView imageView;
 
             public MyViewHolder(View itemView) {
                 super(itemView);
 
                 txtPrizeName = itemView.findViewById(R.id.txtPrizeName);
                 txtPrizePrice = itemView.findViewById(R.id.txtPrizePrice);
+                imageView = itemView.findViewById(R.id.imgMonth);
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -357,6 +362,8 @@ public class Prizes extends Fragment implements View.OnClickListener {
             try {
                 holder.txtPrizeName.setText(jsonArray.getJSONObject(position).getString("raffle_name" + lang));
                 holder.txtPrizePrice.setText(jsonArray.getJSONObject(position).getString("prize" + lang));
+                Picasso.get().load(jsonArray.getJSONObject(position).getString("img")).into(holder.imageView);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -372,12 +379,15 @@ public class Prizes extends Fragment implements View.OnClickListener {
 
             TextView txtPrizeName;
             TextView txtPrizePrice;
+            ImageView imageView;
 
             public MyViewHolder(View itemView) {
                 super(itemView);
 
                 txtPrizeName = itemView.findViewById(R.id.txtPrizeName);
                 txtPrizePrice = itemView.findViewById(R.id.txtPrizePrice);
+                imageView = itemView.findViewById(R.id.imgMonth);
+
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

@@ -76,8 +76,8 @@
 		<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:paddingStart="@dimen/_20sdp"
-				android:text="EMAIL :"
+				android:paddingStart="@dimen/_15sdp"
+				android:text="Email :"
 				android:textColor="@color/black"
 				android:textSize="10sp" />
 
