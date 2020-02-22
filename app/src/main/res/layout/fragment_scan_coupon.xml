@@ -106,7 +106,7 @@
                 app:frameCornersRadius="@dimen/_5sdp"
                 app:frameAspectRatioWidth="1"
                 app:frameAspectRatioHeight="1"
-                app:frameSize="0.5"
+                app:frameSize="0.9"
                 app:frameThickness="@dimen/_2sdp"
                 app:maskColor="#77000000"/>
 
