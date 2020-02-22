@@ -4,19 +4,19 @@ import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.SearchView;
+import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -27,12 +27,16 @@ import com.bezatretailer.bezat.utils.SharedPrefs;
 import com.bezatretailer.bezat.utils.URLS;
 import com.bruce.pickerview.popwindow.DatePickerPopWin;
 import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,17 +55,19 @@ public class TotalCoupon extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    RecyclerView recycleTotalCoupons;
     Loader loader;
     String currentDate;
     TextView txtDate;
     ImageView imgSearch;
     ImageView imgBack;
-    TextView txtCoupon;
-    ImageView imgCoupon;
-    String lang="";
-    LinearLayout layoutItem;
+    String lang = "";
+    SearchView searchView;
     private OnFragmentInteractionListener mListener;
+//    CouponAdapter adapter;
+//    private CouponResult couponResult = new CouponResult();
+//    private CouponData couponData = new CouponData();
+//    private List<CouponDetails> couponDetails;
 
     public TotalCoupon() {
         // Required empty public constructor
@@ -98,27 +104,27 @@ public class TotalCoupon extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        if (SharedPrefs.getKey(getActivity(),"selectedlanguage").contains("ar")) {
+        if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-            lang="_ar";
+            lang = "_ar";
         } else {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
-            lang="";
+            lang = "";
         }
-        rootView=inflater.inflate(R.layout.fragment_total_coupon, container, false);
-        txtCoupon=rootView.findViewById(R.id.txtCoupon);
-        txtDate=rootView.findViewById(R.id.txtDate);
-        imgSearch=rootView.findViewById(R.id.imgSearch);
+        rootView = inflater.inflate(R.layout.fragment_total_coupon, container, false);
+        recycleTotalCoupons = rootView.findViewById(R.id.recycleTotalCoupons);
+        txtDate = rootView.findViewById(R.id.txtDate);
+        imgSearch = rootView.findViewById(R.id.imgSearch);
         imgBack = rootView.findViewById(R.id.imgBack);
-        imgCoupon = rootView.findViewById(R.id.imgCoupon);
-        layoutItem = rootView.findViewById(R.id.layoutItem);
-        loader=new Loader(getContext());
+        searchView = rootView.findViewById(R.id.search_view);
+        loader = new Loader(getContext());
         loader.show();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM", Locale.ENGLISH);
         Date date = new Date();
-        currentDate=formatter.format(date);
+        currentDate = formatter.format(date);
         txtDate.setText(currentDate);
         getTotalCoupon();
+//        getTotalCoupons();
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,12 +140,10 @@ public class TotalCoupon extends Fragment {
                     @Override
                     public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
 //                        Toast.makeText(getActivity(), dateDesc, Toast.LENGTH_SHORT).show();
-                        if ((month+1)<10)
-                        {
-                            txtDate.setText(year + "-0" + (month ));
-                        }
-                        else {
-                            txtDate.setText(year + "-" + (month ));
+                        if ((month + 1) < 10) {
+                            txtDate.setText(year + "-0" + (month));
+                        } else {
+                            txtDate.setText(year + "-" + (month));
                         }
                         currentDate = txtDate.getText().toString();
                         loader.show();
@@ -165,12 +169,10 @@ public class TotalCoupon extends Fragment {
                     @Override
                     public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
 //                        Toast.makeText(getActivity(), dateDesc, Toast.LENGTH_SHORT).show();
-                        if ((month+1)<10)
-                        {
-                            txtDate.setText(year + "-0" + (month ));
-                        }
-                        else {
-                            txtDate.setText(year + "-" + (month ));
+                        if ((month + 1) < 10) {
+                            txtDate.setText(year + "-0" + (month));
+                        } else {
+                            txtDate.setText(year + "-" + (month));
                         }
                         currentDate = txtDate.getText().toString();
                         loader.show();
@@ -192,25 +194,53 @@ public class TotalCoupon extends Fragment {
         return rootView;
     }
 
+//    private void getTotalCoupons() {
+//        loadSeachData();
+//
+//    }
+
+//    private void loadSeachData() {
+//        ClientRetrofit clientRetrofit = new ClientRetrofit();
+//        clientRetrofit.totalCouponsResult(SharedPrefs.getKey(getActivity(), "userId"), currentDate, new TotalCouponsCallback() {
+//            @Override
+//            public void onSuccess(CouponResult responseResult) {
+//                loader.dismiss();
+//                couponResult = responseResult;
+//                adapter.setDatumList(responseResult);
+//                adapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onFailure(Throwable e) {
+//
+//            }
+//        });
+//    }
+
+
     private void getTotalCoupon() {
         JSONObject object = new JSONObject();
-        String Url= URLS.Companion.getTOTAL_COUPON()+"userId="+ SharedPrefs.getKey(getActivity(),"userId")
-                +"&storeId="+SharedPrefs.getKey(getActivity(),"storeID");
-        Log.v("TotalCoupon",Url+" ");
+        String Url = URLS.Companion.getTOTAL_COUPON() + "userId=" + SharedPrefs.getKey(getActivity(), "userId")
+                + "&year_month=" + currentDate;
+
         JsonObjectRequest jsonObjectRequest = new
                 JsonObjectRequest(Request.Method.GET,
-                        Url ,
+                        Url,
                         object,
                         response -> {
                             loader.dismiss();
                             try {
-                                layoutItem.setVisibility(View.VISIBLE);
-                                Picasso.get().load(response.getJSONObject("result").getString("store_logo"))
-                                        .placeholder(R.drawable.ic_image_black_24dp)
-                                        .into(imgCoupon);
-                                txtCoupon.setText(response.getJSONObject("result").getString("available_tickets"));
+                                PostAdapter postAdapter = new PostAdapter(response.getJSONObject("result").getJSONArray("raffles"));
+                                StaggeredGridLayoutManager layoutManager =
+                                        new StaggeredGridLayoutManager(1, OrientationHelper.VERTICAL);
+                                layoutManager.setGapStrategy(
+                                        StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
+                                recycleTotalCoupons.setLayoutManager(layoutManager);
+                                recycleTotalCoupons.setItemAnimator(new DefaultItemAnimator());
+                                if (postAdapter != null && postAdapter.getItemCount() > 0) {
+                                    recycleTotalCoupons.setAdapter(postAdapter);
+                                }
                             } catch (JSONException e) {
-                                layoutItem.setVisibility(View.GONE);
                                 e.printStackTrace();
                             }
                         },
@@ -290,11 +320,10 @@ public class TotalCoupon extends Fragment {
         public void onBindViewHolder(PostAdapter.MyViewHolder holder, int position) {
             try {
 
-
-                holder.txtBilldate.setText("Date : "+jsonArray.getJSONObject(position).getString("bill_date"));
+                holder.txtBilldate.setText("Date : " + jsonArray.getJSONObject(position).getString("bill_date"));
                 holder.txtBillno.setText(jsonArray.getJSONObject(position).getString("bill_no"));
-                holder.txtRaffles.setText("Raffles : "+jsonArray.getJSONObject(position).getString("raffles"));
-                holder.txtStoreName.setText(jsonArray.getJSONObject(position).getString("storeName"+lang));
+                holder.txtRaffles.setText("Raffles : " + jsonArray.getJSONObject(position).getString("raffles"));
+                holder.txtStoreName.setText(jsonArray.getJSONObject(position).getString("storeName" + lang));
 
                 Picasso.get().load(jsonArray.getJSONObject(position).getString("store_logo")).into(holder.imgCoupon);
 
@@ -311,17 +340,17 @@ public class TotalCoupon extends Fragment {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
 
-            TextView txtStoreName,txtRaffles,txtBillno,txtBilldate;
+            TextView txtStoreName, txtRaffles, txtBillno, txtBilldate;
             ImageView imgCoupon;
 
             public MyViewHolder(View itemView) {
                 super(itemView);
 
-                txtBilldate=itemView.findViewById(R.id.txtBilldate);
-                txtBillno=itemView.findViewById(R.id.txtBillno);
-                txtRaffles=itemView.findViewById(R.id.txtRaffles);
-                txtStoreName=itemView.findViewById(R.id.txtStoreName);
-                imgCoupon=itemView.findViewById(R.id.imgCoupon);
+                txtBilldate = itemView.findViewById(R.id.txtBilldate);
+                txtBillno = itemView.findViewById(R.id.txtBillno);
+                txtRaffles = itemView.findViewById(R.id.txtRaffles);
+                txtStoreName = itemView.findViewById(R.id.txtStoreName);
+                imgCoupon = itemView.findViewById(R.id.imgCoupon);
 
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
