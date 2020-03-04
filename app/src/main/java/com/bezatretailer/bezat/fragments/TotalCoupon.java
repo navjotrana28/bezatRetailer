@@ -221,7 +221,8 @@ public class TotalCoupon extends Fragment {
     private void getTotalCoupon() {
         JSONObject object = new JSONObject();
         String Url = URLS.Companion.getTOTAL_COUPON() + "userId=" + SharedPrefs.getKey(getActivity(), "userId")
-                + "&year_month=" + currentDate;
+                + "&storeId=" + SharedPrefs.getKey(getActivity(), "storeId");
+//                + "&year_month=" + currentDate;
 
         JsonObjectRequest jsonObjectRequest = new
                 JsonObjectRequest(Request.Method.GET,
@@ -324,7 +325,6 @@ public class TotalCoupon extends Fragment {
                 holder.txtBillno.setText(jsonArray.getJSONObject(position).getString("bill_no"));
                 holder.txtRaffles.setText("Raffles : " + jsonArray.getJSONObject(position).getString("raffles"));
                 holder.txtStoreName.setText(jsonArray.getJSONObject(position).getString("storeName" + lang));
-
                 Picasso.get().load(jsonArray.getJSONObject(position).getString("store_logo")).into(holder.imgCoupon);
 
             } catch (Exception e) {
