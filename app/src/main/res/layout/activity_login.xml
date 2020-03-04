@@ -62,7 +62,7 @@
 			android:padding="@dimen/default_margin"
 			android:text="@string/forgot_password"
 			android:textSize="@dimen/default_size"
-			android:visibility="invisible"
+			android:visibility="visible"
 			app:layout_constraintBottom_toTopOf="@id/btnLogin"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent" />

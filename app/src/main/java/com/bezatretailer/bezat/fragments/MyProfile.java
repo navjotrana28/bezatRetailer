@@ -12,19 +12,31 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import com.android.volley.*;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bezatretailer.bezat.MyApplication;
 import com.bezatretailer.bezat.R;
@@ -33,11 +45,13 @@ import com.bezatretailer.bezat.utils.SharedPrefs;
 import com.bezatretailer.bezat.utils.URLS;
 import com.bezatretailer.bezat.utils.VolleyMultipartRequest;
 import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -55,21 +69,21 @@ public class MyProfile extends Fragment implements View.OnClickListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    String encoded = "";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     View rootView;
     private OnFragmentInteractionListener mListener;
-    private ImageView imgProfile;
-    private EditText etName;
-    private EditText etAddress;
-    private EditText etPhone;
+    ImageView imgProfile;
+    EditText etName, etEmail, etAddress, etPhone;
     Loader loader;
-    private TextView etCountry, etDob, etGender;
-    private String phone_code;
+    TextView etCountry, etDob, etGender;
+    TextView txtSave;
+    String phone_code;
+    private int mYear, mMonth, mDay;
     PostAdapter postAdapter;
-
     private final int PICK_IMAGE_CAMERA = 1, PICK_IMAGE_GALLERY = 2;
 
     public MyProfile() {
@@ -112,15 +126,14 @@ public class MyProfile extends Fragment implements View.OnClickListener {
         getProfile();
         imgProfile = rootView.findViewById(R.id.imgProfile);
         etName = rootView.findViewById(R.id.etName);
-        EditText etEmail = rootView.findViewById(R.id.etEmail);
+        etEmail = rootView.findViewById(R.id.etEmail);
         etCountry = rootView.findViewById(R.id.etCountry);
         etAddress = rootView.findViewById(R.id.etAddress);
         etGender = rootView.findViewById(R.id.etGender);
         etDob = rootView.findViewById(R.id.etDob);
         etPhone = rootView.findViewById(R.id.etPhone);
-        TextView txtSave = rootView.findViewById(R.id.txtSave);
+        txtSave = rootView.findViewById(R.id.txtSave);
         ConstraintLayout editButtonLayout = rootView.findViewById(R.id.edit_profile);
-
         etDob.setOnClickListener(this);
         etCountry.setOnClickListener(this);
         phone_code = SharedPrefs.getKey(getActivity(), "phone_code");
@@ -132,13 +145,14 @@ public class MyProfile extends Fragment implements View.OnClickListener {
         etDob.setText(SharedPrefs.getKey(getActivity(), "dob"));
         etPhone.setText(SharedPrefs.getKey(getActivity(), "phone"));
 
-//        if (SharedPrefs.getKey(getActivity(),"gender").equalsIgnoreCase("Male"))
-//        {
-//            imgProfile.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.profile));
-//        }
-//        else {
-//            imgProfile.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_femaleicon));
-//        }
+        if (SharedPrefs.getKey(getActivity(), "gender").equalsIgnoreCase("Male")) {
+            imgProfile.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.profile));
+            imgProfile.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        } else {
+            imgProfile.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_femaleicon));
+            imgProfile.setScaleType(ImageView.ScaleType.FIT_CENTER);
+
+        }
         etGender.setOnClickListener(this);
         txtSave.setOnClickListener(this);
 
@@ -149,13 +163,33 @@ public class MyProfile extends Fragment implements View.OnClickListener {
 //        loader.show();
 //        getProfile();
 
-
         onCLickEditImage(editButtonLayout);
         return rootView;
     }
 
+
     private void onCLickEditImage(ConstraintLayout editButtonLayout) {
-        editButtonLayout.setOnClickListener(v -> selectImage());
+        editButtonLayout.setOnClickListener(v -> checkPermission());
+
+    }
+
+    private void checkPermission() {
+        if (ActivityCompat.checkSelfPermission(getContext(),
+                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 1);
+        } else {
+            selectImage();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            selectImage();
+        } else {
+            checkPermission();
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
 
@@ -204,18 +238,20 @@ public class MyProfile extends Fragment implements View.OnClickListener {
                 bitmap = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
+                byte[] byteArray = bytes.toByteArray();
+                String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                SharedPrefs.setKey(getActivity(), "image", "data:image/jpeg;base64," + encoded);
                 Log.e("Activity", "Pick from Camera::>>> ");
 
-                int currentBitmapWidth = bitmap.getWidth();
-                int currentBitmapHeight = bitmap.getHeight();
+//                int currentBitmapWidth = bitmap.getWidth();
+//                int currentBitmapHeight = bitmap.getHeight();
+//
+//                int ivWidth = imgProfile.getWidth();
+//                int newHeight = (int) Math.floor((double) currentBitmapHeight * ((double) ivWidth / (double) currentBitmapWidth));
+//
+//                Bitmap newbitMap = Bitmap.createScaledBitmap(bitmap, ivWidth, newHeight, true);
 
-                int ivWidth = imgProfile.getWidth();
-                int newHeight = (int) Math.floor((double) currentBitmapHeight * ((double) ivWidth / (double) currentBitmapWidth));
-
-                Bitmap newbitMap = Bitmap.createScaledBitmap(bitmap, ivWidth, newHeight, true);
-
-                imgProfile.setImageBitmap(newbitMap);
-                SharedPrefs.setKey(getActivity(), "image", newbitMap.toString());
+                imgProfile.setImageBitmap(bitmap);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -226,14 +262,18 @@ public class MyProfile extends Fragment implements View.OnClickListener {
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
-                Log.e("Activity", "Pick from Gallery::>>> ");
                 imgProfile.setImageBitmap(bitmap);
+                byte[] byteArray = bytes.toByteArray();
+                encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                SharedPrefs.setKey(getActivity(), "image", "data:image/jpeg;base64," + encoded);
+                Log.e("Activity", "Pick from Gallery::>>> ");
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
 
     private void getCountryList() {
         loader.show();
@@ -313,6 +353,14 @@ public class MyProfile extends Fragment implements View.OnClickListener {
                                 SharedPrefs.setKey(getActivity(), "gender", gender);
                                 String dob = userInfo.getString("dob");
                                 SharedPrefs.setKey(getActivity(), "dob", dob);
+                                phone_code = SharedPrefs.getKey(getActivity(), "phone_code");
+                                etName.setText(SharedPrefs.getKey(getActivity(), "user_name"));
+                                etEmail.setText(SharedPrefs.getKey(getActivity(), "email"));
+                                etCountry.setText(SharedPrefs.getKey(getActivity(), "country"));
+                                etAddress.setText(SharedPrefs.getKey(getActivity(), "address"));
+                                etGender.setText(SharedPrefs.getKey(getActivity(), "gender"));
+                                etDob.setText(SharedPrefs.getKey(getActivity(), "dob"));
+                                etPhone.setText(SharedPrefs.getKey(getActivity(), "phone"));
                                 String path = SharedPrefs.getKey(getActivity(), "image");
                                 Picasso.get().load(path).into(imgProfile);
 
@@ -358,6 +406,8 @@ public class MyProfile extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         if (view.getId() == R.id.txtSave) {
             loader.show();
+            String image = SharedPrefs.getKey(getActivity(), "image").replaceAll
+                    ("(?:\\r\\n|\\n\\r|\\n|\\r)", "");
             updateProfile(SharedPrefs.getKey(getActivity(), "userId"),
                     etName.getText().toString(),
                     phone_code,
@@ -366,14 +416,14 @@ public class MyProfile extends Fragment implements View.OnClickListener {
                     etGender.getText().toString(),
                     etDob.getText().toString(),
                     SharedPrefs.getKey(getActivity(), "country_id"),
-                    SharedPrefs.getKey(getActivity(), "image")
+                    image
             );
         }
         if (view.getId() == R.id.etDob) {
             final Calendar c = Calendar.getInstance();
-            int mYear = c.get(Calendar.YEAR);
-            int mMonth = c.get(Calendar.MONTH);
-            int mDay = c.get(Calendar.DAY_OF_MONTH);
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
@@ -442,16 +492,19 @@ public class MyProfile extends Fragment implements View.OnClickListener {
                                String addres, String gender,
                                String dob, String country_id, String image) {
 
+        String saveddata = "{" + "\"phone_code\":" + "\"" + phone_code + "\"," + "\"user_name\":" + "\"" +
+                user_name+ "\"," + "\"phone\":"
+                + "\"" + phone + "\"," + "\"country_id\":" + "\"" + country_id +
+                "\"," + "\"userId\":" + "\"" + userId + "\"," + "\"image\":" + "\"" + image + "\"" + "}";
+        Log.v("savedData", saveddata + "");
+
+
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, URLS.Companion.getPROFILE_Edit(), new Response.Listener<NetworkResponse>() {
             @Override
             public void onResponse(NetworkResponse response) {
                 loader.dismiss();
                 String res = new String(response.data);
-//                if (gender.equalsIgnoreCase("Male")) {
-//                    imgProfile.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.profile));
-//                } else {
-//                    imgProfile.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_femaleicon));
-//                }
+                Toast.makeText(getContext(), res, Toast.LENGTH_LONG).show();
                 Log.v("responseprofile", res + "");
             }
         }, new Response.ErrorListener() {
@@ -467,24 +520,34 @@ public class MyProfile extends Fragment implements View.OnClickListener {
             @Override
             public Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("userId", userId);
-                params.put("user_name", user_name);
-                params.put("phone_code", phone_code);
-                params.put("phone", phone);
-                params.put("addres", addres);
-                params.put("gender", gender);
-                params.put("dob", dob);
-                params.put("country_id", country_id);
-                params.put("image", image);
-                System.out.println("object" + params + " ");
+//                params.put("phone", phone);
+//                params.put("addres", addres);
+//                params.put("gender", gender);
+//                params.put("dob", dob);
+//                params.put("country_id", country_id);
+//                System.out.println("object" + params + " ");
                 return params;
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return saveddata == null ? null : saveddata.getBytes("utf-8");
+                } catch (UnsupportedEncodingException e) {
+                    return null;
+                }
             }
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("apikey", "12345678");
-                headers.put("Content-Type", "application/json");
+//                headers.put("Content-Type", "application/json");
                 return headers;
             }
 
