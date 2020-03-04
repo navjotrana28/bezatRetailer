@@ -221,7 +221,7 @@ public class TotalCoupon extends Fragment {
     private void getTotalCoupon() {
         JSONObject object = new JSONObject();
         String Url = URLS.Companion.getTOTAL_COUPON() + "userId=" + SharedPrefs.getKey(getActivity(), "userId")
-                + "&storeId=" + SharedPrefs.getKey(getActivity(), "storeId");
+                + "&storeId=" + SharedPrefs.getKey(getActivity(), "storeID");
 //                + "&year_month=" + currentDate;
 
         JsonObjectRequest jsonObjectRequest = new
@@ -321,10 +321,7 @@ public class TotalCoupon extends Fragment {
         public void onBindViewHolder(PostAdapter.MyViewHolder holder, int position) {
             try {
 
-                holder.txtBilldate.setText("Date : " + jsonArray.getJSONObject(position).getString("bill_date"));
-                holder.txtBillno.setText(jsonArray.getJSONObject(position).getString("bill_no"));
-                holder.txtRaffles.setText("Raffles : " + jsonArray.getJSONObject(position).getString("raffles"));
-                holder.txtStoreName.setText(jsonArray.getJSONObject(position).getString("storeName" + lang));
+                holder.availTicket.setText(jsonArray.getJSONObject(position).getString("available_tickets"));
                 Picasso.get().load(jsonArray.getJSONObject(position).getString("store_logo")).into(holder.imgCoupon);
 
             } catch (Exception e) {
@@ -340,16 +337,13 @@ public class TotalCoupon extends Fragment {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
 
-            TextView txtStoreName, txtRaffles, txtBillno, txtBilldate;
+            TextView availTicket, ticketNo;
             ImageView imgCoupon;
 
             public MyViewHolder(View itemView) {
                 super(itemView);
 
-                txtBilldate = itemView.findViewById(R.id.txtBilldate);
-                txtBillno = itemView.findViewById(R.id.txtBillno);
-                txtRaffles = itemView.findViewById(R.id.txtRaffles);
-                txtStoreName = itemView.findViewById(R.id.txtStoreName);
+                availTicket = itemView.findViewById(R.id.availTicket);
                 imgCoupon = itemView.findViewById(R.id.imgCoupon);
 
                 itemView.setOnClickListener(new View.OnClickListener() {
