@@ -22,7 +22,7 @@ public class VipData {
     private String customerPhone;
     @SerializedName("customerImage")
     @Expose
-    private Object customerImage;
+    private String customerImage;
 
     public String getCustomerId() {
         return customerId;
@@ -64,11 +64,11 @@ public class VipData {
         this.customerPhone = customerPhone;
     }
 
-    public Object getCustomerImage() {
+    public String getCustomerImage() {
         return customerImage;
     }
 
-    public void setCustomerImage(Object customerImage) {
+    public void setCustomerImage(String customerImage) {
         this.customerImage = customerImage;
     }
 }

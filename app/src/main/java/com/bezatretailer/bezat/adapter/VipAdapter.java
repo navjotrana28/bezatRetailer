@@ -1,8 +1,10 @@
 package com.bezatretailer.bezat.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,9 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bezatretailer.bezat.R;
 import com.bezatretailer.bezat.models.vip_lists.VipResult;
+import com.squareup.picasso.Picasso;
 
 public class VipAdapter extends RecyclerView.Adapter<VipAdapter.MyViewHolder> {
-    VipResult vipResult = new VipResult();
+    private VipResult vipResult = new VipResult();
 
     @NonNull
     @Override
@@ -33,6 +36,12 @@ public class VipAdapter extends RecyclerView.Adapter<VipAdapter.MyViewHolder> {
         viewHolder.code.setText(vipResult.getResult().get(i).getCustomerCode());
         viewHolder.Email.setText(vipResult.getResult().get(i).getCustomerEmail());
         viewHolder.phone.setText(vipResult.getResult().get(i).getCustomerPhone());
+        try {
+            String path = vipResult.getResult().get(i).getCustomerImage();
+            Picasso.get().load(path).into(viewHolder.imgVip);
+        } catch (Exception e) {
+            Log.d("", e.toString());
+        }
     }
 
     @Override
@@ -45,6 +54,7 @@ public class VipAdapter extends RecyclerView.Adapter<VipAdapter.MyViewHolder> {
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView customerName, code, Email, phone;
+        ImageView imgVip;
 
         MyViewHolder(View view) {
             super(view);
@@ -52,6 +62,7 @@ public class VipAdapter extends RecyclerView.Adapter<VipAdapter.MyViewHolder> {
             code = view.findViewById(R.id.txtCustomerCode);
             Email = view.findViewById(R.id.txtCustomerEmail);
             phone = view.findViewById(R.id.txtCustomerPhone);
+            imgVip = view.findViewById(R.id.imageVip);
 
         }
     }
