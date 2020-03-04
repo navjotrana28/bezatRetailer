@@ -231,7 +231,7 @@ public class TotalCoupon extends Fragment {
                         response -> {
                             loader.dismiss();
                             try {
-                                PostAdapter postAdapter = new PostAdapter(response.getJSONObject("result").getJSONArray("raffles"));
+                                PostAdapter postAdapter = new PostAdapter(response.getJSONObject("result"));
                                 StaggeredGridLayoutManager layoutManager =
                                         new StaggeredGridLayoutManager(1, OrientationHelper.VERTICAL);
                                 layoutManager.setGapStrategy(
@@ -294,21 +294,21 @@ public class TotalCoupon extends Fragment {
     }
 
     private class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
-        JSONArray jsonArray;
+        JSONObject jsonArray;
 
-        public PostAdapter(JSONArray array) {
+        public PostAdapter(JSONObject array) {
             this.jsonArray = array;
         }
 
-        public void append(JSONArray array) {
-            try {
-                for (int i = 0; i < array.length(); i++) {
-                    this.jsonArray.put(array.get(i));
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+//        public void append(JSONArray array) {
+//            try {
+//                for (int i = 0; i < array.length(); i++) {
+//                    this.jsonArray.put(array.get(i));
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         @Override
         public PostAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -321,8 +321,12 @@ public class TotalCoupon extends Fragment {
         public void onBindViewHolder(PostAdapter.MyViewHolder holder, int position) {
             try {
 
-                holder.availTicket.setText(jsonArray.getJSONObject(position).getString("available_tickets"));
-                Picasso.get().load(jsonArray.getJSONObject(position).getString("store_logo")).into(holder.imgCoupon);
+//                holder.availTicket.setText(jsonArray.getJSONObject(position).getString("available_tickets"));
+                holder.availTicket.setText(jsonArray.getString("available_tickets"));
+                Picasso.get().load(jsonArray.getString("store_logo"))
+                        .resizeDimen(150,150)
+                        .into(holder.imgCoupon);
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -332,7 +336,7 @@ public class TotalCoupon extends Fragment {
 
         @Override
         public int getItemCount() {
-            return jsonArray.length();
+            return jsonArray.length()-1;
         }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
