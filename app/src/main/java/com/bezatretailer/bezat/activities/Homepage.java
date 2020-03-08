@@ -40,26 +40,35 @@ public class Homepage extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-
                 case R.id.navigation_dashboard:
                     getSupportFragmentManager().popBackStack();
-                    viewPager.setCurrentItem(0);
+                    ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.container, new Dashboard());
+                    ft.commit();
+
+//                    viewPager.setCurrentItem(0);
                     return true;
                 case R.id.navigation_bell:
                     getSupportFragmentManager().popBackStack();
-
-                    viewPager.setCurrentItem(1);
+                    ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.container, new Notification());
+                    ft.commit();
+//                    viewPager.setCurrentItem(1);
                     return true;
                 case R.id.navigation_profile:
                     getSupportFragmentManager().popBackStack();
-
-                    viewPager.setCurrentItem(2);
+                    ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.container, new MyProfile());
+                    ft.commit();
+//                    viewPager.setCurrentItem(2);
                     return true;
 
                 case R.id.navigation_settings:
                     getSupportFragmentManager().popBackStack();
-
-                    viewPager.setCurrentItem(3);
+                    ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.container, new Settings());
+                    ft.commit();
+//                    viewPager.setCurrentItem(3);
                     return true;
             }
             return false;
@@ -104,13 +113,17 @@ public class Homepage extends AppCompatActivity {
         frameLayout = findViewById(R.id.container);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        currentFragment = new Dashboard();
         ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.viewPagerhome, currentFragment);
+        ft.replace(R.id.container, new Dashboard());
         ft.commit();
-        viewPager = findViewById(R.id.viewPagerhome);
-        addTabs(viewPager);
-        setPageChangeListener(navView);
+
+        currentFragment = new Dashboard();
+//        ft = getSupportFragmentManager().beginTransaction();
+//        ft.replace(R.id.viewPagerhome, currentFragment);
+//        ft.commit();
+//        viewPager = findViewById(R.id.viewPagerhome);
+//        addTabs(viewPager);
+//        setPageChangeListener(navView);
 
     }
 

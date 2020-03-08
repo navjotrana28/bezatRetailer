@@ -2,17 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
 		android:background="@color/lightest_grey"
 		android:orientation="horizontal"
 		android:padding="@dimen/_4sdp">
 
-	<ImageView
+	<de.hdodenhof.circleimageview.CircleImageView
 			android:id="@+id/imgCoupon"
-			android:layout_width="@dimen/_86sdp"
-			android:layout_height="@dimen/_86sdp"
-			android:scaleType="fitXY"
-			android:background="@drawable/img"
-	android:src="@drawable/restaurantdummy" />
+			android:layout_width="100dp"
+			android:layout_height="100dp"
+			android:layout_gravity="center"
+			android:src="@drawable/restaurantdummy"
+			app:civ_border_color="@color/colorPrimary"
+			app:civ_border_width="2dp" />
 
 	<LinearLayout
 			android:layout_width="match_parent"
