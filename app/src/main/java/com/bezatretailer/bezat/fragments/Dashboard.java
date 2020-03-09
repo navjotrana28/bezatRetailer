@@ -130,8 +130,8 @@ public class Dashboard extends Fragment {
                                 viewPager.setAdapter(new SliderAdapter(getActivity(), jsonArray));
                                 indicator.setupWithViewPager(viewPager, false);
 
-//                                Timer timer = new Timer();
-//                                timer.scheduleAtFixedRate(new SliderTimer(), 4000, 6000);
+                                Timer timer = new Timer();
+                                timer.scheduleAtFixedRate(new SliderTimer(), 4000, 6000);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
