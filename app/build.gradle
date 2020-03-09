@@ -59,10 +59,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.fragment:fragment-ktx:1.0.0'
     implementation 'com.budiyev.android:code-scanner:2.1.0'
-    implementation 'com.google.firebase:firebase-core:17.0.0'
-    implementation project(":library")
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.google.firebase:firebase-messaging:19.0.1'
+    implementation 'com.google.firebase:firebase-core:17.0.0'
+    implementation project(":library")
     implementation 'androidx.cardview:cardview:1.0.0'
 
     //rxjava
@@ -73,4 +73,4 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.0'
 }
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'

@@ -1,14 +1,18 @@
 package com.bezatretailer.bezat.activities;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +27,10 @@ import com.bezatretailer.bezat.fragments.MyProfile;
 import com.bezatretailer.bezat.fragments.Notification;
 import com.bezatretailer.bezat.fragments.Settings;
 import com.bezatretailer.bezat.utils.SharedPrefs;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Locale;
 
@@ -109,6 +116,25 @@ public class Homepage extends AppCompatActivity {
         verifyStoragePermissions(Homepage.this);
         setContentView(R.layout.activity_home);
 
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel
+                    ("MyNotifications", "MyNotifications", NotificationManager.IMPORTANCE_DEFAULT);
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+        FirebaseMessaging.getInstance().subscribeToTopic("general")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = ("Successful");
+                        if (!task.isSuccessful()) {
+                            msg = ("Failed");
+                        }
+                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+//-------------------------------------------------
         BottomNavigationView navView = findViewById(R.id.navigation);
         frameLayout = findViewById(R.id.container);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
