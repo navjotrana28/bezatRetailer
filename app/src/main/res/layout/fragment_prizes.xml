@@ -165,7 +165,7 @@
 			android:layout_height="@dimen/_1sdp"
 			android:layout_above="@id/txtBottom"
 			android:background="@color/whitegray"
-			android:visibility="gone" />
+			android:visibility="visible" />
 
 	<TextView
 			android:id="@+id/txtBottom"
@@ -186,5 +186,5 @@
 			android:layout_height="@dimen/_1sdp"
 			android:layout_below="@id/txtBottom"
 			android:background="@color/whitegray"
-			android:visibility="gone" />
+			android:visibility="visible" />
 </RelativeLayout>

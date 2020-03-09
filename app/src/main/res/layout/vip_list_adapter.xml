@@ -11,9 +11,9 @@
 	<ImageView
 			android:layout_width="120dp"
 			android:layout_height="100dp"
+			android:layout_marginTop="4dp"
 			android:id="@+id/imageVip"
 			android:layout_gravity="center"
-			android:scaleType="fitXY"
 			android:src="@drawable/vip_logo" />
 
 	<LinearLayout
@@ -32,7 +32,7 @@
 				android:textSize="10sp" />
 
 		<TextView
-				android:id="@+id/txtCustomerName"
+				android:id="@+id/txCustomerName"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"

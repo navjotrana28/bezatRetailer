@@ -131,7 +131,8 @@ public class PrizeDetails extends Fragment {
                                 txtPrize.setText("Prize : " + jsonObject.getString("prize"));
                                 String difDate = getDifDays(jsonObject.getString("draw_date"));
                                 if (Integer.parseInt(difDate) > 1) {
-                                    draw = "RAFFLE DRAW IN " + difDate + " DAYS";
+                                    int temp = Integer.parseInt(difDate) - 1;
+                                    draw = "RAFFLE DRAW IN " + temp + " DAYS";
                                 } else if (Integer.parseInt(difDate) < 0) {
                                     draw = "RAFFLE DRAW " + Math.abs(Integer.parseInt(difDate)) + " DAYS BEFORE";
                                 } else if (Integer.parseInt(difDate) == 0) {
@@ -211,6 +212,6 @@ public class PrizeDetails extends Fragment {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return diffDays.replace(" ","");
+        return diffDays.replace(" ", "");
     }
 }

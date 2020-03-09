@@ -58,7 +58,7 @@ public class VipAdapter extends RecyclerView.Adapter<VipAdapter.MyViewHolder> {
 
         MyViewHolder(View view) {
             super(view);
-            customerName = view.findViewById(R.id.txtCustomerName);
+            customerName = view.findViewById(R.id.txCustomerName);
             code = view.findViewById(R.id.txtCustomerCode);
             Email = view.findViewById(R.id.txtCustomerEmail);
             phone = view.findViewById(R.id.txtCustomerPhone);
