@@ -324,7 +324,6 @@ public class TotalCoupon extends Fragment {
 //                holder.availTicket.setText(jsonArray.getJSONObject(position).getString("available_tickets"));
                 holder.availTicket.setText(jsonArray.getString("available_tickets"));
                 Picasso.get().load(jsonArray.getString("store_logo"))
-                        .resizeDimen(150,150)
                         .into(holder.imgCoupon);
 
 
