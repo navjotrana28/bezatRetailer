@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "771129828137",
+    "firebase_url": "https://bezatretailer-b1e1a.firebaseio.com",
+    "project_id": "bezatretailer-b1e1a",
+    "storage_bucket": "bezatretailer-b1e1a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771129828137:android:8e5f0cd65a69e344628d38",
+        "android_client_info": {
+          "package_name": "com.bezatretailer.bezat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771129828137-m3d51kn305esqnmp6mk72jso6f29nq43.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bezatretailer.bezat",
+            "certificate_hash": "07d8f90265f366d41e4624994abc1be4865411d2"
+          }
+        },
+        {
+          "client_id": "771129828137-d03k60k2vcqepqvrkqbn4n4k3aao332m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6KopoUPtLl8igsIs14vvtPsvBy70thK8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771129828137-d03k60k2vcqepqvrkqbn4n4k3aao332m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
