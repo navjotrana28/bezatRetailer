@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +59,7 @@ public class StoreOffer extends Fragment implements View.OnClickListener {
     Loader loader;
     ImageView imgBanner;
     Button btnAllOffer;
+    LinearLayout wholeStorelayout;
     ImageView imgBack;
     String lang = "";
     TextView tvDescrip;
@@ -122,6 +124,7 @@ public class StoreOffer extends Fragment implements View.OnClickListener {
         imgBack = rootView.findViewById(R.id.imgBack);
         txtLoc = rootView.findViewById(R.id.txtLoc);
         txtSnap = rootView.findViewById(R.id.txtSnap);
+        wholeStorelayout = rootView.findViewById(R.id.wholeStorelayout);
 
         imgBack.setOnClickListener(this);
         txtTwitter.setOnClickListener(this);
@@ -205,7 +208,7 @@ public class StoreOffer extends Fragment implements View.OnClickListener {
                                     tvDescrip.setText(jsonObject.getString("description" + lang));
                                 }
                                 JSONArray storeArray = jsonObject.getJSONArray("store_offers");
-
+                                wholeStorelayout.setVisibility(View.VISIBLE);
                                 btnAllOffer.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
