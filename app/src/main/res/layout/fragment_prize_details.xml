@@ -70,44 +70,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_40sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_40sdp"
                 android:layout_marginStart="@dimen/_2sdp"
                 android:layout_marginEnd="@dimen/_2sdp"
                 app:cardBackgroundColor="@color/white"
-                app:contentPadding="@dimen/_8sdp">
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center">
-                <TextView
-                        android:id="@+id/txtPrizeType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12sdp"
-                        android:fontFamily="@font/muli_bold"
-                        android:text="Prize: Meet a star"/>
+                app:contentPadding="@dimen/_12sdp">
             <TextView
                     android:id="@+id/txtPrize"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:fontFamily="@font/muli_semibold"
+                    android:textSize="@dimen/_14sdp"
                     android:text="Prize: Meet a star"/>
-                <TextView
-                        android:id="@+id/txtPrizeDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12sdp"
-                        android:fontFamily="@font/muli_semibold"
-                        android:text="Prize: Meet a star"/>
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
 
