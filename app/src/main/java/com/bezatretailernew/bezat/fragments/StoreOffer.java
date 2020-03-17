@@ -125,7 +125,8 @@ public class StoreOffer extends Fragment implements View.OnClickListener {
         txtLoc = rootView.findViewById(R.id.txtLoc);
         txtSnap = rootView.findViewById(R.id.txtSnap);
         wholeStorelayout = rootView.findViewById(R.id.wholeStorelayout);
-
+        loader=new Loader(getContext());
+        loader.show();
         imgBack.setOnClickListener(this);
         txtTwitter.setOnClickListener(this);
         txtInsta.setOnClickListener(this);
@@ -209,6 +210,7 @@ public class StoreOffer extends Fragment implements View.OnClickListener {
                                 }
                                 JSONArray storeArray = jsonObject.getJSONArray("store_offers");
                                 wholeStorelayout.setVisibility(View.VISIBLE);
+                                loader.dismiss();
                                 btnAllOffer.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {

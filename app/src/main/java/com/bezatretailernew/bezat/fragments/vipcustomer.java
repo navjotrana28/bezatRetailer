@@ -37,6 +37,7 @@ import com.bezatretailernew.bezat.utils.Loader;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
 import com.bezatretailernew.bezat.utils.URLS;
 import com.bezatretailernew.bezat.utils.VolleyMultipartRequest;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,7 +65,7 @@ public class vipcustomer extends Fragment {
     Button btnaddVip;
     View rootView;
     LinearLayout layoutContent, vip_list_linear;
-    ImageView imgSearch, imgBack;
+    ImageView imgSearch, imgBack,imgFront;
     TextView txtCustomerName, txtCustomerCode, txtCustomerEmail, txtCustomerPhone;
     EditText etSearch;
     Loader loader;
@@ -107,6 +108,7 @@ public class vipcustomer extends Fragment {
         txtCustomerCode = rootView.findViewById(R.id.txtCustomerCode);
         txtCustomerEmail = rootView.findViewById(R.id.txtCustomerEmail);
         txtCustomerPhone = rootView.findViewById(R.id.txtCustomerPhone);
+        imgFront = rootView.findViewById(R.id.imgFront);
         btnaddVip = rootView.findViewById(R.id.btnaddVip);
         etSearch = rootView.findViewById(R.id.etSearch);
         imgSearch = rootView.findViewById(R.id.imgSearch);
@@ -242,7 +244,7 @@ public class vipcustomer extends Fragment {
                             try {
                                 layoutContent.setVisibility(View.VISIBLE);
                                 btnaddVip.setVisibility(View.VISIBLE);
-                                vip_list_linear.setVisibility(View.GONE);
+//                                vip_list_linear.setVisibility(View.GONE);
                                 customerId = response.getJSONObject("result").getString("customerId");
                                 String customerName = response.getJSONObject("result").getString("customerName");
                                 String customerEmail = response.getJSONObject("result").getString("customerEmail");
@@ -252,6 +254,12 @@ public class vipcustomer extends Fragment {
                                 txtCustomerEmail.setText(customerEmail);
                                 txtCustomerCode.setText(customerCode);
                                 txtCustomerPhone.setText(customerPhone);
+                                try {
+                                    String path = response.getJSONObject("result").getString("customerImage");
+                                    Picasso.get().load(path).into(imgFront);
+                                } catch (Exception e) {
+                                    Log.d("", e.toString());
+                                }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
