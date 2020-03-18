@@ -146,7 +146,7 @@ public class StoreOffer extends Fragment implements View.OnClickListener {
         Date date = new Date();
         String currentDate = formatter.format(date);
         JSONObject object = new JSONObject();
-        String vipUrl = URLS.Companion.getSTORE_BY_OFFER() + "userId=" + SharedPrefs.getKey(getActivity(), "userId")
+        String vipUrl = URLS.Companion.getSTAFF_OFFER_LIST() + "userId=" + SharedPrefs.getKey(getActivity(), "userId")
                 + "&storeId=" + storeId
                 + "&currentDate=" + currentDate;
         Log.v("STORE_BY_OFFER", vipUrl + " ");
