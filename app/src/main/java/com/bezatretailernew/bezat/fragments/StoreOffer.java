@@ -59,9 +59,9 @@ public class StoreOffer extends Fragment implements View.OnClickListener {
     Loader loader;
     ImageView imgBanner;
     Button btnAllOffer;
-    LinearLayout wholeStorelayout;
     ImageView imgBack;
     String lang = "";
+    LinearLayout wholeStorelayout;
     TextView tvDescrip;
     ImageButton txtTwitter, txtInsta, txtFb, txtWeb, txtPhone, txtSnap, txtLoc;
     TextView txtStoreName;
