@@ -317,7 +317,6 @@ public class MyProfile extends Fragment implements View.OnClickListener {
                         vipUrl,
                         object,
                         response -> {
-                            loader.dismiss();
                             Log.v("NotificationResponse", response + " ");
                             try {
                                 JSONObject userInfo = response.getJSONObject("userInfo");
@@ -363,6 +362,8 @@ public class MyProfile extends Fragment implements View.OnClickListener {
                                 etPhone.setText(SharedPrefs.getKey(getActivity(), "phone"));
                                 String path = SharedPrefs.getKey(getActivity(), "image");
                                 Picasso.get().load(path).into(imgProfile);
+                                SharedPrefs.setKey(getActivity(), "image", "");
+                                loader.dismiss();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -504,7 +505,6 @@ public class MyProfile extends Fragment implements View.OnClickListener {
             public void onResponse(NetworkResponse response) {
                 loader.dismiss();
                 String res = new String("Your profile has been updated successfully");
-//                String res = new String(response.data);
                 Toast.makeText(getContext(), res, Toast.LENGTH_LONG).show();
                 Log.v("responseprofile", res + "");
             }
