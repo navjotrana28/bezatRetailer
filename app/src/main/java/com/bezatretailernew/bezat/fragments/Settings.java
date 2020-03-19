@@ -122,19 +122,19 @@ public class Settings extends Fragment implements View.OnClickListener {
         txtChangeLanguage.setOnClickListener(this);
         txtMyFav.setOnClickListener(this);
 
-        if (SharedPrefs.getKey(getActivity(), "push_notification_status").equalsIgnoreCase("1")) {
+        if (SharedPrefs.getKey(getActivity(), "push_notificationretailer").equalsIgnoreCase("1")) {
             switches.setChecked(true);
         } else {
-            switches.setChecked(true);
-//            switches.setChecked(false);
+            switches.setChecked(false);
         }
         switches.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    notificationChange("0");
-                } else {
+                    SharedPrefs.setKey(getActivity(), "push_notificationretailer", "1");
                     notificationChange("1");
-                }
+                } else {
+                    SharedPrefs.setKey(getActivity(), "push_notificationretailer", "0");
+                    notificationChange("0");                }
             }
         });
         return rootView;
