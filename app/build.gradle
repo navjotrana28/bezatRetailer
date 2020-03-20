@@ -11,8 +11,8 @@ android {
         applicationId "com.bezatretailernew.bezat"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 3
-        versionName "2.0.1"
+        versionCode 4
+        versionName "4.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
