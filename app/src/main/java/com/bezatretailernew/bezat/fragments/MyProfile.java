@@ -8,9 +8,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -51,6 +58,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -147,10 +158,10 @@ public class MyProfile extends Fragment implements View.OnClickListener {
 
         if (SharedPrefs.getKey(getActivity(), "gender").equalsIgnoreCase("Male")) {
             imgProfile.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.profile));
-            imgProfile.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            imgProfile.setScaleType(ImageView.ScaleType.FIT_XY);
         } else {
             imgProfile.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.ic_femaleicon));
-            imgProfile.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            imgProfile.setScaleType(ImageView.ScaleType.FIT_XY);
 
         }
         etGender.setOnClickListener(this);
@@ -237,21 +248,12 @@ public class MyProfile extends Fragment implements View.OnClickListener {
             try {
                 bitmap = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
                 byte[] byteArray = bytes.toByteArray();
                 String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
                 SharedPrefs.setKey(getActivity(), "image", "data:image/jpeg;base64," + encoded);
                 Log.e("Activity", "Pick from Camera::>>> ");
-
-//                int currentBitmapWidth = bitmap.getWidth();
-//                int currentBitmapHeight = bitmap.getHeight();
-//
-//                int ivWidth = imgProfile.getWidth();
-//                int newHeight = (int) Math.floor((double) currentBitmapHeight * ((double) ivWidth / (double) currentBitmapWidth));
-//
-//                Bitmap newbitMap = Bitmap.createScaledBitmap(bitmap, ivWidth, newHeight, true);
-
-                imgProfile.setImageBitmap(bitmap);
+               imgProfile.setImageBitmap(bitmap);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -259,6 +261,7 @@ public class MyProfile extends Fragment implements View.OnClickListener {
         } else if (requestCode == PICK_IMAGE_GALLERY) {
             Uri selectedImage = data.getData();
             try {
+                //for api
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
@@ -273,7 +276,6 @@ public class MyProfile extends Fragment implements View.OnClickListener {
             }
         }
     }
-
 
     private void getCountryList() {
         loader.show();
@@ -494,7 +496,7 @@ public class MyProfile extends Fragment implements View.OnClickListener {
                                String dob, String country_id, String image) {
 
         String saveddata = "{" + "\"phone_code\":" + "\"" + phone_code + "\"," + "\"user_name\":" + "\"" +
-                user_name+ "\"," + "\"phone\":"
+                user_name + "\"," + "\"phone\":"
                 + "\"" + phone + "\"," + "\"country_id\":" + "\"" + country_id +
                 "\"," + "\"userId\":" + "\"" + userId + "\"," + "\"image\":" + "\"" + image + "\"" + "}";
         Log.v("savedData", saveddata + "");
@@ -642,4 +644,5 @@ public class MyProfile extends Fragment implements View.OnClickListener {
             }
         }
     }
+
 }

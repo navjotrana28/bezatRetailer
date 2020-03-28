@@ -82,7 +82,7 @@
     <string name="bezat_winner">الفائزين</string>
     <string name="phone_number">رقم الهاتف</string>
     <string name="code">Code</string>
-    <string name="send">Send</string>
+    <string name="send">ارسال</string>
     <string name="please_enter_your_register_phone_number_below_we_will_send_a_code_to_reset_your_password">يرجى إدخال عنوان البريديرجى إدخال رقم هاتفك المسجل أدناه. سنرسل رمزًا لإعادة تعيين كلمة المرور الخاصة بك</string>
     <string name="my_favourite">My Favourite</string>
     <string name="google">GOOGLE</string>
@@ -103,9 +103,9 @@
     <string name="didn_t_receive_the_otp">لم أستلم OTP؟</string>
     <string name="scan_coupon">مسح القسيمة</string>
     <string name="vip_customers">كبار الشخصيات العملاء</string>
-	<string name="no_result_found">لم يتم العثور على نتائج</string>
-	<string name="scan_qr_code">مسح رمز الاستجابة السريعة</string>
-	<string name="email_phone">البريد الإلكتروني، الهاتف</string>
+    <string name="no_result_found">لم يتم العثور على نتائج</string>
+    <string name="scan_qr_code">مسح رمز الاستجابة السريعة</string>
+    <string name="email_phone">البريد الإلكتروني، الهاتف</string>
     <string name="customer_name">اسم الزبون :</string>
     <string name="customer_code">كود العميل:</string>
     <string name="customer_email">البريد الإلكتروني للعميل:</string>
@@ -115,10 +115,17 @@
     <string name="other_raffles">رافلز أخرى</string>
     <string name="bezat_raffles">  رافلز Bezat</string>
     <string name="prize_details">تفاصيل الجائزة</string>
-	<string name="reports">Reports</string>
+    <string name="reports">Reports</string>
     <string name="add_offer">Add Offer</string>
     <string name="purchase">Purchase</string>
-	<string name="offerc">Offer:</string>
-	<string name="offer_detail">Offer Detail</string>
-
+    <string name="offerc">Offer:</string>
+    <string name="offer_detail">Offer Detail</string>
+    <string name="yes_label">نعم</string>
+    <string name="no_label">لا</string>
+    <string name="send_contact_us">ارسال</string>
+    <string name="get_name">اسم:</string>
+    <string name="get_email">البريد الالكتروني:</string>
+    <string name="get_comments">تعليقات:</string>
+    <string name="user_name_Login">اسم المستخدم / رقم الهاتف</string>
+    <string name="are_you_sure_logout">هل أنت متأكد، تريد تسجيل الخروج؟</string>
 </resources>

@@ -55,8 +55,9 @@ public class OTP extends AppCompatActivity implements View.OnClickListener {
         {
             forgot=getIntent().getStringExtra("Forgot");
         }
-
-        otp=getIntent().getStringExtra("otp");
+        if (getIntent().getStringExtra("otp") != null) {
+            otp=getIntent().getStringExtra("otp");
+        }
         deviceId=getIntent().getStringExtra("deviceId");
         dob=getIntent().getStringExtra("dob");
         email=getIntent().getStringExtra("email");

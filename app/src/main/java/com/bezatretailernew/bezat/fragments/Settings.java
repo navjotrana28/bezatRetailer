@@ -282,14 +282,14 @@ public class Settings extends Fragment implements View.OnClickListener {
         if (view.getId() == R.id.txtLogout) {
             new AlertDialog.Builder(getActivity(), R.style.DialogTheme)
                     .setMessage(getActivity().getString(R.string.logout_confirm))
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(getString(R.string.yes_label), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             SharedPrefs.deleteSharedPrefs(getActivity());
                             startActivity(new Intent(getActivity(), LoginActivity.class));
                             getActivity().finish();
                         }
                     })
-                    .setNegativeButton("No", null)
+                    .setNegativeButton(getString(R.string.no_label), null)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         }

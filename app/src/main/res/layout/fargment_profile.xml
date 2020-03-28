@@ -116,9 +116,9 @@
 
 						<androidx.appcompat.widget.AppCompatImageView
 								android:id="@+id/imgProfile"
-								android:layout_width="wrap_content"
-								android:layout_height="@dimen/_124sdp"
-								android:scaleType="fitCenter"
+								android:layout_width="match_parent"
+								android:layout_height="@dimen/_154sdp"
+                            android:scaleType="fitXY"
 								android:background="@color/colorPrimary"
 								android:src="@drawable/ic_femaleicon"
 								app:layout_constraintBottom_toBottomOf="parent"
