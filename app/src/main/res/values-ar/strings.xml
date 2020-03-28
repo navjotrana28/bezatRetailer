@@ -128,4 +128,11 @@
     <string name="get_comments">تعليقات:</string>
     <string name="user_name_Login">اسم المستخدم / رقم الهاتف</string>
     <string name="are_you_sure_logout">هل أنت متأكد، تريد تسجيل الخروج؟</string>
+    <string name="name_vip">اسم:</string>
+    <string name="code_vip">التعليمات البرمجيه:</string>
+    <string name="email_vip">البريد الالكتروني:</string>
+    <string name="phone_vip">الهاتف:</string>
+    <string name="vip_lists_vip">قوائم كبار الشخصيات</string>
+    <string name="bezat_yearly">بيزات سنويا</string>
+    <string name="bezat_monthly">بيزات شهريًا</string>
 </resources>

@@ -91,7 +91,7 @@
 				android:layout_marginTop="10dp"
 				android:background="@drawable/vip_list_outline"
 				android:orientation="vertical"
-				android:visibility="gone">
+				android:visibility="visible">
 
 			<ImageView
 					android:id="@+id/imgFront"
@@ -113,7 +113,7 @@
 						android:layout_weight="1"
 						android:gravity="end"
 						android:paddingStart="@dimen/_20sdp"
-						android:text="Name :"
+						android:text="@string/name_vip"
 						android:textColor="@color/black"
 						android:textSize="10sp" />
 
@@ -140,7 +140,7 @@
 						android:gravity="end"
 						android:paddingStart="@dimen/_20sdp"
 						android:paddingEnd="7dp"
-						android:text="Code :"
+						android:text="@string/code_vip"
 						android:textColor="@color/black"
 						android:textSize="10sp" />
 
@@ -166,7 +166,7 @@
 						android:layout_weight="1"
 						android:gravity="end"
 						android:paddingStart="@dimen/_20sdp"
-						android:text="Email :"
+						android:text="@string/email_vip"
 						android:textColor="@color/black"
 						android:textSize="10sp" />
 
@@ -194,7 +194,7 @@
 						android:layout_weight="1"
 						android:gravity="end"
 						android:paddingStart="@dimen/_20sdp"
-						android:text="Phone :"
+						android:text="@string/phone_vip"
 						android:textColor="@color/black"
 						android:textSize="10sp" />
 
@@ -236,7 +236,7 @@
 					android:layout_gravity="center"
 					android:layout_marginTop="20dp"
 					android:gravity="center"
-					android:text="VIP Lists"
+					android:text="@string/vip_lists_vip"
 					android:textColor="@color/colorPrimary"
 					android:textSize="16sp" />
 

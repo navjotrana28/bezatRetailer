@@ -27,7 +27,7 @@
 				android:layout_weight="1"
 				android:gravity="end"
 				android:paddingStart="@dimen/_20sdp"
-				android:text="Name :"
+			android:text="@string/name_vip"
 				android:textColor="@color/black"
 				android:textSize="10sp" />
 
@@ -54,7 +54,7 @@
 				android:gravity="end"
 				android:paddingStart="@dimen/_20sdp"
 				android:paddingEnd="5dp"
-				android:text="Code :"
+				android:text="@string/code_vip"
 				android:textColor="@color/black"
 				android:textSize="10sp" />
 
@@ -78,7 +78,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:paddingStart="@dimen/_15sdp"
-				android:text="Email :"
+				android:text="@string/email_vip"
 				android:textColor="@color/black"
 				android:textSize="10sp" />
 

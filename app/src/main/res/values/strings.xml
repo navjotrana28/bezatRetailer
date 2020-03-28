@@ -135,5 +135,12 @@
     <string name="get_comments">COMMENTS:</string>
     <string name="user_name_Login">Username / Phone number</string>
     <string name="are_you_sure_logout">Are you sure, you want to LOGOUT?</string>
+    <string name="name_vip">Name :</string>
+    <string name="code_vip">Code :</string>
+    <string name="email_vip">Email :</string>
+    <string name="phone_vip">Phone :</string>
+    <string name="vip_lists_vip">VIP Lists</string>
+    <string name="bezat_yearly">Bezat Yearly</string>
+    <string name="bezat_monthly">Bezat Monthly</string>
 
 </resources>
