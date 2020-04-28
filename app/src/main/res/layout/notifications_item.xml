@@ -22,7 +22,6 @@
                 android:layout_width="@dimen/_52sdp"
                    android:layout_height="@dimen/_52sdp"
                    android:src="@drawable/app_logo"
-
         />
     <LinearLayout
             android:layout_weight="1"

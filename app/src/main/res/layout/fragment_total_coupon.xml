@@ -43,10 +43,10 @@
 
 
             <LinearLayout
-                    android:visibility="invisible"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    android:visibility="gone"
                     android:layout_centerVertical="true"
                     android:orientation="horizontal">
                 <TextView
@@ -74,58 +74,33 @@
 
         </RelativeLayout>
     </Toolbar>
-    <LinearLayout
+    <SearchView
             android:layout_below="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:padding="@dimen/_10sdp"
-            android:gravity="center"
-            android:orientation="vertical">
-
-        <LinearLayout
-                android:id="@+id/layoutItem"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:gravity="center"
-        android:orientation="horizontal">
-
-            <ImageView
-                    android:id="@+id/imgCoupon"
-                    android:layout_width="@dimen/_148sdp"
-                       android:layout_height="@dimen/_148sdp"
-                       android:src="@color/colorPrimary"
+            android:id="@+id/search_total_coupons"
+            android:layout_width="350dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/divider_grey"
+            android:iconifiedByDefault="false"
+            android:visibility="gone"
+            android:queryHint="Search Here"
             />
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:gravity="center"
+    <LinearLayout
+            android:layout_below="@+id/search_total_coupons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                    android:text="@string/total_coupon"
-                android:textSize="@dimen/_15sdp"
-                          android:fontFamily="@font/muli_semibold"
-                android:textColor="@color/colorPrimary"/>
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleTotalCoupons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <TextView
-                        android:id="@+id/txtCoupon" android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                         android:paddingStart="@dimen/_15sdp"
-                          android:paddingEnd="@dimen/_15sdp"
-                          android:paddingTop="@dimen/_4sdp"
-                          android:paddingBottom="@dimen/_4sdp"
-                          android:layout_marginTop="@dimen/_7sdp"
-                          android:background="@color/colorPrimary"
-                          android:text="121"
-                          android:textSize="@dimen/_12sdp"
-                />
-            </LinearLayout>
-
-
-        </LinearLayout>
-
+        </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 
 </RelativeLayout>

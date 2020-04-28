@@ -47,11 +47,13 @@
     </Toolbar>
 
     <LinearLayout
+            android:id="@+id/wholeStorelayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/topImage">
 
@@ -190,7 +192,6 @@
                         android:layout_gravity="center"
                         android:baselineAligned="false"/>
             </FrameLayout>
-
 
 
         </LinearLayout>
