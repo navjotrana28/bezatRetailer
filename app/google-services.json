@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:162083087673:android:98b077f0ba82eefa",
         "android_client_info": {
-          "package_name": "com.bezatretailer.bezat"
+          "package_name": "com.bezatretailernew.bezat"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "162083087673-tlgeaajn75pte6ot6c3af9tpunu10h69.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.bezatretailer.bezat",
+            "package_name": "com.bezatretailernew.bezat",
             "certificate_hash": "c1a6f1a7e49f7fe84dd6b0f86f76c482ce0dbd8c"
           }
         },
