@@ -1,80 +1,50 @@
 {
   "project_info": {
-    "project_number": "908654007934",
-    "firebase_url": "https://bezatnew-android.firebaseio.com",
-    "project_id": "bezatnew-android",
-    "storage_bucket": "bezatnew-android.appspot.com"
+    "project_number": "162083087673",
+    "firebase_url": "https://bezatmerchant.firebaseio.com",
+    "project_id": "bezatmerchant",
+    "storage_bucket": "bezatmerchant.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:908654007934:android:61f9fa1b933f925f532a2f",
-        "android_client_info": {
-          "package_name": "com.bezatnew.bezat"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "908654007934-9c4r68hrqk8b0bejr7n4v0355q265jc1.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.bezatnew.bezat",
-            "certificate_hash": "07d8f90265f366d41e4624994abc1be4865411d2"
-          }
-        },
-        {
-          "client_id": "908654007934-bhek89rhsrp2032928djh2f0qng28u4q.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBrKtF_1DlZgmnN3cWzAvsroN70mcZUias"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "908654007934-bhek89rhsrp2032928djh2f0qng28u4q.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:908654007934:android:457e486b1d611f2b532a2f",
+        "mobilesdk_app_id": "1:162083087673:android:98b077f0ba82eefa",
         "android_client_info": {
           "package_name": "com.bezatretailernew.bezat"
         }
       },
       "oauth_client": [
         {
-          "client_id": "908654007934-gdnhlc30hccegh2vucmvfriioduvujso.apps.googleusercontent.com",
+          "client_id": "162083087673-tlgeaajn75pte6ot6c3af9tpunu10h69.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.bezatretailernew.bezat",
-            "certificate_hash": "07d8f90265f366d41e4624994abc1be4865411d2"
+            "certificate_hash": "c1a6f1a7e49f7fe84dd6b0f86f76c482ce0dbd8c"
           }
         },
         {
-          "client_id": "908654007934-bhek89rhsrp2032928djh2f0qng28u4q.apps.googleusercontent.com",
+          "client_id": "162083087673-ijgq403vka4lqp64afm1682ov2indcou.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBrKtF_1DlZgmnN3cWzAvsroN70mcZUias"
+          "current_key": "AIzaSyCd_7Z0R2p99zCniKNNQIimfsF-S-sGOqE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "908654007934-bhek89rhsrp2032928djh2f0qng28u4q.apps.googleusercontent.com",
+              "client_id": "162083087673-ijgq403vka4lqp64afm1682ov2indcou.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "162083087673-m34tem50lgub6m0aeltgqkdtfbp299j8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.bezatMerchant"
+              }
             }
           ]
         }
