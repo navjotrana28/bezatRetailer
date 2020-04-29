@@ -13,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.android.volley.*;
 import com.bezatretailernew.bezat.MyApplication;
 import com.bezatretailernew.bezat.R;
@@ -122,7 +124,7 @@ public class Settings extends Fragment implements View.OnClickListener {
         txtChangeLanguage.setOnClickListener(this);
         txtMyFav.setOnClickListener(this);
 
-        if (SharedPrefs.getKey(getActivity(), "push_notificationretailer").equalsIgnoreCase("1")) {
+        if (SharedPrefs.getKey(getActivity(), "push_notification_status").equalsIgnoreCase("1")) {
             switches.setChecked(true);
         } else {
             switches.setChecked(false);
@@ -130,11 +132,12 @@ public class Settings extends Fragment implements View.OnClickListener {
         switches.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    SharedPrefs.setKey(getActivity(), "push_notificationretailer", "1");
+                    SharedPrefs.setKey(getActivity(), "push_notification_status", "1");
                     notificationChange("1");
                 } else {
-                    SharedPrefs.setKey(getActivity(), "push_notificationretailer", "0");
-                    notificationChange("0");                }
+                    SharedPrefs.setKey(getActivity(), "push_notification_status", "0");
+                    notificationChange("0");
+                }
             }
         });
         return rootView;
