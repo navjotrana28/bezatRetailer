@@ -43,6 +43,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     Loader loader;
     PostAdapter postAdapter;
     Context context = ForgotPassword.this;
+    SmsHashCodeHelper smsHashCodeHelper = new SmsHashCodeHelper(this);
     Button btnSend;
     EditText etPhone;
     ImageView imgBack;
@@ -131,6 +132,8 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
             public Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("phone", phone);
+                String hashCode = String.valueOf(smsHashCodeHelper.getAppHashCode());
+                params.put("smsHashCode", hashCode.substring(1, hashCode.length() - 1));
                 System.out.println("object" + params + " ");
                 return params;
             }

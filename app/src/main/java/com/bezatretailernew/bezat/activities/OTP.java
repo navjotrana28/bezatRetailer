@@ -2,6 +2,7 @@ package com.bezatretailernew.bezat.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
@@ -11,15 +12,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.android.volley.*;
 import com.bezatretailernew.bezat.MyApplication;
 import com.bezatretailernew.bezat.R;
+import com.bezatretailernew.bezat.interfaces.GetOtpInterface;
 import com.bezatretailernew.bezat.utils.Loader;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
 import com.bezatretailernew.bezat.utils.URLS;
 import com.bezatretailernew.bezat.utils.VolleyMultipartRequest;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.phone.SmsRetriever;
+import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,7 +41,12 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class OTP extends AppCompatActivity implements View.OnClickListener {
+public class OTP extends AppCompatActivity implements View.OnClickListener,
+        GoogleApiClient.ConnectionCallbacks, GetOtpInterface, GoogleApiClient.OnConnectionFailedListener  {
+    public static final String IS_OTP_VERIFIED = "is_otp_verified";
+    GoogleApiClient mGoogleApiClient;
+    MySMSBroadCastReceiver mySMSBroadCastReceiver;
+    private int RESOLVE_HINT = 2;
         EditText etOTP;
         Button btnSave;
         String otp,deviceId,dob,email,gender,mobileCode,
@@ -69,6 +88,22 @@ public class OTP extends AppCompatActivity implements View.OnClickListener {
         Log.v("otp details",otp+" "+deviceId+" "+
                 dob+" "+email+" "+gender+" "+mobileCode+" "+
                 password+" "+phone+" ");
+        //-------------------------
+        mySMSBroadCastReceiver = new MySMSBroadCastReceiver();
+        //set google api client for hint request
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.CREDENTIALS_API)
+                .build();
+        mySMSBroadCastReceiver.setOnOtpListeners(this);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION);
+        getApplicationContext().registerReceiver(mySMSBroadCastReceiver, intentFilter);
+        // get mobile number from phone
+//        getHintPhoneNumber();
+        //start SMS listner
+        smsListener();
     }
 
     @Override
@@ -231,6 +266,47 @@ public class OTP extends AppCompatActivity implements View.OnClickListener {
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
+
+    }
+    public void smsListener() {
+        SmsRetrieverClient mClient = SmsRetriever.getClient(this);
+        Task<Void> mTask = mClient.startSmsRetriever();
+        mTask.addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d( "SMS Retriever Started","Starting");
+            }
+        });
+        mTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(OTP.this, "Error", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    @Override
+    public void onOtpReceived(String otp) {
+        Toast.makeText(this, "Otp Received " + otp, Toast.LENGTH_LONG).show();
+        etOTP.setText(otp);
+    }
+
+    @Override
+    public void onOtpTimeout() {
+        Toast.makeText(this, "Time out, please resend", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 }
