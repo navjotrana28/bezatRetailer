@@ -312,17 +312,10 @@ public class Dashboard extends Fragment {
             try {
 
                 holder.text.setText(dashBoardItems.get(position).getName() + " ");
-                final int sdk = android.os.Build.VERSION.SDK_INT;
-                if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                    holder.image.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(),
+//                    holder.image.setBackground(ContextCompat.getDrawable(getActivity(),
+//                            dashBoardItems.get(position).getDrawable()));
+                    holder.image.setImageDrawable(ContextCompat.getDrawable(getActivity(),
                             dashBoardItems.get(position).getDrawable()));
-                } else {
-                    holder.image.setBackground(ContextCompat.getDrawable(getActivity(),
-                            dashBoardItems.get(position).getDrawable()));
-                }
-                holder.image.setImageDrawable(ContextCompat.getDrawable(getActivity(),
-                        dashBoardItems.get(position).getDrawable()));
-
 
             } catch (Exception e) {
                 e.printStackTrace();
