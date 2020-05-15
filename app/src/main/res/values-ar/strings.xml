@@ -118,8 +118,8 @@
     <string name="reports">Reports</string>
     <string name="add_offer">Add Offer</string>
     <string name="purchase">Purchase</string>
-    <string name="offerc">Offer:</string>
-    <string name="offer_detail">Offer Detail</string>
+    <string name="offerc">العرض:</string>
+    <string name="offer_detail">تفاصيل العرض</string>
     <string name="yes_label">نعم</string>
     <string name="no_label">لا</string>
     <string name="send_contact_us">ارسال</string>
@@ -135,4 +135,19 @@
     <string name="vip_lists_vip">قوائم كبار الشخصيات</string>
     <string name="bezat_yearly">بيزات سنويا</string>
     <string name="bezat_monthly">بيزات شهريًا</string>
+    <string name="prize_prizes_section">جائزه:</string>
+    <string name="prize_details_prizes_section">تفاصيل الجائزة</string>
+    <string name="raffle_draw_announce_tomorrow">السحب السحب يعلن غدا</string>
+    <string name="raffle_draw_announce_today">السحب السحب يعلن اليوم</string>
+    <string name="raffle_held">عقد السحب</string>
+    <string name="days_before">قبل أيام</string>
+    <string name="raffle_draw_in">السحب في السحب</string>
+    <string name="days_prizes">ايام</string>
+    <string name="no_vip_list_found">لم يتم العثور على قائمة كبار الشخصيات</string>
+    <string name="no_coupons_available">لا تتوفر كوبونات</string>
+    <string name="available_tickets">التذاكر المتاحة </string>
+    <string name="no_offer_found">لم يتم العثور على عرض</string>
+    <string name="offer_price">سعر العرض</string>
+    <string name="original_prize_bd">السعر الأصلي: دينار بحريني</string>
+    <string name="BD_offers">دينار بحريني</string>
 </resources>

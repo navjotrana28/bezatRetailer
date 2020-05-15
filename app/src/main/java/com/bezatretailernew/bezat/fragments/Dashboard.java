@@ -201,7 +201,7 @@ public class Dashboard extends Fragment {
                 getString(R.string.offers) + ""
         ));
         dashBoardItem.add(new DashBoardItem(
-                R.drawable.prize,
+                R.drawable.prizes,
                 getString(R.string.prizes) + ""
         ));
 
@@ -313,6 +313,13 @@ public class Dashboard extends Fragment {
 
                 holder.text.setText(dashBoardItems.get(position).getName() + " ");
                 final int sdk = android.os.Build.VERSION.SDK_INT;
+                if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    holder.image.setBackgroundDrawable(ContextCompat.getDrawable(getActivity(),
+                            dashBoardItems.get(position).getDrawable()));
+                } else {
+                    holder.image.setBackground(ContextCompat.getDrawable(getActivity(),
+                            dashBoardItems.get(position).getDrawable()));
+                }
                 holder.image.setImageDrawable(ContextCompat.getDrawable(getActivity(),
                         dashBoardItems.get(position).getDrawable()));
 
