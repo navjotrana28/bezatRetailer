@@ -75,20 +75,20 @@
         </RelativeLayout>
     </Toolbar>
     <SearchView
-            android:layout_below="@+id/toolbar"
-            android:id="@+id/search_total_coupons"
-            android:layout_width="350dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/round_corners"
-            android:backgroundTint="@color/divider_grey"
-            android:iconifiedByDefault="false"
-            android:visibility="gone"
-            android:queryHint="Search Here"
-            />
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/search_total_coupons"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/round_corners"
+        android:searchIcon="@drawable/ic_search_black_24dp"
+        android:gravity="left"
+        android:iconifiedByDefault="false"
+        android:queryHint="search by retailer"
+        />
     <LinearLayout
             android:layout_below="@+id/search_total_coupons"
             android:layout_width="match_parent"
