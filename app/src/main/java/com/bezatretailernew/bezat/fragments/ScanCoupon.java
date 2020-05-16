@@ -166,13 +166,13 @@ public class ScanCoupon extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//        mCodeScanner.startPreview();
+        mCodeScanner.startPreview();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-//        mCodeScanner.releaseResources();
+        mCodeScanner.releaseResources();
     }
 
     @Override
