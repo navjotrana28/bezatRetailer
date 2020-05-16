@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -58,7 +59,7 @@ public class StoreOffer extends Fragment implements View.OnClickListener {
     View rootView;
     Loader loader;
     ImageView imgBanner;
-    Button btnAllOffer;
+    CardView btnAllOffer;
     ImageView imgBack;
     String lang = "";
     LinearLayout wholeStorelayout;

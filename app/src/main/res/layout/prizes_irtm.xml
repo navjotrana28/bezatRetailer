@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                   android:layout_width="@dimen/_120sdp"
+                                   android:layout_width="wrap_content"
                                    android:layout_height="wrap_content"
                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                    android:gravity="center_horizontal"
@@ -26,6 +26,7 @@
                 app:civ_border_width="2dp"
                 android:src="@drawable/app_logo"/>
         <TextView
+            android:textStyle="bold"
                 android:id="@+id/txtPrizeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -33,16 +34,17 @@
               android:padding="@dimen/_3sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textSize="@dimen/_13sdp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/colorPrimary"/>
 
         <TextView
+            android:textStyle="bold"
                 android:id="@+id/txtPrizePrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="USD:300"
                 android:padding="@dimen/_2sdp"
                 android:textSize="@dimen/_12sdp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/colorPrimary"/>
 
     </LinearLayout>
 

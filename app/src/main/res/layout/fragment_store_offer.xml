@@ -24,26 +24,34 @@
             android:contentInsetEnd="0dp"
             app:contentInsetRight="0dp"
             app:contentInsetEnd="0dp">
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
-            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <ImageView
                     android:id="@+id/imgBack"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_28sdp"
-                    android:src="@mipmap/ic_back"/>
-            <TextView
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:textSize="@dimen/_14sdp"
-                    android:fontFamily="@font/muli_bold"
-                    android:text="@string/offers"/>
+                    android:src="@mipmap/ic_back" />
+            </LinearLayout>
 
-        </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/muli_bold"
+                android:gravity="center"
+                android:text="@string/offers"
+                android:textSize="@dimen/_14sdp" />
+
+
+        </RelativeLayout>
     </Toolbar>
 
     <LinearLayout
@@ -53,7 +61,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:orientation="vertical"
-            android:visibility="gone"
+        android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/topImage">
 
@@ -81,74 +89,68 @@
                     android:textSize="@dimen/_14sdp"/>
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="@dimen/_5sdp"
-                app:cardBackgroundColor="@color/white"
-                app:contentPadding="@dimen/_4sdp">
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                <ImageButton
-                        android:id="@+id/txtPhone"
-                        android:layout_width="@dimen/_24sdp"
-                        android:layout_height="@dimen/_24sdp"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:backgroundTint="@color/partnerline"
-                        android:background="@drawable/ic_phone"/>
-                <ImageButton
-                        android:id="@+id/txtLoc"
-                        android:layout_width="@dimen/_24sdp"
-                        android:layout_height="@dimen/_24sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/txtPhone"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:backgroundTint="@color/partnerline"
+                android:background="@drawable/ic_phone"/>
+            <ImageButton
+                android:id="@+id/txtLoc"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
 
-                        android:backgroundTint="@color/partnerline"
-                        android:background="@drawable/ic_location"/>
+                android:backgroundTint="@color/partnerline"
+                android:background="@drawable/ic_location"/>
 
-                <ImageButton
-                        android:id="@+id/txtWeb"
-                        android:layout_width="@dimen/_24sdp"
-                        android:layout_height="@dimen/_24sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:backgroundTint="@color/partnerline"
-                        android:background="@drawable/ic_web"/>
+            <ImageButton
+                android:id="@+id/txtWeb"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:backgroundTint="@color/partnerline"
+                android:background="@drawable/ic_web"/>
 
-                <ImageButton
-                        android:id="@+id/txtFb"
-                        android:layout_width="@dimen/_24sdp"
-                        android:layout_height="@dimen/_24sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:backgroundTint="@color/partnerline"
-                        android:background="@drawable/ic_fb"/>
-                <ImageButton
-                        android:id="@+id/txtInsta"
-                        android:layout_width="@dimen/_24sdp"
-                        android:layout_height="@dimen/_24sdp"
-                        android:backgroundTint="@color/partnerline"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:background="@drawable/ic_insta"/>
-                <ImageButton
-                        android:id="@+id/txtTwitter"
-                        android:layout_width="@dimen/_24sdp"
-                        android:layout_height="@dimen/_24sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:backgroundTint="@color/partnerline"
-                        android:background="@drawable/ic_twitter"/>
+            <ImageButton
+                android:id="@+id/txtFb"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:backgroundTint="@color/partnerline"
+                android:background="@drawable/ic_fb"/>
+            <ImageButton
+                android:id="@+id/txtInsta"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:backgroundTint="@color/partnerline"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/ic_insta"/>
+            <ImageButton
+                android:id="@+id/txtTwitter"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:backgroundTint="@color/partnerline"
+                android:background="@drawable/ic_twitter"/>
 
-                <ImageButton
-                        android:id="@+id/txtSnap"
-                        android:layout_width="@dimen/_24sdp"
-                        android:layout_height="@dimen/_24sdp"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:backgroundTint="@color/partnerline"
-                        android:background="@drawable/ic_snap"/>
+            <ImageButton
+                android:id="@+id/txtSnap"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:backgroundTint="@color/partnerline"
+                android:background="@drawable/ic_snap"/>
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
 
 
@@ -176,21 +178,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="bottom">
-                <Button
+                <androidx.cardview.widget.CardView
+                    app:cardCornerRadius="25dp"
                         android:id="@+id/btnAllOffer"
                         android:layout_width="wrap_content"
                         android:layout_marginTop="@dimen/_15sdp"
                         android:layout_marginBottom="@dimen/_10sdp"
-                        android:layout_height="@dimen/_44sdp"
+                        android:layout_height="50dp"
                         android:backgroundTint="@color/colorPrimary"
-                        android:text="@string/view_all_offers"
-                        android:textSize="@dimen/_14sdp"
-                        android:fontFamily="@font/muli_bold"
-                        android:textColor="@color/white"
                         android:paddingStart="@dimen/_15sdp"
                         android:paddingEnd="@dimen/_15sdp"
                         android:layout_gravity="center"
-                        android:baselineAligned="false"/>
+                        android:baselineAligned="false">
+                    <TextView
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/muli_bold"
+                        android:textColor="@color/white"
+                        android:layout_margin="14dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/view_all_offers"
+                        android:textSize="@dimen/_14sdp">
+
+                    </TextView>
+                </androidx.cardview.widget.CardView>
             </FrameLayout>
 
 
