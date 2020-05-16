@@ -105,6 +105,7 @@ public class TotalCoupon extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        rootView = inflater.inflate(R.layout.fragment_total_coupon, container, false);
         if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             lang = "_ar";
@@ -112,7 +113,6 @@ public class TotalCoupon extends Fragment {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
             lang = "";
         }
-        rootView = inflater.inflate(R.layout.fragment_total_coupon, container, false);
         recycleTotalCoupons = rootView.findViewById(R.id.recycleTotalCoupons);
         txtDate = rootView.findViewById(R.id.txtDate);
         imgSearch = rootView.findViewById(R.id.imgSearch);
@@ -248,7 +248,7 @@ public class TotalCoupon extends Fragment {
                                     recycleTotalCoupons.setVisibility(View.VISIBLE);
                                 } else {
                                     recycleTotalCoupons.setVisibility(View.GONE);
-                                    Toast.makeText(getActivity(), "No Coupons Available", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), getString(R.string.no_coupons_available), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

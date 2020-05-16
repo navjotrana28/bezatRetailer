@@ -54,7 +54,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:fontFamily="@font/muli_bold"
-					android:text="Available tickets "
+					android:text="@string/available_tickets"
 					android:textColor="@color/colorPrimary"
 					android:textSize="@dimen/_12sdp" />
 

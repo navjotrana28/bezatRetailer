@@ -112,6 +112,7 @@ public class OfferDetails extends Fragment implements View.OnClickListener {
         imgSaved = rootView.findViewById(R.id.imgSaved);
         imgBack = rootView.findViewById(R.id.imgBack);
         loader=new Loader(getContext());
+        loader.show();
          offerId=getArguments().getString("offerId");
         getOfferDetails(SharedPrefs.getKey(getActivity(),"userId"),
                 offerId);

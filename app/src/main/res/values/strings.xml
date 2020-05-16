@@ -142,5 +142,20 @@
     <string name="vip_lists_vip">VIP Lists</string>
     <string name="bezat_yearly">Bezat Yearly</string>
     <string name="bezat_monthly">Bezat Monthly</string>
+    <string name="prize_prizes_section">Prize :</string>
+    <string name="prize_details_prizes_section">Prize Details</string>
+    <string name="raffle_draw_announce_tomorrow">RAFFLE DRAW ANNOUNCE TOMORROW</string>
+    <string name="raffle_draw_announce_today">RAFFLE DRAW ANNOUNCE TODAY</string>
+    <string name="raffle_held">RAFFLE HELD</string>
+    <string name="days_before">DAYS BEFORE</string>
+    <string name="raffle_draw_in">RAFFLE DRAW IN</string>
+    <string name="days_prizes">DAYS</string>
+    <string name="no_vip_list_found">No Vip List found</string>
+    <string name="no_coupons_available">No Coupons Available</string>
+    <string name="available_tickets">Available tickets</string>
+    <string name="no_offer_found">No Offer found</string>
+    <string name="offer_price">Offer price</string>
+    <string name="original_prize_bd">Original Price:BD</string>
+    <string name="BD_offers">BD</string>
 
 </resources>
