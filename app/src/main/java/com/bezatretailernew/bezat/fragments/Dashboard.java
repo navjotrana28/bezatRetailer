@@ -225,6 +225,7 @@ public class Dashboard extends Fragment {
 
         PostAdapter postAdapter = new PostAdapter(dashBoardItem);
 
+        recycle.setNestedScrollingEnabled(false);
         recycle.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getActivity(), R.dimen.gap);
         recycle.addItemDecoration(itemDecoration);

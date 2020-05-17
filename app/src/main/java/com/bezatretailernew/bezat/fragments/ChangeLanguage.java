@@ -10,15 +10,23 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bezatretailernew.bezat.R;
 import com.bezatretailernew.bezat.activities.Homepage;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -106,6 +114,96 @@ public class ChangeLanguage extends Fragment implements View.OnClickListener {
         });
         txtEnglish.setOnClickListener(this);
         txtArabic.setOnClickListener(this);
+
+        List<String> l = new ArrayList<>();
+        l.add("");
+        l.add("English");
+        l.add("Arabic");
+
+        Spinner spinner = (Spinner) rootView.findViewById(R.id.spinner_language);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getBaseContext(),
+                R.layout.spinner_item_language,
+                R.id.tv_language,
+                l){
+            @Override
+            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+                LayoutInflater inflater = ChangeLanguage.this.getLayoutInflater();
+
+                if(convertView == null){
+                    convertView = inflater.inflate(R.layout.spinner_item_language,parent, false);
+                }
+                TextView txtTitle = (TextView) convertView.findViewById(R.id.tv_language);
+                txtTitle.setText(l.get(position));
+                ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_language);
+                if(position==1){
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.english_icon));
+                }else if(position==2){
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.arabic_icon));
+                }
+                else{
+                    imageView.setImageDrawable(null);
+                }
+
+                return convertView;
+            }
+        };
+        /*{
+            @Override
+            public boolean isEnabled(int position){
+                if(position == 0)
+                {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0){
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                }
+                else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        }*/;
+        adapter.setDropDownViewResource(R.layout.spinner_item_language);
+        spinner.setAdapter(adapter);
+        spinner.setPrompt("Change language");
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==0){
+
+                }else if(position==1){
+                    setLocale("en");
+                    ImageView v = view.findViewById(R.id.iv_language);
+                    v.setImageDrawable(getResources().getDrawable(R.drawable.english_icon));
+                }else{
+                    setLocale("ar");
+                    ImageView v = view.findViewById(R.id.iv_language);
+                    v.setImageDrawable(getResources().getDrawable(R.drawable.arabic_icon));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         return rootView;
     }
 
