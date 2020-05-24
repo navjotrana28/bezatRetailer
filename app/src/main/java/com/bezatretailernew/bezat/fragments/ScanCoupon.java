@@ -43,6 +43,7 @@ public class ScanCoupon extends Fragment {
     private CodeScanner mCodeScanner;
     Button btnScan;
     ImageView imgBack;
+    String lang="";
     CodeScannerView scannerView;
     private OnFragmentInteractionListener mListener;
 
@@ -82,6 +83,13 @@ public class ScanCoupon extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_scan_coupon, container, false);
+        if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            lang = "_ar";
+        } else {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+            lang = "";
+        }
 
         scannerView = view.findViewById(R.id.scanner_view);
         btnScan = view.findViewById(R.id.btnScan);
@@ -102,9 +110,6 @@ public class ScanCoupon extends Fragment {
                     public void run() {
                         getAutoLogin(result.getText());
                         Toast.makeText(getActivity(), result.getText(), Toast.LENGTH_SHORT).show();
-                        Log.d("qrcode", result.getText());
-                        Log.d("qrcodebar", result.getBarcodeFormat().toString());
-                        Log.d("qrcoderaw", result.getRawBytes().toString());
                     }
                 });
             }
@@ -166,8 +171,8 @@ public class ScanCoupon extends Fragment {
 
     @Override
     public void onPause() {
-        mCodeScanner.releaseResources();
         super.onPause();
+        mCodeScanner.releaseResources();
     }
 
     @Override

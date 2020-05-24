@@ -7,7 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +19,11 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.bezatretailernew.bezat.R;
+import com.bezatretailernew.bezat.utils.SharedPrefs;
 import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -44,6 +49,8 @@ public class Offers extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     View rootView;
+    private String lang = "";
+
     public Offers() {
         // Required empty public constructor
     }
@@ -78,19 +85,26 @@ public class Offers extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            lang = "_ar";
+        } else {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+            lang = "";
+        }
         // Inflate the layout for this fragment
-        rootView=inflater.inflate(R.layout.fragment_offers, container, false);
-        recOffer=rootView.findViewById(R.id.recOffer);
-        imgBack=rootView.findViewById(R.id.imgBack);
+        rootView = inflater.inflate(R.layout.fragment_offers, container, false);
+        recOffer = rootView.findViewById(R.id.recOffer);
+        imgBack = rootView.findViewById(R.id.imgBack);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().onBackPressed();
             }
         });
-        String response=getArguments().getString("storeArray");
+        String response = getArguments().getString("storeArray");
         try {
-            JSONArray jsonArray=new JSONArray(response);
+            JSONArray jsonArray = new JSONArray(response);
             PostAdapter postAdapter = new PostAdapter(jsonArray);
             StaggeredGridLayoutManager layoutManager =
                     new StaggeredGridLayoutManager(1, OrientationHelper.VERTICAL);
@@ -100,9 +114,8 @@ public class Offers extends Fragment {
             recOffer.setItemAnimator(new DefaultItemAnimator());
             if (postAdapter != null && postAdapter.getItemCount() > 0) {
                 recOffer.setAdapter(postAdapter);
-            }
-            else {
-                AlertDialog alertDialog = new AlertDialog.Builder(getActivity(),R.style.DialogTheme).create();
+            } else {
+                AlertDialog alertDialog = new AlertDialog.Builder(getActivity(), R.style.DialogTheme).create();
                 alertDialog.setMessage(getString(R.string.no_result_found));
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok),
                         new DialogInterface.OnClickListener() {
@@ -179,15 +192,18 @@ public class Offers extends Fragment {
         @Override
         public void onBindViewHolder(PostAdapter.MyViewHolder holder, int position) {
             try {
-                holder.offer_descp.setText(jsonArray.getJSONObject(position).getString("offer_descp"));
-                holder.discount_price.setText("BD "+jsonArray.getJSONObject(position).getString("discount_price"));
-                holder.actual_price.setText("Origanal Price:BD "+jsonArray.getJSONObject(position).getString("actual_price"));
+                holder.offer_descp.setText(jsonArray.getJSONObject(position).getString("offer_descp" + lang));
+                holder.discount_price.setText(getString(R.string.BD_offers) + " " +
+                        jsonArray.getJSONObject(position).getString("discount_price"));
+                holder.actual_price.setText(getString(R.string.original_prize_bd) + " " +
+                        jsonArray.getJSONObject(position).getString("actual_price"));
                 Picasso.get().load(jsonArray.getJSONObject(position).getString("offer_img"))
                         .into(holder.offer_img);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+
         @Override
         public int getItemCount() {
             return jsonArray.length();
@@ -195,28 +211,28 @@ public class Offers extends Fragment {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
 
-            TextView offer_descp,discount_price,actual_price;
+            TextView offer_descp, discount_price, actual_price;
             ImageView offer_img;
 
             public MyViewHolder(View itemView) {
                 super(itemView);
 
 
-                offer_descp=itemView.findViewById(R.id.offer_descp);
-                discount_price=itemView.findViewById(R.id.discount_price);
-                actual_price=itemView.findViewById(R.id.actual_price);
-                offer_img=itemView.findViewById(R.id.offer_img);
+                offer_descp = itemView.findViewById(R.id.offer_descp);
+                discount_price = itemView.findViewById(R.id.discount_price);
+                actual_price = itemView.findViewById(R.id.actual_price);
+                offer_img = itemView.findViewById(R.id.offer_img);
 
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         try {
-                            OfferDetails offerDetails=new OfferDetails();
+                            OfferDetails offerDetails = new OfferDetails();
                             Bundle args = new Bundle();
-                            args.putString("offerId",jsonArray.getJSONObject(getAdapterPosition()).getString("offer_id") );
+                            args.putString("offerId", jsonArray.getJSONObject(getAdapterPosition()).getString("offer_id"));
                             offerDetails.setArguments(args);
                             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                            ft.replace(R.id.container,offerDetails);
+                            ft.replace(R.id.container, offerDetails);
                             ft.addToBackStack(null);
                             ft.commit();
                         } catch (JSONException e) {

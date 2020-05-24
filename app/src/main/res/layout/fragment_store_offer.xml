@@ -177,13 +177,13 @@
             <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="bottom">
+                >
                 <androidx.cardview.widget.CardView
                     app:cardCornerRadius="25dp"
                         android:id="@+id/btnAllOffer"
-                        android:layout_width="wrap_content"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_width="230dp"
+                        android:layout_marginTop="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_16sdp"
                         android:layout_height="50dp"
                         android:backgroundTint="@color/colorPrimary"
                         android:paddingStart="@dimen/_15sdp"
@@ -194,11 +194,11 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/muli_bold"
                         android:textColor="@color/white"
-                        android:layout_margin="14dp"
+                        android:layout_margin="6dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/view_all_offers"
-                        android:textSize="@dimen/_14sdp">
+                        android:textSize="@dimen/_19sdp">
 
                     </TextView>
                 </androidx.cardview.widget.CardView>

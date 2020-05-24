@@ -166,7 +166,7 @@ public class vipcustomer extends Fragment {
                     loader.dismiss();
                 } else {
                     loader.dismiss();
-                    Toast.makeText(getActivity(), "No Vip List found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getString(R.string.no_vip_list_found), Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -244,7 +244,6 @@ public class vipcustomer extends Fragment {
                             try {
                                 layoutContent.setVisibility(View.VISIBLE);
                                 btnaddVip.setVisibility(View.VISIBLE);
-//                                vip_list_linear.setVisibility(View.GONE);
                                 customerId = response.getJSONObject("result").getString("customerId");
                                 String customerName = response.getJSONObject("result").getString("customerName");
                                 String customerEmail = response.getJSONObject("result").getString("customerEmail");
