@@ -128,8 +128,6 @@
             android:paddingEnd="@dimen/_12sdp"
             android:text="@string/scan_qr_code"
             android:textSize="@dimen/_13sdp"
-
-
             />
     </RelativeLayout>
 

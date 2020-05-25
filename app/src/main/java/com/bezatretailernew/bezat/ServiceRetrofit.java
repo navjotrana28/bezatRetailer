@@ -1,6 +1,7 @@
 package com.bezatretailernew.bezat;
 
 import com.bezatretailernew.bezat.api.contactusResponse.ContactUsResponse;
+import com.bezatretailernew.bezat.models.LogoutResponse;
 import com.bezatretailernew.bezat.models.feedbackResponse.FeedbackResponse;
 import com.bezatretailernew.bezat.models.searchRetailerResponses.SearchResponseResult;
 import com.bezatretailernew.bezat.models.vip_lists.VipResult;
@@ -14,9 +15,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ServiceRetrofit {
-
-//    @POST("user/sendEnquiry")
-//    Observable<ContactUsResponse> getContactSuccess(@Body ContactUsRequest request);
 
     @FormUrlEncoded
     @POST("user/sendEnquiry")
@@ -42,7 +40,7 @@ public interface ServiceRetrofit {
 
     @FormUrlEncoded
     @POST("staff/logout")
-    Call<Void> getLogoutAPi(@Field("userId") String userId);
+    Observable<LogoutResponse> getLogoutAPi(@Field("userID") String userId);
 
 }
 

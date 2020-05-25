@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -34,7 +35,9 @@ import com.bezatretailernew.bezat.MyApplication;
 import com.bezatretailernew.bezat.R;
 import com.bezatretailernew.bezat.activities.*;
 import com.bezatretailernew.bezat.adapter.SliderAdapter;
+import com.bezatretailernew.bezat.interfaces.LogoutCallback;
 import com.bezatretailernew.bezat.models.DashBoardItem;
+import com.bezatretailernew.bezat.models.LogoutResponse;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
 import com.bezatretailernew.bezat.utils.URLS;
 import com.google.android.material.tabs.TabLayout;
@@ -315,8 +318,8 @@ public class Dashboard extends Fragment {
                 holder.text.setText(dashBoardItems.get(position).getName() + " ");
 //                    holder.image.setBackground(ContextCompat.getDrawable(getActivity(),
 //                            dashBoardItems.get(position).getDrawable()));
-                    holder.image.setImageDrawable(ContextCompat.getDrawable(getActivity(),
-                            dashBoardItems.get(position).getDrawable()));
+                holder.image.setImageDrawable(ContextCompat.getDrawable(getActivity(),
+                        dashBoardItems.get(position).getDrawable()));
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -354,10 +357,21 @@ public class Dashboard extends Fragment {
                                     .setPositiveButton(getString(R.string.yes_label), new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             ClientRetrofit retrofit = new ClientRetrofit();
-                                            retrofit.logOutAPi(SharedPrefs.getKey(getActivity(), "userId"));
-                                            SharedPrefs.deleteSharedPrefs(getActivity());
-                                            startActivity(new Intent(getActivity(), LoginActivity.class));
-                                            getActivity().finish();
+                                            retrofit.logOutAPi(SharedPrefs.getKey(getActivity(), "userId"), new LogoutCallback() {
+                                                @Override
+                                                public void onSuccess(LogoutResponse responseResult) {
+                                                    SharedPrefs.deleteSharedPrefs(getActivity());
+                                                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                                                    getActivity().finish();
+                                                }
+
+                                                @Override
+                                                public void onFailure(Throwable e) {
+                                                    Toast.makeText(getContext(), getString(R.string.someting_wrong), Toast.LENGTH_SHORT).show();
+
+                                                }
+                                            });
+
                                         }
                                     })
 
