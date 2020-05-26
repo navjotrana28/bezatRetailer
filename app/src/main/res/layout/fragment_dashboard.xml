@@ -18,7 +18,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:background="@color/colorPrimary"
-            android:src="@drawable/logo_text"
+            android:src="@drawable/bezat_name"
             android:scaleType="fitCenter"/>
 
         <androidx.core.widget.NestedScrollView
