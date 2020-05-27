@@ -4,10 +4,12 @@ import com.bezatretailernew.bezat.api.contactusResponse.ContactUsRequest;
 import com.bezatretailernew.bezat.api.contactusResponse.ContactUsResponse;
 import com.bezatretailernew.bezat.interfaces.ContactUsSuccessResponse;
 import com.bezatretailernew.bezat.interfaces.FeedbackCallback;
+import com.bezatretailernew.bezat.interfaces.SearchPackageInterface;
 import com.bezatretailernew.bezat.interfaces.SearchRetaierInterface;
 import com.bezatretailernew.bezat.interfaces.VipListResponse;
 import com.bezatretailernew.bezat.models.feedbackResponse.FeedbackRequest;
 import com.bezatretailernew.bezat.models.feedbackResponse.FeedbackResponse;
+import com.bezatretailernew.bezat.models.packageResponse.PackageResponse;
 import com.bezatretailernew.bezat.models.searchRetailerResponses.SearchResponseResult;
 import com.bezatretailernew.bezat.models.vip_lists.VipResult;
 import com.bezatretailernew.bezat.utils.URLS;
@@ -148,6 +150,34 @@ public class ClientRetrofit {
 
     public void logOutAPi(String userID) {
         serviceRetrofit.getLogoutAPi(userID);
+    }
+
+    public void getPackages(final SearchPackageInterface packageInterface){
+        serviceRetrofit.getPackages()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<PackageResponse>() {
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(PackageResponse packageResponseData) {
+                        packageInterface.onSuccess(packageResponseData);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
 }
