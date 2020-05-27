@@ -5,8 +5,10 @@ import com.bezatretailernew.bezat.api.contactusResponse.ContactUsResponse;
 import com.bezatretailernew.bezat.interfaces.ContactUsSuccessResponse;
 import com.bezatretailernew.bezat.interfaces.FeedbackCallback;
 import com.bezatretailernew.bezat.interfaces.SearchPackageInterface;
+import com.bezatretailernew.bezat.interfaces.LogoutCallback;
 import com.bezatretailernew.bezat.interfaces.SearchRetaierInterface;
 import com.bezatretailernew.bezat.interfaces.VipListResponse;
+import com.bezatretailernew.bezat.models.LogoutResponse;
 import com.bezatretailernew.bezat.models.feedbackResponse.FeedbackRequest;
 import com.bezatretailernew.bezat.models.feedbackResponse.FeedbackResponse;
 import com.bezatretailernew.bezat.models.packageResponse.PackageResponse;
@@ -67,7 +69,7 @@ public class ClientRetrofit {
                 });
     }
 
-    public void vipListData(String userId,final VipListResponse vipListResponse) {
+    public void vipListData(String userId, final VipListResponse vipListResponse) {
         serviceRetrofit.getVipLists(userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -148,8 +150,31 @@ public class ClientRetrofit {
                 });
     }
 
-    public void logOutAPi(String userID) {
-        serviceRetrofit.getLogoutAPi(userID);
+    public void logOutAPi(String userID, final LogoutCallback logoutCallback) {
+        serviceRetrofit.getLogoutAPi(userID)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<LogoutResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(LogoutResponse responseResult) {
+                        logoutCallback.onSuccess(responseResult);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        logoutCallback.onFailure(e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     public void getPackages(final SearchPackageInterface packageInterface){

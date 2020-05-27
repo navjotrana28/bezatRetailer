@@ -43,7 +43,7 @@ public class ScanCoupon extends Fragment {
     private CodeScanner mCodeScanner;
     Button btnScan;
     ImageView imgBack;
-    String lang="";
+    String lang = "";
     CodeScannerView scannerView;
     private OnFragmentInteractionListener mListener;
 
@@ -81,8 +81,6 @@ public class ScanCoupon extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_scan_coupon, container, false);
         if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             lang = "_ar";
@@ -90,11 +88,12 @@ public class ScanCoupon extends Fragment {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
             lang = "";
         }
+        View view = inflater.inflate(R.layout.fragment_scan_coupon, container, false);
 
         scannerView = view.findViewById(R.id.scanner_view);
         btnScan = view.findViewById(R.id.btnScan);
-        mCodeScanner = new CodeScanner(getActivity(), scannerView);
         imgBack = view.findViewById(R.id.imgBack);
+        mCodeScanner = new CodeScanner(view.getContext(), scannerView);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +121,7 @@ public class ScanCoupon extends Fragment {
             }
         });
 
+        ;
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,11 +163,11 @@ public class ScanCoupon extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mCodeScanner.startPreview();
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        mCodeScanner.startPreview();
+//    }
 
     @Override
     public void onPause() {

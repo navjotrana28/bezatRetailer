@@ -19,9 +19,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.*;
+import com.bezatretailernew.bezat.ClientRetrofit;
 import com.bezatretailernew.bezat.MyApplication;
 import com.bezatretailernew.bezat.R;
 import com.bezatretailernew.bezat.activities.LoginActivity;
+import com.bezatretailernew.bezat.interfaces.LogoutCallback;
+import com.bezatretailernew.bezat.models.LogoutResponse;
 import com.bezatretailernew.bezat.utils.Loader;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
 import com.bezatretailernew.bezat.utils.URLS;
@@ -287,9 +290,22 @@ public class Settings extends Fragment implements View.OnClickListener {
                     .setMessage(getActivity().getString(R.string.logout_confirm))
                     .setPositiveButton(getString(R.string.yes_label), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            SharedPrefs.deleteSharedPrefs(getActivity());
-                            startActivity(new Intent(getActivity(), LoginActivity.class));
-                            getActivity().finish();
+                            ClientRetrofit retrofit = new ClientRetrofit();
+                            retrofit.logOutAPi(SharedPrefs.getKey(getActivity(), "userId"), new LogoutCallback() {
+                                @Override
+                                public void onSuccess(LogoutResponse responseResult) {
+                                    SharedPrefs.deleteSharedPrefs(getActivity());
+                                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                                    getActivity().finish();
+                                }
+
+                                @Override
+                                public void onFailure(Throwable e) {
+                                    Toast.makeText(getContext(), getString(R.string.someting_wrong), Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+
                         }
                     })
                     .setNegativeButton(getString(R.string.no_label), null)
