@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bezatretailernew.bezat.ClientRetrofit;
 import com.bezatretailernew.bezat.R;
 import com.bezatretailernew.bezat.interfaces.FeedbackCallback;
@@ -21,7 +23,10 @@ public class Feedback extends Fragment {
     EditText text;
     RatingBar ratingBar;
     Button button;
-    ImageView imgBack;
+    ImageView imgUser, imgBack;
+    TextView username, txtFeedback;
+    RecyclerView recFeedback;
+    View rootView;
     public Feedback() {
         // Required empty public constructor
     }
@@ -31,24 +36,11 @@ public class Feedback extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_feedback, container, false);
-        addViews(view);
-        onCLickSendBtn();
-        onClickBackButton(view);
-
-        return view;
-    }
-
-    private void onCLickSendBtn() {
-        button.setOnClickListener(v -> {
-            FeedbackRequest request = new FeedbackRequest();
-            request.setFeedback(text.getText().toString());
-            request.setRatings(String.valueOf(ratingBar.getNumStars()));
-            request.setUserId(SharedPrefs.getKey(getActivity(), "userId"));
-            request.setRetailerId("1448");
-            feedbackToServer(request);
-        });
-
+        rootView = inflater.inflate(R.layout.fragment_feedback, container, false);
+        recFeedback=rootView.findViewById(R.id.recFeedback);
+//        addViews(view);
+        onClickBackButton(rootView);
+        return rootView;
     }
 
     private void onClickBackButton(View view) {
@@ -56,26 +48,8 @@ public class Feedback extends Fragment {
         imgBack.setOnClickListener(view1 -> getActivity().onBackPressed());
     }
 
-    private void feedbackToServer(FeedbackRequest request) {
-        ClientRetrofit clientRetrofit = new ClientRetrofit();
-        clientRetrofit.feedBackRequestApi(request, new FeedbackCallback() {
-            @Override
-            public void onSuccess(FeedbackResponse response) {
-                Toast.makeText(getContext(), response.getStatus(), Toast.LENGTH_LONG).show();
-                getActivity().onBackPressed();
-            }
 
-            @Override
-            public void onFailure(Throwable e) {
-
-            }
-        });
-
-    }
-
-    private void addViews(View view) {
-        text = view.findViewById(R.id.edit_text);
-        ratingBar = view.findViewById(R.id.rating_bar);
-        button = view.findViewById(R.id.send_button);
-    }
+//    private void addViews(View view) {
+//
+//    }
 }

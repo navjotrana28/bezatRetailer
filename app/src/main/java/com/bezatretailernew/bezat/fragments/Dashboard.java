@@ -208,10 +208,10 @@ public class Dashboard extends Fragment {
                 getString(R.string.prizes) + ""
         ));
 
-//        dashBoardItem.add(new DashBoardItem(
-//                R.drawable.feedback,
-//                "Feedback"
-//        ));
+        dashBoardItem.add(new DashBoardItem(
+                R.drawable.feedback,
+                "Feedback"+""
+        ));
 //        dashBoardItem.add(new DashBoardItem(
 //                R.drawable.createoffer,
 //                getString(R.string.add_offer)+""
