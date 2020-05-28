@@ -41,82 +41,21 @@
 		</LinearLayout>
 	</Toolbar>
 
-	<ImageView
-			android:id="@+id/img_feedback"
-			android:layout_width="180dp"
-			android:layout_height="180dp"
-			android:src="@drawable/feedback"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
-	<EditText
-			android:id="@+id/edit_text"
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		android:orientation="vertical"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/toolbar">
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/recFeedback"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="30dp"
-			android:layout_marginTop="4dp"
-			android:layout_marginEnd="30dp"
-			android:background="@drawable/outline_border"
-			android:gravity="start"
-			android:lines="4"
-			android:textColor="@color/black"
-			app:layout_constraintTop_toBottomOf="@+id/img_feedback" tools:layout_editor_absoluteX="20dp"/>
-	<TextView
-			android:id="@+id/note_text"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="20dp"
-			android:layout_marginTop="5dp"
-			android:layout_marginEnd="20dp"
-			android:fontFamily="sans-serif"
-			android:paddingStart="20dp"
-			android:paddingEnd="20dp"
-			android:text="Note: Your feedback will be sent to the retailer"
-			android:textColor="@color/black"
-			android:textSize="14sp"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/edit_text"/>
-	<RatingBar
-			android:id="@+id/rating_bar"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="85dp"
-			android:layout_marginTop="30dp"
-			android:layout_marginEnd="85dp"
-			android:isIndicator="?android:attr/ratingBarStyleIndicator"
-			android:numStars="5"
-			android:progressBackgroundTint="@color/divider_grey"
-			android:progressTint="@color/golden"
-			android:stepSize="1.0"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/note_text"/>
-	<TextView
-			android:id="@+id/rate_text"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="10dp"
-			android:fontFamily="sans-serif"
-			android:text="Rate your star"
-			android:textAlignment="center"
-			android:textColor="@color/black"
-			android:textSize="16sp"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/rating_bar"/>
-	<Button
-			android:id="@+id/send_button"
-			android:layout_width="120dp"
-			android:layout_height="40dp"
-			android:layout_marginTop="12dp"
-			android:background="@color/colorPrimary"
-			android:text="Send"
-			android:textColor="@color/white"
-			android:textSize="16dp"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/rate_text"
-	/>
+			android:layout_height="match_parent">
+
+		</androidx.recyclerview.widget.RecyclerView>
+	</LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
