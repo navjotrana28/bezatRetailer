@@ -43,16 +43,17 @@
                 android:textSize="@dimen/_12sdp"
                 android:paddingStart="@dimen/_12sdp"
                 android:textColor="@color/colorPrimary"/>
-                <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:minHeight="@dimen/_17sdp"
-                    android:scaleY="1"
-                    android:scaleX="1"
+                <TextView
                     android:id="@+id/rating"
-                    android:maxHeight="@dimen/_12sdp"
-                    />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="5 "
+                    android:fontFamily="@font/muli_bold"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/_12sdp"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:textColor="@color/colorPrimary"/>
+
             </LinearLayout>
 
             <TextView

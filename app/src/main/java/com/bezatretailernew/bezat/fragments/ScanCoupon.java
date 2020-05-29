@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bezatretailernew.bezat.R;
+import com.bezatretailernew.bezat.activities.ExampleDialog;
 import com.bezatretailernew.bezat.utils.Loader;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
 import com.budiyev.android.codescanner.CodeScanner;
@@ -135,12 +136,20 @@ public class ScanCoupon extends Fragment {
                 String customerCode=customer_code.getText().toString();
                 String customerPhone=customer_phone.getText().toString();
                 if (customerCode.isEmpty() && customerPhone.isEmpty()){
-                    Toast.makeText(getContext(),"Please fill any of two fields",Toast.LENGTH_LONG).show();
+                    openDialog();
                 }else {
-                    if (customerCode.isEmpty())
-                        userPhone=customerPhone;
-                    else
-                        qr=customerCode;
+                    if (customerCode.isEmpty()) {
+                        userPhone = customerPhone;
+                        getAutoLogin(qr, userPhone);
+                    }
+                    else if (customerPhone.isEmpty()){
+                        qr = customerCode;
+                        getAutoLogin(qr,userPhone);
+                    }else {
+                        userPhone = customerPhone;
+                        qr = customerCode;
+                        getAutoLogin(qr, userPhone);
+                    }
                 }
 //                mCodeScanner.setDecodeCallback(new DecodeCallback() {
 //                    @Override
@@ -148,16 +157,21 @@ public class ScanCoupon extends Fragment {
 //                        getActivity().runOnUiThread(new Runnable() {
 //                            @Override
 //                            public void run() {
-                                getAutoLogin(qr,userPhone);
+
                             }
 //                        });
 //                    }
                 });
 //            }
 //        });
+
         return view;
     }
+        public void openDialog(){
+            ExampleDialog exampleDialog=new ExampleDialog();
+            exampleDialog.show(getFragmentManager(),"example dialog");
 
+        }
     private void getAutoLogin(String qr,String userPhone) {
         Loader loader = new Loader(getContext());
         loader.show();
