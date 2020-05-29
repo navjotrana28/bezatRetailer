@@ -46,10 +46,6 @@
         <item name="dialogCornerRadius">@dimen/default_margin</item>
         <item name="android:fontFamily">@font/muli_regular</item>
     </style>
-    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/bg_splash</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
-    </style>
     <style name="opposite" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorPrimary</item>

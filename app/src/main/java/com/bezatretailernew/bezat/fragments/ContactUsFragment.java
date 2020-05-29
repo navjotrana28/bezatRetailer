@@ -40,6 +40,7 @@ public class ContactUsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        container.setClickable(true);
         View view = inflater.inflate(R.layout.fragment_contact_us, container, false);
         addViews(view);
         onClickSendButton();

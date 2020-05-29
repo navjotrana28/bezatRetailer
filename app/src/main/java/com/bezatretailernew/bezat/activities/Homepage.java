@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bezatretailernew.bezat.R;
+import com.bezatretailernew.bezat.fragments.BlankFragment;
 import com.bezatretailernew.bezat.fragments.Dashboard;
 import com.bezatretailernew.bezat.fragments.MyProfile;
 import com.bezatretailernew.bezat.fragments.Notification;
@@ -41,6 +42,7 @@ public class Homepage extends AppCompatActivity {
     ViewPagerAdapter adapter;
     ViewPager viewPager;
     FrameLayout frameLayout;
+    MenuItem prevMenuItem;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -48,35 +50,61 @@ public class Homepage extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_dashboard:
-                    getSupportFragmentManager().popBackStack();
-                    ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.container, new Dashboard());
-                    ft.commit();
-
-//                    viewPager.setCurrentItem(0);
-                    return true;
+                    if(lang.equals("a")){
+                        ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.container, new BlankFragment());
+                        ft.commit();
+                        viewPager.setCurrentItem(3);
+                    }else{
+                        ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.container, new BlankFragment());
+                        ft.commit();
+                        viewPager.setCurrentItem(0);
+                    }
+                    frameLayout.setClickable(false);
+                    break;
                 case R.id.navigation_bell:
-                    getSupportFragmentManager().popBackStack();
-                    ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.container, new Notification());
-                    ft.commit();
-//                    viewPager.setCurrentItem(1);
-                    return true;
+                    if(lang.equals("a")){
+                        ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.container, new BlankFragment());
+                        ft.commit();
+                        viewPager.setCurrentItem(2);
+                    }else{
+                        ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.container, new BlankFragment());
+                        ft.commit();
+                        viewPager.setCurrentItem(1);
+                    }
+                    frameLayout.setClickable(false);
+                    break;
                 case R.id.navigation_profile:
-                    getSupportFragmentManager().popBackStack();
-                    ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.container, new MyProfile());
-                    ft.commit();
-//                    viewPager.setCurrentItem(2);
-                    return true;
-
+                    if(lang.equals("a")){
+                        ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.container, new BlankFragment());
+                        ft.commit();
+                        viewPager.setCurrentItem(1);
+                    }else{
+                        ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.container, new BlankFragment());
+                        ft.commit();
+                        viewPager.setCurrentItem(2);
+                    }
+                    frameLayout.setClickable(false);
+                    break;
                 case R.id.navigation_settings:
-                    getSupportFragmentManager().popBackStack();
-                    ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.container, new Settings());
-                    ft.commit();
-//                    viewPager.setCurrentItem(3);
-                    return true;
+                    if(lang.equals("a")){
+                        ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.container, new BlankFragment());
+                        ft.commit();
+                        viewPager.setCurrentItem(0);
+                    }else{
+                        ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.container, new BlankFragment());
+                        ft.commit();
+                        viewPager.setCurrentItem(3);
+                    }
+                    frameLayout.setClickable(false);
+                    break;
             }
             return false;
         }
@@ -104,13 +132,23 @@ public class Homepage extends AppCompatActivity {
         }
     }
 
+    String lang;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        frameLayout.setClickable(false);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (SharedPrefs.getKey(this, "selectedlanguage").contains("ar")) {
+            lang = "a";
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             setLocale("ar");
         } else {
+            lang = "e";
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         }
         verifyStoragePermissions(Homepage.this);
@@ -140,16 +178,21 @@ public class Homepage extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.container, new Dashboard());
+        ft.replace(R.id.container, new BlankFragment());
         ft.commit();
 
         currentFragment = new Dashboard();
-//        ft = getSupportFragmentManager().beginTransaction();
-//        ft.replace(R.id.viewPagerhome, currentFragment);
-//        ft.commit();
-//        viewPager = findViewById(R.id.viewPagerhome);
-//        addTabs(viewPager);
-//        setPageChangeListener(navView);
+
+        viewPager = findViewById(R.id.viewPagerhome);
+        if(lang.equals("a")){
+            addTabsArabic(viewPager);
+        }else{
+            addTabsEnglish(viewPager);
+        }
+
+        frameLayout.setClickable(false);
+
+        setPageChangeListener(navView);
 
     }
 
@@ -161,10 +204,21 @@ public class Homepage extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 3) {
-                    frameLayout.setVisibility(View.VISIBLE);
+                if (prevMenuItem != null)
+                    prevMenuItem.setChecked(false);
+                else
+                    navView.getMenu().getItem(0).setChecked(false);
+
+                if (lang.equals("a")) {
+                    navView.getMenu().getItem(3 - position).setChecked(true);
+                } else {
+                    navView.getMenu().getItem(position).setChecked(true);
                 }
-                navView.getMenu().getItem(position).setChecked(true);
+                prevMenuItem = navView.getMenu().getItem(position);
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.container, new BlankFragment());
+                ft.commit();
+                frameLayout.setClickable(false);
             }
 
             @Override
@@ -174,13 +228,23 @@ public class Homepage extends AppCompatActivity {
         });
     }
 
-    private void addTabs(ViewPager viewPager) {
+    private void addTabsEnglish(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new Dashboard(), " ");
         adapter.addFrag(new Notification(), " ");
         adapter.addFrag(new MyProfile(), " ");
         adapter.addFrag(new Settings(), " ");
         viewPager.setAdapter(adapter);
+    }
+
+    private void addTabsArabic(ViewPager viewPager) {
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new Settings(), " ");
+        adapter.addFrag(new MyProfile(), " ");
+        adapter.addFrag(new Notification(), " ");
+        adapter.addFrag(new Dashboard(), " ");
+        viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(3);
     }
 
     public void setLocale(String lang) {
