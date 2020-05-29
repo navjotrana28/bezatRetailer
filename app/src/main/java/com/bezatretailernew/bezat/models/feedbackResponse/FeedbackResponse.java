@@ -1,5 +1,7 @@
 package com.bezatretailernew.bezat.models.feedbackResponse;
 
+import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,6 +10,12 @@ public class FeedbackResponse {
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("message")
+    @Expose
+    private String message;
+    @SerializedName("data")
+    @Expose
+    private List<FeedbackDetails> data = null;
 
     public String getStatus() {
         return status;
@@ -15,6 +23,22 @@ public class FeedbackResponse {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public List<FeedbackDetails> getData() {
+        return data;
+    }
+
+    public void setData(List<FeedbackDetails> data) {
+        this.data = data;
     }
 
 }

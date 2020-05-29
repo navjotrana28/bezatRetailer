@@ -8,7 +8,7 @@ import com.bezatretailernew.bezat.interfaces.LogoutCallback;
 import com.bezatretailernew.bezat.interfaces.SearchRetaierInterface;
 import com.bezatretailernew.bezat.interfaces.VipListResponse;
 import com.bezatretailernew.bezat.models.LogoutResponse;
-import com.bezatretailernew.bezat.models.feedbackResponse.FeedbackRequest;
+import com.bezatretailernew.bezat.models.feedbackResponse.FeedbackDetails;
 import com.bezatretailernew.bezat.models.feedbackResponse.FeedbackResponse;
 import com.bezatretailernew.bezat.models.searchRetailerResponses.SearchResponseResult;
 import com.bezatretailernew.bezat.models.vip_lists.VipResult;
@@ -121,8 +121,8 @@ public class ClientRetrofit {
                 });
     }
 
-    public void feedBackRequestApi(FeedbackRequest request, final FeedbackCallback callback) {
-        serviceRetrofit.getFeedbackRequest(request.getUserId(), request.getFeedback(), request.getRetailerId(), request.getRatings())
+    public void feedBackRequestApi(String userId, final FeedbackCallback callback) {
+        serviceRetrofit.getFeedbackRequest(userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<FeedbackResponse>() {
