@@ -13,50 +13,59 @@
     <LinearLayout
         android:background="@color/white"
         android:layout_margin="1dp"
-        android:padding="16dp"
         android:orientation="vertical"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:id="@+id/bg"
+            android:gravity="center"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_package"
-                android:layout_width="@dimen/_32sdp"
-                android:layout_height="@dimen/_32sdp">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_package"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp">
 
-            </de.hdodenhof.circleimageview.CircleImageView>
+                </de.hdodenhof.circleimageview.CircleImageView>
+
+                <TextView
+                    android:layout_marginLeft="8dp"
+                    android:textColor="@color/black"
+                    android:id="@+id/tv_package_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+            </LinearLayout>
 
             <TextView
-                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:id="@+id/tv_package_name"
+                android:id="@+id/tv_package_raffles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
             </TextView>
         </LinearLayout>
 
-        <TextView
-            android:layout_marginTop="16dp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:id="@+id/tv_package_raffles"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </TextView>
-
         <Button
+            android:textSize="12sp"
+            android:layout_marginBottom="16dp"
             android:id="@+id/btn_know_more"
             android:layout_marginTop="16dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:background="@color/colorPrimary"
             android:text="Know More"
             android:layout_width="wrap_content"

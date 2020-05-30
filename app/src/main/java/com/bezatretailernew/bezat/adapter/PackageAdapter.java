@@ -2,11 +2,13 @@ package com.bezatretailernew.bezat.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,6 +50,8 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.MyViewHo
                 .load(data.getPkg_img())
                 .into(holder.img);
 
+        holder.bg.setBackgroundColor(Color.parseColor(data.getColor()));
+
         holder.know_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +83,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.MyViewHo
         TextView name, raffles;
         CircleImageView img;
         Button know_more;
+        LinearLayout bg;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -86,6 +91,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.MyViewHo
             raffles = itemView.findViewById(R.id.tv_package_raffles);
             img = itemView.findViewById(R.id.iv_package);
             know_more = itemView.findViewById(R.id.btn_know_more);
+            bg = itemView.findViewById(R.id.bg);
         }
     }
 }
