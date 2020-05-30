@@ -65,6 +65,7 @@
             </com.budiyev.android.codescanner.CodeScannerView>
 
             <EditText
+                android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
                 android:id="@+id/et_phone_number"
@@ -78,6 +79,7 @@
                 android:layout_below="@id/scanner_view"/>
 
             <EditText
+                android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
                 android:id="@+id/et_customer_code"
@@ -88,6 +90,25 @@
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:background="@drawable/edtback"
                 android:layout_marginTop="@dimen/_20sdp"/>
+
+            <TextView
+                android:textColor="@color/black"
+                android:text="Offer Code *"
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+            <TextView
+                android:textColor="#cc0000"
+                android:layout_margin="8dp"
+                android:id="@+id/tv_redeem_offer"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </TextView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_get_offers"

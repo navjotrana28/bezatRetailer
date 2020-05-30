@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout android:gravity="center_vertical"
     android:layout_margin="4dp"
     android:padding="8dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <CheckBox
+        android:id="@+id/cb_offer"
+        android:buttonTint="@color/colorPrimary"
         android:layout_width="@dimen/_24sdp"
         android:layout_height="@dimen/_24sdp">
     </CheckBox>

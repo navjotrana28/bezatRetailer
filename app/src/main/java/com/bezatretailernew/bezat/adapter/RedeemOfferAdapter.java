@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bezatretailernew.bezat.R;
 import com.bezatretailernew.bezat.models.getOfferCodes.GetOfferCodesResponse;
 import com.bezatretailernew.bezat.models.getOfferCodes.OfferCodeData;
-import com.bezatretailernew.bezat.models.redeemUserOffer.RedeemUserOfferResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +53,19 @@ public class RedeemOfferAdapter extends RecyclerView.Adapter<RedeemOfferAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RedeemOfferAdapter.MyViewHolder holder, int position) {
-        OfferCodeData data = response.getData().get(position);
-        holder.offer_name.setText(data.getOffer_coupon_code());
+        //OfferCodeData data = response.getData().get(position);
+        //holder.offer_name.setText(data.getOffer_coupon_code());
+        holder.offer_name.setText(response.getMsg());
+        holder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    array_offers.add(response.getMsg()+position);
+                }else{
+                    array_offers.remove(response.getMsg()+position);
+                }
+            }
+        });
     }
 
     @Override
@@ -62,17 +74,19 @@ public class RedeemOfferAdapter extends RecyclerView.Adapter<RedeemOfferAdapter.
         if(response.getData()!=null){
             return response.getData().size();
         }
-        return 0;
+        return 5;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView offer_name;
+        CheckBox selected;
 
         public MyViewHolder(@NonNull View itemView) {
 
             super(itemView);
             offer_name = itemView.findViewById(R.id.offer_name);
+            selected = itemView.findViewById(R.id.cb_offer);
         }
     }
 }
