@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bezatretailernew.bezat.ClientRetrofit;
 import com.bezatretailernew.bezat.R;
 import com.bezatretailernew.bezat.adapter.SearchAdapter;

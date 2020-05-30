@@ -87,6 +87,8 @@ public class ChangeLanguage extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        container.setClickable(true);
+
         if (SharedPrefs.getKey(getActivity(),"selectedlanguage").contains("ar")) {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             lang="_ar";

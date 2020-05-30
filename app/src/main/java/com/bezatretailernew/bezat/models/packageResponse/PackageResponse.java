@@ -1,21 +1,27 @@
-package com.bezatretailernew.bezat.models.feedbackResponse;
-
-import java.util.List;
+package com.bezatretailernew.bezat.models.packageResponse;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FeedbackResponse {
+import java.util.List;
+
+public class PackageResponse {
 
     @SerializedName("status")
     @Expose
     private String status;
+
     @SerializedName("message")
     @Expose
     private String message;
+
+    @SerializedName("whatsapp")
+    @Expose
+    private String whatsapp;
+
     @SerializedName("data")
     @Expose
-    private List<FeedbackDetails> data = null;
+    private List<PackageData> data = null;
 
     public String getStatus() {
         return status;
@@ -33,12 +39,19 @@ public class FeedbackResponse {
         this.message = message;
     }
 
-    public List<FeedbackDetails> getData() {
+    public String getWhatsapp() {
+        return whatsapp;
+    }
+
+    public void setWhatsapp(String whatsapp) {
+        this.whatsapp = whatsapp;
+    }
+
+    public List<PackageData> getData() {
         return data;
     }
 
-    public void setData(List<FeedbackDetails> data) {
+    public void setData(List<PackageData> data) {
         this.data = data;
     }
-
 }

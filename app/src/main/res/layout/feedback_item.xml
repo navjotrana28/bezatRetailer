@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:contentPadding="@dimen/_10sdp"
+    android:layout_marginStart="@dimen/_5sdp"
+    android:layout_marginTop="@dimen/_2sdp"
+    android:layout_marginBottom="@dimen/_4sdp"
     app:cardBackgroundColor="@color/white"
     app:cardElevation="@dimen/_1sdp"
-    android:layout_marginTop="@dimen/_2sdp"
-    android:layout_marginEnd="@dimen/_5sdp"
-    android:layout_marginStart="@dimen/_5sdp"
-    android:layout_marginBottom="@dimen/_4sdp">
-    <LinearLayout android:layout_width="match_parent"
+    app:contentPadding="@dimen/_2sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -23,36 +23,39 @@
             android:src="@drawable/app_logo" />
 
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1">
+                android:orientation="horizontal">
 
                 <TextView
-                android:id="@+id/userName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Username "
-                android:fontFamily="@font/muli_bold"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/_12sdp"
-                android:paddingStart="@dimen/_12sdp"
-                android:textColor="@color/colorPrimary"/>
-                <TextView
-                    android:id="@+id/rating"
+                    android:id="@+id/userName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="5 "
                     android:fontFamily="@font/muli_bold"
                     android:gravity="center_vertical"
-                    android:textSize="@dimen/_12sdp"
                     android:paddingStart="@dimen/_12sdp"
-                    android:textColor="@color/colorPrimary"/>
+                    android:text="Username "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_11sdp" />
+
+                <RatingBar
+
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    style = "?android:attr/ratingBarStyleSmall"
+                    android:isIndicator="?android:attr/ratingBarStyleIndicator"
+                    android:progressBackgroundTint="@color/divider_grey"
+                    android:progressTint="@color/golden"
+                    android:stepSize="1.5"
+                    android:numStars="5" />
 
             </LinearLayout>
 
@@ -60,12 +63,12 @@
                 android:id="@+id/txtFeedback"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="User FeedBack"
                 android:fontFamily="@font/muli_regular"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/_11sdp"
                 android:paddingStart="@dimen/_11sdp"
-                android:textColor="@color/colorPrimary"/>
+                android:text="User FeedBack"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_11sdp" />
 
         </LinearLayout>
 

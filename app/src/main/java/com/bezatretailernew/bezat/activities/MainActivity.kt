@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.bezatretailernew.bezat.R
 import com.bezatretailernew.bezat.utils.SharedPrefs
 import com.bezatretailernew.bezat.utils.URLS
 import com.github.kittinunf.fuel.core.FuelManager
@@ -19,6 +20,8 @@ class MainActivity : AppCompatActivity() {
         } else {
             window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
         }
+        setContentView(R.layout.activity_main);
+        supportActionBar?.hide();
         Handler(Looper.getMainLooper()).postDelayed({
             if (SharedPrefs.getKey(this@MainActivity, "LoggedIn").equals("true")) {
                 startActivity(Intent(this, Homepage::class.java))
