@@ -59,7 +59,7 @@ public class Feedback extends Fragment {
 
     private void getFeedbacks() {
         ClientRetrofit clientRetrofit = new ClientRetrofit();
-        clientRetrofit.feedBackRequestApi(SharedPrefs.getKey(getActivity(), "userId"),
+        clientRetrofit.feedBackRequestApi(SharedPrefs.getKey(getActivity(), "storeID"),
                 new FeedbackCallback() {
                     @Override
                     public void onSuccess(FeedbackResponse responseResult) {

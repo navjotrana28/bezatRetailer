@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bezatretailernew.bezat.R;
 import com.bezatretailernew.bezat.models.feedbackResponse.FeedbackResponse;
-import com.bezatretailernew.bezat.models.searchRetailerResponses.SearchResponseData;
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyViewHolder> {
@@ -28,7 +28,6 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
 
     public void setDatumList(FeedbackResponse datumList) {
         this.responseResult = datumList;
-        notifyDataSetChanged();
     }
 
     @NonNull
@@ -44,10 +43,10 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.title.setText(responseResult.getData().get(position).getUserName());
         holder.feedback.setText(responseResult.getData().get(position).getFeedback());
-        holder.ratingBar.setNumStars(Integer.parseInt(responseResult.getData().get(position).getRatings()));
-        Picasso.get()
+        holder.ratingBar.setRating(Integer.parseInt(responseResult.getData().get(position).getRatings()));
+        Glide.with(mcontext)
                 .load(responseResult.getData().get(position).getImage())
-                .resize(500, 200)
+                .centerInside()
                 .into(holder.imageView);
     }
 

@@ -5,11 +5,10 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/_5sdp"
     android:layout_marginTop="@dimen/_2sdp"
-    android:layout_marginEnd="@dimen/_5sdp"
     android:layout_marginBottom="@dimen/_4sdp"
     app:cardBackgroundColor="@color/white"
     app:cardElevation="@dimen/_1sdp"
-    app:contentPadding="@dimen/_10sdp">
+    app:contentPadding="@dimen/_2sdp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +31,6 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
@@ -44,18 +42,20 @@
                     android:paddingStart="@dimen/_12sdp"
                     android:text="Username "
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_11sdp" />
 
                 <RatingBar
 
                     android:id="@+id/rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxHeight="@dimen/_12sdp"
-                    android:minHeight="@dimen/_17sdp"
-                    android:numStars="5"
-                    android:scaleX="1"
-                    android:scaleY="1" />
+                    android:gravity="start"
+                    style = "?android:attr/ratingBarStyleSmall"
+                    android:isIndicator="?android:attr/ratingBarStyleIndicator"
+                    android:progressBackgroundTint="@color/divider_grey"
+                    android:progressTint="@color/golden"
+                    android:stepSize="1.5"
+                    android:numStars="5" />
 
             </LinearLayout>
 
