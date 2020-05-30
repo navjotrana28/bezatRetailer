@@ -36,7 +36,8 @@
     <string name="sign_out">الخروج</string>
     <string name="vip_offers">"عروض كبار الشخصيات</string>
     <string name="my_profile">ملفي</string>
-    <string name="packages">Packages</string>
+    <string name="packages">Purchase Packages</string>
+    <string name="redeem_offer">Redeem Offer</string>
     <string name="save">حفظ"</string>
     <string name="skip">Skip</string>
     <string name="done">Done</string>

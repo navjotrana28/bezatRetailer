@@ -211,6 +211,10 @@ public class Dashboard extends Fragment {
                 R.drawable.prizes,
                 getString(R.string.packages) + ""
         ));
+        dashBoardItem.add(new DashBoardItem(
+                R.drawable.prizes,
+                getString(R.string.redeem_offer) + ""
+        ));
 
 //        dashBoardItem.add(new DashBoardItem(
 //                R.drawable.feedback,
@@ -438,6 +442,16 @@ public class Dashboard extends Fragment {
                                 .getName().equalsIgnoreCase(getString(R.string.packages))) {
                             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                             ft.replace(R.id.container, new PurchaseCoupons());
+                            ft.addToBackStack(null);
+                            ft.commit();
+//                            Intent i = new Intent(Intent.ACTION_VIEW);
+//                            i.setData(Uri.parse("http://bezatapp.com/manage_App"));
+//                            startActivity(i);
+
+                        }else if (dashBoardItems.get(getAdapterPosition())
+                                .getName().equalsIgnoreCase(getString(R.string.redeem_offer))) {
+                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.container, new RedeemOffer());
                             ft.addToBackStack(null);
                             ft.commit();
 //                            Intent i = new Intent(Intent.ACTION_VIEW);
