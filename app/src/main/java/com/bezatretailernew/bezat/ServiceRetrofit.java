@@ -36,11 +36,8 @@ public interface ServiceRetrofit {
 
 
     @FormUrlEncoded
-    @POST("user/feedback")
-    Observable<FeedbackResponse> getFeedbackRequest(@Field("userId") String userId,
-                                                    @Field("feedback") String feedback,
-                                                    @Field("retailerId") String retailerId,
-                                                    @Field("ratings") String ratings);
+    @POST("staff/feedbacks")
+    Observable<FeedbackResponse> getFeedbackRequest(@Field("retailerId") String userId);
 
     @FormUrlEncoded
     @POST("staff/logout")

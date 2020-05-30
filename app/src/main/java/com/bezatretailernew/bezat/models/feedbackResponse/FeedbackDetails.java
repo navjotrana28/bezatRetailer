@@ -3,28 +3,20 @@ package com.bezatretailernew.bezat.models.feedbackResponse;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FeedbackRequest {
+public class FeedbackDetails {
 
-    @SerializedName("userId")
-    @Expose
-    private String userId;
     @SerializedName("feedback")
     @Expose
     private String feedback;
-    @SerializedName("retailerId")
-    @Expose
-    private String retailerId;
     @SerializedName("ratings")
     @Expose
     private String ratings;
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+    @SerializedName("user_name")
+    @Expose
+    private String userName;
+    @SerializedName("image")
+    @Expose
+    private String image;
 
     public String getFeedback() {
         return feedback;
@@ -34,20 +26,28 @@ public class FeedbackRequest {
         this.feedback = feedback;
     }
 
-    public String getRetailerId() {
-        return retailerId;
-    }
-
-    public void setRetailerId(String retailerId) {
-        this.retailerId = retailerId;
-    }
-
     public String getRatings() {
         return ratings;
     }
 
     public void setRatings(String ratings) {
         this.ratings = ratings;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
 }

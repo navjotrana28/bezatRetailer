@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bezatretailernew.bezat.R;
+import com.bezatretailernew.bezat.activities.ExampleDialog;
 import com.bezatretailernew.bezat.utils.Loader;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
 import com.budiyev.android.codescanner.CodeScanner;
@@ -42,10 +44,12 @@ public class ScanCoupon extends Fragment {
     private String mParam2;
     private CodeScanner mCodeScanner;
     Button btnScan;
+    EditText customer_phone,customer_code;
     ImageView imgBack;
     String lang = "";
     CodeScannerView scannerView;
     private OnFragmentInteractionListener mListener;
+    private String userPhone="";
 
     public ScanCoupon() {
         // Required empty public constructor
@@ -94,6 +98,8 @@ public class ScanCoupon extends Fragment {
         btnScan = view.findViewById(R.id.btnScan);
         imgBack = view.findViewById(R.id.imgBack);
         mCodeScanner = new CodeScanner(view.getContext(), scannerView);
+        customer_code=view.findViewById(R.id.customer_code);
+        customer_phone=view.findViewById(R.id.customer_phone);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +113,7 @@ public class ScanCoupon extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        getAutoLogin(result.getText());
+                        getAutoLogin(result.getText(),"");
                         Toast.makeText(getActivity(), result.getText(), Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -125,29 +131,53 @@ public class ScanCoupon extends Fragment {
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCodeScanner.setDecodeCallback(new DecodeCallback() {
-                    @Override
-                    public void onDecoded(@NonNull final Result result) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                getAutoLogin(result.getRawBytes().toString());
-                                Toast.makeText(getActivity(), result.getText(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                String qr="";
+                String userPhone="";
+                String customerCode=customer_code.getText().toString();
+                String customerPhone=customer_phone.getText().toString();
+                if (customerCode.isEmpty() && customerPhone.isEmpty()){
+                    openDialog();
+                }else {
+                    if (customerCode.isEmpty()) {
+                        userPhone = customerPhone;
+                        getAutoLogin(qr, userPhone);
                     }
+                    else if (customerPhone.isEmpty()){
+                        qr = customerCode;
+                        getAutoLogin(qr,userPhone);
+                    }else {
+                        userPhone = customerPhone;
+                        qr = customerCode;
+                        getAutoLogin(qr, userPhone);
+                    }
+                }
+//                mCodeScanner.setDecodeCallback(new DecodeCallback() {
+//                    @Override
+//                    public void onDecoded(@NonNull final Result result) {
+//                        getActivity().runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+
+                            }
+//                        });
+//                    }
                 });
-            }
-        });
+//            }
+//        });
+
         return view;
     }
+        public void openDialog(){
+            ExampleDialog exampleDialog=new ExampleDialog();
+            exampleDialog.show(getFragmentManager(),"example dialog");
 
-    private void getAutoLogin(String qr) {
+        }
+    private void getAutoLogin(String qr,String userPhone) {
         Loader loader = new Loader(getContext());
         loader.show();
 
         String url = "http://bezatapp.com/manage_App/admin/mobile_app/scan_coupon?" + "user_id=" + SharedPrefs.getKey(getActivity(), "userId") +
-                "&customer_code=" + qr;
+                "&customer_code=" + qr +"&user_phone=" +userPhone;
         Log.v("couponurl", url + " ");
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.container, new WebViewCoupon(url));
