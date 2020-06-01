@@ -6,11 +6,12 @@
     android:background="@drawable/ripple_white_primary"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="@dimen/_10sdp">
+    android:padding="@dimen/_6sdp">
 
     <ImageView
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_weight="1"
-        android:layout_margin="16dp"
         android:id="@+id/image"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -25,7 +26,6 @@
         android:ellipsize="end"
         android:gravity="center"
         android:fontFamily="Tajawal"
-        android:layout_marginTop="@dimen/_5sdp"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/_12sdp"
         app:layout_constraintDimensionRatio="h,1:0.3"

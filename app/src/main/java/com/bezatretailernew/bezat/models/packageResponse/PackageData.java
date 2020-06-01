@@ -21,6 +21,18 @@ public class PackageData {
     @Expose
     private String pkg_img;
 
+    @SerializedName("color")
+    @Expose
+    private String color;
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public String getPackage_name() {
         return package_name;
     }

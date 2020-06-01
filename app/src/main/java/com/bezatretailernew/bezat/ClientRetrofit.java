@@ -1,9 +1,13 @@
 package com.bezatretailernew.bezat;
 
+import android.util.Log;
+
 import com.bezatretailernew.bezat.api.contactusResponse.ContactUsRequest;
 import com.bezatretailernew.bezat.api.contactusResponse.ContactUsResponse;
 import com.bezatretailernew.bezat.interfaces.ContactUsSuccessResponse;
 import com.bezatretailernew.bezat.interfaces.FeedbackCallback;
+import com.bezatretailernew.bezat.interfaces.GetOfferCodeCallback;
+import com.bezatretailernew.bezat.interfaces.RedeemUserOfferCallback;
 import com.bezatretailernew.bezat.interfaces.SearchPackageInterface;
 import com.bezatretailernew.bezat.interfaces.LogoutCallback;
 import com.bezatretailernew.bezat.interfaces.SearchRetaierInterface;
@@ -11,7 +15,10 @@ import com.bezatretailernew.bezat.interfaces.VipListResponse;
 import com.bezatretailernew.bezat.models.LogoutResponse;
 import com.bezatretailernew.bezat.models.feedbackResponse.FeedbackDetails;
 import com.bezatretailernew.bezat.models.feedbackResponse.FeedbackResponse;
+import com.bezatretailernew.bezat.models.getOfferCodes.GetOfferCodesResponse;
 import com.bezatretailernew.bezat.models.packageResponse.PackageResponse;
+import com.bezatretailernew.bezat.models.redeemUserOffer.RedeemUserOfferRequest;
+import com.bezatretailernew.bezat.models.redeemUserOffer.RedeemUserOfferResponse;
 import com.bezatretailernew.bezat.models.searchRetailerResponses.SearchResponseResult;
 import com.bezatretailernew.bezat.models.vip_lists.VipResult;
 import com.bezatretailernew.bezat.utils.URLS;
@@ -191,6 +198,63 @@ public class ClientRetrofit {
                     @Override
                     public void onNext(PackageResponse packageResponseData) {
                         packageInterface.onSuccess(packageResponseData);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void getOfferCodes(String retailerId,GetOfferCodeCallback getOfferCodeCallback){
+        serviceRetrofit.getOfferCodes(retailerId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<GetOfferCodesResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(GetOfferCodesResponse getOfferCodeResponse) {
+                        Log.d("---test---",getOfferCodeResponse.toString());
+                        getOfferCodeCallback.onSuccess(getOfferCodeResponse);
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public void redeemUserOffer(RedeemUserOfferRequest request,RedeemUserOfferCallback redeemUserOfferCallback){
+        serviceRetrofit.redeemUserOffer(request.getOffer_code(),request.getCustomer_code(),request.getCustomer_code())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<RedeemUserOfferResponse>() {
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(RedeemUserOfferResponse redeemOfferResponse) {
+                        redeemUserOfferCallback.onSuccess(redeemOfferResponse);
                     }
 
                     @Override
