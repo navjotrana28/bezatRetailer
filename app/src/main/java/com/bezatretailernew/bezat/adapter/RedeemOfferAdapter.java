@@ -53,9 +53,10 @@ public class RedeemOfferAdapter extends RecyclerView.Adapter<RedeemOfferAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RedeemOfferAdapter.MyViewHolder holder, int position) {
-        //OfferCodeData data = response.getData().get(position);
-        //holder.offer_name.setText(data.getOffer_coupon_code());
-        holder.offer_name.setText(response.getMsg());
+       if(response.getData()!=null && response.getData().size()!=0){
+           OfferCodeData data = response.getData().get(position);
+           holder.offer_name.setText(data.getOffer_coupon_code());
+       }
         holder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -74,7 +75,7 @@ public class RedeemOfferAdapter extends RecyclerView.Adapter<RedeemOfferAdapter.
         if(response.getData()!=null){
             return response.getData().size();
         }
-        return 5;
+        return 0;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

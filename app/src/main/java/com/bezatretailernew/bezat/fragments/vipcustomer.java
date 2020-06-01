@@ -101,7 +101,7 @@ public class vipcustomer extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        container.setClickable(true);
         rootView = inflater.inflate(R.layout.fragment_vipcustomer, container, false);
 
         txtCustomerName = rootView.findViewById(R.id.txtCustomerName);

@@ -46,6 +46,7 @@ public class Feedback extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        container.setClickable(true);
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_feedback, container, false);
         recFeedback = rootView.findViewById(R.id.recFeedback);
