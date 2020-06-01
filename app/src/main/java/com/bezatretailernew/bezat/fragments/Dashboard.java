@@ -34,10 +34,13 @@ import com.bezatretailernew.bezat.ClientRetrofit;
 import com.bezatretailernew.bezat.MyApplication;
 import com.bezatretailernew.bezat.R;
 import com.bezatretailernew.bezat.activities.*;
+import com.bezatretailernew.bezat.adapter.RedeemOfferAdapter;
 import com.bezatretailernew.bezat.adapter.SliderAdapter;
+import com.bezatretailernew.bezat.interfaces.GetOfferCodeCallback;
 import com.bezatretailernew.bezat.interfaces.LogoutCallback;
 import com.bezatretailernew.bezat.models.DashBoardItem;
 import com.bezatretailernew.bezat.models.LogoutResponse;
+import com.bezatretailernew.bezat.models.getOfferCodes.GetOfferCodesResponse;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
 import com.bezatretailernew.bezat.utils.URLS;
 import com.google.android.material.tabs.TabLayout;
@@ -75,6 +78,7 @@ public class Dashboard extends Fragment {
     List<DashBoardItem> dashBoardItem;
     View rootView;
     String lang = "";
+    String retailerId;
 
     public Dashboard() {
         // Required empty public constructor
@@ -104,6 +108,7 @@ public class Dashboard extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        retailerId = SharedPrefs.getKey(getActivity(), "userId");
         if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             lang = "_ar";
@@ -448,12 +453,30 @@ public class Dashboard extends Fragment {
 //                            i.setData(Uri.parse("http://bezatapp.com/manage_App"));
 //                            startActivity(i);
 
-                        }else if (dashBoardItems.get(getAdapterPosition())
-                                .getName().equalsIgnoreCase(getString(R.string.redeem_offer))) {
-                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                            ft.replace(R.id.container, new RedeemOffer());
-                            ft.addToBackStack(null);
-                            ft.commit();
+                        }else if (dashBoardItems.get(getAdapterPosition()).getName().equalsIgnoreCase(getString(R.string.redeem_offer))) {
+
+                            ClientRetrofit clientRetrofit = new ClientRetrofit();
+                            clientRetrofit.getOfferCodes(retailerId, new GetOfferCodeCallback() {
+                                @Override
+                                public void onSuccess(GetOfferCodesResponse responseResult) {
+                                    if(responseResult.getStatus().equals("error")){
+                                        Toast.makeText(getActivity().getBaseContext(), responseResult.getMsg(), Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                                        ft.replace(R.id.container, new RedeemOffer());
+                                        ft.addToBackStack(null);
+                                        ft.commit();
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFailure(Throwable e) {
+
+                                }
+                            });
+
+
 //                            Intent i = new Intent(Intent.ACTION_VIEW);
 //                            i.setData(Uri.parse("http://bezatapp.com/manage_App"));
 //                            startActivity(i);
