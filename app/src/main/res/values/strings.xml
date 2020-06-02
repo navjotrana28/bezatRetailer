@@ -160,5 +160,6 @@
     <string name="offer_price">Offer price</string>
     <string name="original_prize_bd">Original Price:BD</string>
     <string name="BD_offers">BD</string>
+    <string name="search_by_retailer">Search by Retailer</string>
 
 </resources>
