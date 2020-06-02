@@ -104,6 +104,7 @@ public class TotalCoupon extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        container.setClickable(true);
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_total_coupon, container, false);
         if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
