@@ -161,5 +161,7 @@
     <string name="original_prize_bd">Original Price:BD</string>
     <string name="BD_offers">BD</string>
     <string name="search_by_retailer">Search by Retailer</string>
+    <string name="get_feedback">Feedback</string>
+
 
 </resources>

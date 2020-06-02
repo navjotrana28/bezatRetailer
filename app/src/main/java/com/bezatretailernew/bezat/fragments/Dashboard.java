@@ -223,7 +223,7 @@ public class Dashboard extends Fragment {
 
         dashBoardItem.add(new DashBoardItem(
                 R.drawable.feedback,
-                "Feedback"+""
+                getString(R.string.get_feedback)+""
         ));
 //        dashBoardItem.add(new DashBoardItem(
 //                R.drawable.createoffer,
@@ -434,7 +434,7 @@ public class Dashboard extends Fragment {
                             startActivity(i);
 
                         } else if (dashBoardItems.get(getAdapterPosition())
-                                .getName().equalsIgnoreCase("Feedback")) {
+                                .getName().equalsIgnoreCase(getString(R.string.get_feedback))) {
                             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                             ft.replace(R.id.container, new Feedback());
                             ft.addToBackStack(null);
