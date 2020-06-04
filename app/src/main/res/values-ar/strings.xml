@@ -37,8 +37,8 @@
     <string name="sign_out">الخروج</string>
     <string name="vip_offers">"عروض كبار الشخصيات</string>
     <string name="my_profile">ملفي</string>
-    <string name="packages">Purchase Packages</string>
-    <string name="redeem_offer">Redeem Offer</string>
+    <string name="packages">حزم الشراء</string>
+    <string name="redeem_offer">تخليص عرض</string>
     <string name="save">حفظ"</string>
     <string name="skip">Skip</string>
     <string name="done">Done</string>
@@ -153,4 +153,7 @@
     <string name="offer_price">سعر العرض</string>
     <string name="original_prize_bd">السعر الأصلي: دينار بحريني</string>
     <string name="BD_offers">دينار بحريني</string>
+
+    <string name="feedback">ردود الفعل</string>
+
 </resources>
