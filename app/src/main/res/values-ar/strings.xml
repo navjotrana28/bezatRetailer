@@ -38,14 +38,14 @@
     <string name="vip_offers">"عروض كبار الشخصيات</string>
     <string name="my_profile">ملفي</string>
     <string name="packages">حزم الشراء</string>
-    <string name="redeem_offer">عرض الاسترداد</string>
+    <string name="redeem_offer">تخليص عرض</string>
     <string name="save">حفظ"</string>
     <string name="skip">Skip</string>
     <string name="done">Done</string>
     <string name="someting_wrong">Something, went wrong!</string>
     <string name="ok">حسنا</string>
     <string name="confirm_password">تأكيد كلمة المرور</string>
-    <string name="phone">رقم الهاتف</string>
+    <string name="phone">هاتف</string>
     <string name="valid_email">الرجاء إدخال بريد إلكتروني صحيح</string>
     <string name="empty_email">يرجى إدخال البريد الإلكتروني</string>
     <string name="empty_name">يرجى إدخال الاسم</string>
@@ -153,6 +153,11 @@
     <string name="offer_price">سعر العرض</string>
     <string name="original_prize_bd">السعر الأصلي: دينار بحريني</string>
     <string name="BD_offers">دينار بحريني</string>
+
+    <string name="feedback">ردود الفعل</string>
+
+    <string name="know">تعرف أكثر</string>
+
     <string name="feedback">ردود الفعل</string>
     <string name="search_by_retailer">البحث حسب بائع التجزئة</string>
     <string name="get_feedback">ردود الفعل</string>

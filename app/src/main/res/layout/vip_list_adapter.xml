@@ -31,6 +31,7 @@
 				android:textSize="10sp" />
 
 		<TextView
+			android:layout_marginRight="8dp"
 				android:id="@+id/txCustomerName"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -54,6 +55,7 @@
 				android:textSize="10sp" />
 
 		<TextView
+			android:layout_marginRight="8dp"
 				android:id="@+id/txtCustomerCode"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -77,6 +79,7 @@
 				android:textSize="10sp" />
 
 		<TextView
+			android:layout_marginRight="8dp"
 			android:layout_weight="1"
 				android:id="@+id/txtCustomerEmail"
 				android:layout_width="wrap_content"
@@ -96,11 +99,12 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="end"
-				android:text="Phone :"
+				android:text="@string/phone_vip"
 				android:textColor="@color/black"
 				android:textSize="10sp" />
 
 		<TextView
+			android:layout_marginRight="8dp"
 				android:id="@+id/txtCustomerPhone"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"

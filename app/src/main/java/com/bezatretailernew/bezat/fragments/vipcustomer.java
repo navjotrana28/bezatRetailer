@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +73,7 @@ public class vipcustomer extends Fragment {
     private VipAdapter adapter;
     GridLayoutManager layoutManager;
     private RecyclerView recyclerView;
+    String lang="a";
 
 
     private OnFragmentInteractionListener mListener;
@@ -104,10 +106,27 @@ public class vipcustomer extends Fragment {
         container.setClickable(true);
         rootView = inflater.inflate(R.layout.fragment_vipcustomer, container, false);
 
+        if (SharedPrefs.getKey(getActivity().getBaseContext(), "selectedlanguage").contains("ar")) {
+            lang = "a";
+        } else {
+            lang = "e";
+        }
+
         txtCustomerName = rootView.findViewById(R.id.txtCustomerName);
         txtCustomerCode = rootView.findViewById(R.id.txtCustomerCode);
         txtCustomerEmail = rootView.findViewById(R.id.txtCustomerEmail);
         txtCustomerPhone = rootView.findViewById(R.id.txtCustomerPhone);
+        if(lang.equals("a")){
+            txtCustomerName.setGravity(Gravity.RIGHT);
+            txtCustomerCode.setGravity(Gravity.RIGHT);
+            txtCustomerEmail.setGravity(Gravity.RIGHT);
+            txtCustomerPhone.setGravity(Gravity.RIGHT);
+        }else{
+            txtCustomerName.setGravity(Gravity.LEFT);
+            txtCustomerCode.setGravity(Gravity.LEFT);
+            txtCustomerEmail.setGravity(Gravity.LEFT);
+            txtCustomerPhone.setGravity(Gravity.LEFT);
+        }
         imgFront = rootView.findViewById(R.id.imgFront);
         btnaddVip = rootView.findViewById(R.id.btnaddVip);
         etSearch = rootView.findViewById(R.id.etSearch);
@@ -155,7 +174,7 @@ public class vipcustomer extends Fragment {
             @Override
             public void onSuccess(VipResult response) {
                 if (response.getResult().size() > 0) {
-                    adapter = new VipAdapter();
+                    adapter = new VipAdapter(lang);
                     layoutManager = new GridLayoutManager(getActivity(), 2);
                     adapter.setData(response);
                     recyclerView.setLayoutManager(layoutManager);
