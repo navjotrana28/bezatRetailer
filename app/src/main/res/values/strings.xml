@@ -119,7 +119,7 @@
     <string name="customer_name">Customer Name :</string>
     <string name="customer_code">Customer Code :</string>
     <string name="customer_email">Customer Email :</string>
-    <string name="customer_phone">Customer Phone :</string>
+    <string name="customer_phone">Customer Mobile Number</string>
     <string name="add_vip">Add VIP</string>
     <string name="view_all_offers">View all offers</string>
     <string name="bezat_raffles">Bezat Raffles</string>
@@ -160,6 +160,7 @@
     <string name="offer_price">Offer price</string>
     <string name="original_prize_bd">Original Price:BD</string>
     <string name="BD_offers">BD</string>
+    <string name="feedback">Feedback</string>
     <string name="search_by_retailer">Search by Retailer</string>
     <string name="get_feedback">Feedback</string>
 

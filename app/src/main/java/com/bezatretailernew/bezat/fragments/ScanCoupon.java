@@ -1,6 +1,7 @@
 package com.bezatretailernew.bezat.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -101,7 +102,6 @@ public class ScanCoupon extends Fragment {
         mCodeScanner = new CodeScanner(view.getContext(), scannerView);
         customer_code=view.findViewById(R.id.customer_code);
         customer_phone=view.findViewById(R.id.customer_phone);
-
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
