@@ -45,7 +45,7 @@
     <string name="someting_wrong">Something, went wrong!</string>
     <string name="ok">حسنا</string>
     <string name="confirm_password">تأكيد كلمة المرور</string>
-    <string name="phone">رقم الهاتف</string>
+    <string name="phone">هاتف</string>
     <string name="valid_email">الرجاء إدخال بريد إلكتروني صحيح</string>
     <string name="empty_email">يرجى إدخال البريد الإلكتروني</string>
     <string name="empty_name">يرجى إدخال الاسم</string>
@@ -155,5 +155,7 @@
     <string name="BD_offers">دينار بحريني</string>
 
     <string name="feedback">ردود الفعل</string>
+
+    <string name="know">تعرف أكثر</string>
 
 </resources>

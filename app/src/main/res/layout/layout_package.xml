@@ -68,7 +68,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:background="@color/colorPrimary"
-            android:text="Know More"
+            android:text="@string/know"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
