@@ -213,11 +213,11 @@ public class Dashboard extends Fragment {
                 getString(R.string.prizes) + ""
         ));
         dashBoardItem.add(new DashBoardItem(
-                R.drawable.prizes,
+                R.drawable.get_packages,
                 getString(R.string.packages) + ""
         ));
         dashBoardItem.add(new DashBoardItem(
-                R.drawable.prizes,
+                R.drawable.redeem_offer,
                 getString(R.string.redeem_offer) + ""
         ));
 
