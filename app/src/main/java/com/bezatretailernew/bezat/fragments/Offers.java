@@ -5,27 +5,39 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.bezatretailernew.bezat.MyApplication;
 import com.bezatretailernew.bezat.R;
+import com.bezatretailernew.bezat.utils.Loader;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
+import com.bezatretailernew.bezat.utils.URLS;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +58,8 @@ public class Offers extends Fragment {
     private String mParam2;
     RecyclerView recOffer;
     ImageView imgBack;
+    Loader loader;
+
 
     private OnFragmentInteractionListener mListener;
     View rootView;
@@ -97,13 +111,58 @@ public class Offers extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_offers, container, false);
         recOffer = rootView.findViewById(R.id.recOffer);
         imgBack = rootView.findViewById(R.id.imgBack);
+        loader = new Loader(getContext());
+        loader.show();
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().onBackPressed();
             }
         });
-        String response = getArguments().getString("storeArray");
+
+        getStoreOffer(SharedPrefs.getKey(getActivity(), "storeID"));
+        return rootView;
+    }
+
+    private void getStoreOffer(String storeId) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date date = new Date();
+        String currentDate = formatter.format(date);
+        JSONObject object = new JSONObject();
+        String vipUrl = URLS.Companion.getSTAFF_OFFER_LIST() + "userId=" + SharedPrefs.getKey(getActivity(), "userId")
+                + "&storeId=" + storeId
+                + "&currentDate=" + currentDate;
+        Log.v("STORE_BY_OFFER", vipUrl + " ");
+        JsonObjectRequest jsonObjectRequest = new
+                JsonObjectRequest(Request.Method.GET,
+                        vipUrl,
+                        object,
+                        response -> {
+                            Log.v("storeoffer", response + " ");
+                            try {
+                                JSONObject jsonObject = response.getJSONObject("result");
+                                JSONArray storeArray = jsonObject.getJSONArray("store_offers");
+                                offerList(storeArray.toString());
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        },
+                        error -> {
+                            loader.dismiss();
+                        }) {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put("apikey", "12345678");
+                        return headers;
+                    }
+                };
+        MyApplication.getInstance().addToRequestQueue(jsonObjectRequest);
+    }
+
+
+    private void offerList(String response) {
         try {
             JSONArray jsonArray = new JSONArray(response);
             PostAdapter postAdapter = new PostAdapter(jsonArray);
@@ -129,7 +188,6 @@ public class Offers extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -424,7 +424,7 @@ public class Dashboard extends Fragment {
                         } else if (dashBoardItems.get(getAdapterPosition())
                                 .getName().equalsIgnoreCase(getString(R.string.offers))) {
                             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                            ft.replace(R.id.container, new StoreOffer());
+                            ft.replace(R.id.container, new Offers());
                             ft.addToBackStack(null);
                             ft.commit();
                         } else if (dashBoardItems.get(getAdapterPosition())
