@@ -136,7 +136,7 @@
     <string name="get_name">NAME:</string>
     <string name="get_email">EMAIL:</string>
     <string name="get_comments">COMMENTS:</string>
-    <string name="user_name_Login">Username / Phone number</string>
+    <string name="user_name_Login">Email / Phone number</string>
     <string name="are_you_sure_logout">Are you sure, you want to LOGOUT?</string>
     <string name="name_vip">Name :</string>
     <string name="code_vip">Code :</string>
