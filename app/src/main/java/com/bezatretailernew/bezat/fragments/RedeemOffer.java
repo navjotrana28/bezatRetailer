@@ -3,13 +3,6 @@ package com.bezatretailernew.bezat.fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,20 +11,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bezatretailernew.bezat.ClientRetrofit;
 import com.bezatretailernew.bezat.R;
-import com.bezatretailernew.bezat.adapter.PackageAdapter;
 import com.bezatretailernew.bezat.adapter.RedeemOfferAdapter;
 import com.bezatretailernew.bezat.interfaces.GetOfferCodeCallback;
 import com.bezatretailernew.bezat.interfaces.RedeemUserOfferCallback;
-import com.bezatretailernew.bezat.interfaces.SearchPackageInterface;
 import com.bezatretailernew.bezat.models.getOfferCodes.GetOfferCodesResponse;
-import com.bezatretailernew.bezat.models.packageResponse.PackageResponse;
 import com.bezatretailernew.bezat.models.redeemUserOffer.RedeemUserOfferRequest;
 import com.bezatretailernew.bezat.models.redeemUserOffer.RedeemUserOfferResponse;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,7 +36,7 @@ public class RedeemOffer extends Fragment {
     GridLayoutManager layoutManager;
     String retailerId;
     Button redeem;
-    EditText customer_code,phone_number;
+    EditText customer_code, phone_number;
     RedeemOfferAdapter adapter;
     TextView error;
 
@@ -59,7 +51,7 @@ public class RedeemOffer extends Fragment {
                              Bundle savedInstanceState) {
         container.setClickable(true);
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_redeem_offer, container, false);
+        View view = inflater.inflate(R.layout.fragment_redeem_offer, container, false);
 
         if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
@@ -71,7 +63,7 @@ public class RedeemOffer extends Fragment {
         retailerId = SharedPrefs.getKey(getActivity(), "userId");
         imgBack = view.findViewById(R.id.imgBack);
         recyclerViewOffers = view.findViewById(R.id.rv_get_offers);
-        layoutManager = new GridLayoutManager(getActivity(),2);
+        layoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerViewOffers.setLayoutManager(layoutManager);
         redeem = view.findViewById(R.id.btn_redeem);
         customer_code = view.findViewById(R.id.et_customer_code);
@@ -84,10 +76,10 @@ public class RedeemOffer extends Fragment {
             @Override
             public void onClick(View v) {
 
-                boolean code = false,phone = false, offers = false;
-                if(!customer_code.getText().toString().trim().equals("")){
+                boolean code = false, phone = false, offers = false;
+                if (!customer_code.getText().toString().trim().equals("")) {
                     code = true;
-                }else{
+                } else {
                     new AlertDialog.Builder(getActivity())
                             .setTitle("Customer code empty")
                             .setMessage("Please enter customer code")
@@ -102,9 +94,9 @@ public class RedeemOffer extends Fragment {
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
                 }
-                if(!phone_number.getText().toString().trim().equals("")){
+                if (!phone_number.getText().toString().trim().equals("")) {
                     phone = true;
-                }else{
+                } else {
                     new AlertDialog.Builder(getActivity())
                             .setTitle("Customer phone empty")
                             .setMessage("Please enter customer phone number")
@@ -119,7 +111,7 @@ public class RedeemOffer extends Fragment {
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
                 }
-                if(adapter.getArray_offers()==null || adapter.getArray_offers().length==0){
+                if (adapter.getArray_offers() == null || adapter.getArray_offers().length == 0) {
                     new AlertDialog.Builder(getActivity())
                             .setTitle("No offers selected")
                             .setMessage("Please choose some offer to redeem")
@@ -133,10 +125,10 @@ public class RedeemOffer extends Fragment {
                             })
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
-                }else{
+                } else {
                     offers = true;
                 }
-                if(code && phone && offers){
+                if (code && phone && offers) {
                     RedeemUserOfferRequest request = new RedeemUserOfferRequest();
                     request.setCustomer_code(customer_code.getText().toString());
                     request.setPhone_number(phone_number.getText().toString());
@@ -169,7 +161,6 @@ public class RedeemOffer extends Fragment {
         });
 
 
-
         return view;
     }
 
@@ -178,15 +169,15 @@ public class RedeemOffer extends Fragment {
         clientRetrofit.getOfferCodes(retailerId, new GetOfferCodeCallback() {
             @Override
             public void onSuccess(GetOfferCodesResponse responseResult) {
-                if(responseResult.getStatus().equals("error")){
+                if (responseResult.getStatus().equals("error")) {
                     recyclerViewOffers.setVisibility(View.GONE);
                     error.setVisibility(View.VISIBLE);
                     error.setText(responseResult.getMsg());
-                    adapter = new RedeemOfferAdapter(getActivity().getBaseContext(),responseResult);
-                }else{
+                    adapter = new RedeemOfferAdapter(getActivity().getBaseContext(), responseResult);
+                } else {
                     recyclerViewOffers.setVisibility(View.VISIBLE);
                     error.setVisibility(View.GONE);
-                    adapter = new RedeemOfferAdapter(getActivity().getBaseContext(),responseResult);
+                    adapter = new RedeemOfferAdapter(getActivity().getBaseContext(), responseResult);
                     recyclerViewOffers.setAdapter(adapter);
                 }
 
