@@ -143,6 +143,7 @@ public class Offers extends Fragment {
                                 JSONObject jsonObject = response.getJSONObject("result");
                                 JSONArray storeArray = jsonObject.getJSONArray("store_offers");
                                 offerList(storeArray.toString());
+                                loader.dismiss();
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -183,7 +184,7 @@ public class Offers extends Fragment {
                                 dialog.dismiss();
                             }
                         });
-                alertDialog.show();
+                loader.dismiss();
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -8,17 +8,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -29,7 +23,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,9 +54,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -259,7 +249,7 @@ public class MyProfile extends Fragment implements View.OnClickListener {
                 String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
                 SharedPrefs.setKey(getActivity(), "image", "data:image/jpeg;base64," + encoded);
                 Log.e("Activity", "Pick from Camera::>>> ");
-               imgProfile.setImageBitmap(bitmap);
+                imgProfile.setImageBitmap(bitmap);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -270,7 +260,7 @@ public class MyProfile extends Fragment implements View.OnClickListener {
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 //api
-                Bitmap bitmap1 = rotateImageIfRequired(getContext(),bitmap,selectedImage);
+                Bitmap bitmap1 = rotateImageIfRequired(getContext(), bitmap, selectedImage);
                 imgProfile.setImageBitmap(bitmap1);
                 bitmap1.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
                 byte[] byteArray = bytes.toByteArray();
@@ -282,6 +272,7 @@ public class MyProfile extends Fragment implements View.OnClickListener {
             }
         }
     }
+
     private static Bitmap rotateImageIfRequired(Context context, Bitmap img, Uri selectedImage) throws IOException {
         InputStream input = context.getContentResolver().openInputStream(selectedImage);
         ExifInterface ei;
@@ -302,7 +293,6 @@ public class MyProfile extends Fragment implements View.OnClickListener {
                 return img;
         }
     }
-
 
 
     private void getCountryList() {
@@ -391,7 +381,12 @@ public class MyProfile extends Fragment implements View.OnClickListener {
                                 etDob.setText(SharedPrefs.getKey(getActivity(), "dob"));
                                 etPhone.setText(SharedPrefs.getKey(getActivity(), "phone"));
                                 String path = SharedPrefs.getKey(getActivity(), "image");
-                                Picasso.get().load(path).into(imgProfile);
+                                if (path.equals("")) {
+                                    Picasso.get().load(R.drawable.maleicon).into(imgProfile);
+
+                                } else {
+                                    Picasso.get().load(path).into(imgProfile);
+                                }
                                 SharedPrefs.setKey(getActivity(), "image", "");
                                 loader.dismiss();
 
