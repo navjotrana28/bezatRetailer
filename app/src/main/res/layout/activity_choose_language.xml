@@ -45,7 +45,7 @@ android:scaleType="fitCenter"/>
        <TextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:fontFamily="@font/muli_semibold"
+               android:fontFamily="@font/tajawal_regular"
                android:drawableTint="@color/white"
                android:drawableEnd="@drawable/ic_keyboard_arrow_down_black_24dp"
                android:textSize="@dimen/_14sdp"

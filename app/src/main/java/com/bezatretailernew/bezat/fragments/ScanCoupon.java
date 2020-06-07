@@ -120,12 +120,12 @@ public class ScanCoupon extends Fragment {
             }
         });
 
-        scannerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        scannerView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
                 mCodeScanner.startPreview();
-            }
-        });
+//            }
+//        });
 
         ;
         btnScan.setOnClickListener(new View.OnClickListener() {

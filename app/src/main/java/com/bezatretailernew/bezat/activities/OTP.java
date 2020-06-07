@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +54,7 @@ public class OTP extends AppCompatActivity implements View.OnClickListener,
                 password,phone;
         Context context=OTP.this;
         TextView txtResend;
+        ImageView imgBack;
         String forgot="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,7 @@ public class OTP extends AppCompatActivity implements View.OnClickListener,
         etOTP=findViewById(R.id.etOTP);
         btnSave=findViewById(R.id.btnSave);
         txtResend=findViewById(R.id.txtResend);
+        imgBack=findViewById(R.id.imgBack);
         btnSave.setOnClickListener(this);
         txtResend.setOnClickListener(this);
 
@@ -104,6 +107,12 @@ public class OTP extends AppCompatActivity implements View.OnClickListener,
 //        getHintPhoneNumber();
         //start SMS listner
         smsListener();
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
