@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:gravity="center"
-        android:fontFamily="Tajawal"
+        android:fontFamily="@font/tajawal_bold"
         android:layout_marginTop="@dimen/_5sdp"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/_12sdp"

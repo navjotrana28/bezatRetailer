@@ -33,7 +33,7 @@
                     android:text="Dessange"
                     android:textSize="@dimen/_13sdp"
                     android:textColor="@color/colorPrimary"
-                    android:fontFamily="@font/muli_semibold"/>
+                    android:fontFamily="@font/tajawal_medium"/>
             <TextView
                     android:id="@+id/bill_date"
                     android:layout_width="match_parent"

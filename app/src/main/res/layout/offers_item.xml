@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_12sdp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/muli_semibold"
+                android:fontFamily="@font/tajawal_medium"
                 android:text="Origanal Price:BD 100.00"/>
     </LinearLayout>
 

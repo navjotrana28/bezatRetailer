@@ -85,7 +85,7 @@
                     android:text="Dessange"
                     android:gravity="center"
                     android:textColor="@color/colorPrimary"
-                    android:fontFamily="@font/muli_semibold"
+                    android:fontFamily="@font/tajawal_medium"
                     android:textSize="@dimen/_14sdp"/>
         </androidx.cardview.widget.CardView>
 
@@ -192,7 +192,7 @@
                         android:baselineAligned="false">
                     <TextView
                         android:layout_gravity="center"
-                        android:fontFamily="@font/muli_bold"
+                        android:fontFamily="@font/tajawal_bold"
                         android:textColor="@color/white"
                         android:layout_margin="6dp"
                         android:layout_width="wrap_content"
