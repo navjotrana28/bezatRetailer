@@ -42,7 +42,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
 					android:layout_weight="1"
-					android:fontFamily="@font/muli_bold"
+					android:fontFamily="@font/tajawal_bold"
 					android:gravity="center"
 					android:text="@string/vip_customers"
 					android:textSize="@dimen/_14sdp" />
@@ -72,7 +72,7 @@
 					android:layout_weight="1"
 					android:background="@drawable/editshape"
 					android:elevation="1dp"
-					android:fontFamily="@font/muli_semibold"
+					android:fontFamily="@font/tajawal_medium"
 					android:hint="@string/email_phone"
 					android:paddingStart="@dimen/_15sdp"
 					android:textColor="@color/black"
@@ -83,7 +83,8 @@
 					android:id="@+id/imgSearch"
 					android:layout_width="@dimen/_20sdp"
 					android:layout_height="@dimen/_20sdp"
-					android:layout_marginStart="@dimen/_10sdp"
+				android:layout_marginLeft="-27dp"
+				android:layout_marginRight="@dimen/_3sdp"
 					android:src="@drawable/search"
 					android:tint="@color/black" />
 		</LinearLayout>

@@ -117,7 +117,7 @@
     <string name="scan_qr_code">Scan QR Code</string>
     <string name="email_phone">Email,Phone</string>
     <string name="customer_name">Customer Name :</string>
-    <string name="customer_code">Customer Code :</string>
+    <string name="customer_code">Customer Code </string>
     <string name="customer_email">Customer Email :</string>
     <string name="customer_phone">Customer Mobile Number</string>
     <string name="add_vip">Add VIP</string>

@@ -209,7 +209,7 @@ public class Dashboard extends Fragment {
                 getString(R.string.offers) + ""
         ));
         dashBoardItem.add(new DashBoardItem(
-                R.drawable.prizes,
+                R.drawable.prize2,
                 getString(R.string.prizes) + ""
         ));
         dashBoardItem.add(new DashBoardItem(
@@ -423,6 +423,7 @@ public class Dashboard extends Fragment {
 
                         } else if (dashBoardItems.get(getAdapterPosition())
                                 .getName().equalsIgnoreCase(getString(R.string.offers))) {
+
                             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                             ft.replace(R.id.container, new Offers());
                             ft.addToBackStack(null);
