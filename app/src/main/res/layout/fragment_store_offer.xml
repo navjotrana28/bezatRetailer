@@ -61,7 +61,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:orientation="vertical"
-        android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/topImage">
 
@@ -113,27 +112,21 @@
                 android:background="@drawable/ic_location"/>
 
             <ImageButton
-                android:id="@+id/txtWeb"
-                android:layout_width="@dimen/_24sdp"
-                android:layout_height="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:backgroundTint="@color/partnerline"
-                android:background="@drawable/ic_web"/>
-
-            <ImageButton
-                android:id="@+id/txtFb"
-                android:layout_width="@dimen/_24sdp"
-                android:layout_height="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:backgroundTint="@color/partnerline"
-                android:background="@drawable/ic_fb"/>
-            <ImageButton
                 android:id="@+id/txtInsta"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
                 android:backgroundTint="@color/partnerline"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:background="@drawable/ic_insta"/>
+
+            <ImageButton
+                android:id="@+id/txtSnap"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:backgroundTint="@color/partnerline"
+                android:background="@drawable/ic_snap"/>
+
             <ImageButton
                 android:id="@+id/txtTwitter"
                 android:layout_width="@dimen/_24sdp"
@@ -143,12 +136,26 @@
                 android:background="@drawable/ic_twitter"/>
 
             <ImageButton
-                android:id="@+id/txtSnap"
+                android:id="@+id/txtFb"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:backgroundTint="@color/partnerline"
-                android:background="@drawable/ic_snap"/>
+                android:background="@drawable/ic_fb"/>
+
+            <ImageButton
+                android:id="@+id/txtWeb"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:backgroundTint="@color/partnerline"
+                android:background="@drawable/ic_web"/>
+
+
+
+
+
+
 
         </LinearLayout>
 
@@ -175,29 +182,30 @@
 
 
             <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
                 <androidx.cardview.widget.CardView
-                    app:cardCornerRadius="25dp"
-                        android:id="@+id/btnAllOffer"
-                        android:layout_width="230dp"
-                        android:layout_marginTop="@dimen/_1sdp"
-                        android:layout_marginBottom="@dimen/_16sdp"
-                        android:layout_height="50dp"
-                        android:backgroundTint="@color/colorPrimary"
-                        android:paddingStart="@dimen/_15sdp"
-                        android:paddingEnd="@dimen/_15sdp"
-                        android:layout_gravity="center"
-                        android:baselineAligned="false">
+                    android:id="@+id/btnAllOffer"
+                    android:layout_width="230dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:layout_marginBottom="@dimen/_16sdp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:baselineAligned="false"
+                    android:paddingStart="@dimen/_15sdp"
+                    android:paddingEnd="@dimen/_15sdp"
+                    app:cardCornerRadius="25dp">
+
                     <TextView
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/muli_bold"
-                        android:textColor="@color/white"
-                        android:layout_margin="6dp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_margin="6dp"
+                        android:fontFamily="@font/muli_bold"
                         android:text="@string/view_all_offers"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/_19sdp">
 
                     </TextView>

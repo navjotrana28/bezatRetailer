@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,8 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.MyViewHo
         Glide.with(mcontext)
                 .load(data.getPkg_img())
                 .into(holder.img);
+
+        Log.d("---test---",data.getPkg_img());
 
         holder.bg.setBackgroundColor(Color.parseColor(data.getColor()));
 
