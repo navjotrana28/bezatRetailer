@@ -7,20 +7,18 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -33,8 +31,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.bezatretailernew.bezat.ClientRetrofit;
 import com.bezatretailernew.bezat.MyApplication;
 import com.bezatretailernew.bezat.R;
-import com.bezatretailernew.bezat.activities.*;
-import com.bezatretailernew.bezat.adapter.RedeemOfferAdapter;
+import com.bezatretailernew.bezat.activities.LoginActivity;
 import com.bezatretailernew.bezat.adapter.SliderAdapter;
 import com.bezatretailernew.bezat.interfaces.GetOfferCodeCallback;
 import com.bezatretailernew.bezat.interfaces.LogoutCallback;
@@ -49,7 +46,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -108,7 +110,7 @@ public class Dashboard extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        retailerId = SharedPrefs.getKey(getActivity(), "userId");
+        retailerId = SharedPrefs.getKey(getActivity(), "storeID");
         if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             lang = "_ar";
@@ -223,7 +225,7 @@ public class Dashboard extends Fragment {
 
         dashBoardItem.add(new DashBoardItem(
                 R.drawable.feedback,
-                getString(R.string.get_feedback)+""
+                getString(R.string.get_feedback) + ""
         ));
 //        dashBoardItem.add(new DashBoardItem(
 //                R.drawable.createoffer,
@@ -444,7 +446,7 @@ public class Dashboard extends Fragment {
 //                            i.setData(Uri.parse("http://bezatapp.com/manage_App"));
 //                            startActivity(i);
 
-                        }else if (dashBoardItems.get(getAdapterPosition())
+                        } else if (dashBoardItems.get(getAdapterPosition())
                                 .getName().equalsIgnoreCase(getString(R.string.packages))) {
                             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                             ft.replace(R.id.container, new PurchaseCoupons());
@@ -454,15 +456,15 @@ public class Dashboard extends Fragment {
 //                            i.setData(Uri.parse("http://bezatapp.com/manage_App"));
 //                            startActivity(i);
 
-                        }else if (dashBoardItems.get(getAdapterPosition()).getName().equalsIgnoreCase(getString(R.string.redeem_offer))) {
+                        } else if (dashBoardItems.get(getAdapterPosition()).getName().equalsIgnoreCase(getString(R.string.redeem_offer))) {
 
                             ClientRetrofit clientRetrofit = new ClientRetrofit();
                             clientRetrofit.getOfferCodes(retailerId, new GetOfferCodeCallback() {
                                 @Override
                                 public void onSuccess(GetOfferCodesResponse responseResult) {
-                                    if(responseResult.getStatus().equals("error")){
+                                    if (responseResult.getStatus().equals("error")) {
                                         Toast.makeText(getActivity().getBaseContext(), responseResult.getMsg(), Toast.LENGTH_SHORT).show();
-                                    }else{
+                                    } else {
                                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                                         ft.replace(R.id.container, new RedeemOffer());
                                         ft.addToBackStack(null);

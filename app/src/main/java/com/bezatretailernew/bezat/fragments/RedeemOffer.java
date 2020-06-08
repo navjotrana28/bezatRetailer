@@ -60,7 +60,7 @@ public class RedeemOffer extends Fragment {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
             lang = "";
         }
-        retailerId = SharedPrefs.getKey(getActivity(), "userId");
+        retailerId = SharedPrefs.getKey(getActivity(), "storeID");
         imgBack = view.findViewById(R.id.imgBack);
         recyclerViewOffers = view.findViewById(R.id.rv_get_offers);
         layoutManager = new GridLayoutManager(getActivity(), 2);
@@ -140,15 +140,17 @@ public class RedeemOffer extends Fragment {
                             new AlertDialog.Builder(getActivity())
                                     .setTitle(responseResult.getStatus())
                                     .setMessage(responseResult.getMsg())
-
                                     // Specifying a listener allows you to take an action before dismissing the dialog.
                                     // The dialog is automatically dismissed when a dialog button is clicked.
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             // Continue with delete operation
+                                            getActivity().onBackPressed();
+
                                         }
                                     })
                                     .show();
+
                         }
 
                         @Override
