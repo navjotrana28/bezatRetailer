@@ -192,16 +192,16 @@ public class Dashboard extends Fragment {
         recycle = rootView.findViewById(R.id.recycle);
         dashBoardItem = dashBoardItem = new ArrayList<>();
         dashBoardItem.add(new DashBoardItem(
-                R.drawable.totalcoupon,
+                R.drawable.total_coupons,
                 getString(R.string.total_coupon) + ""
         ));
         dashBoardItem.add(new DashBoardItem(
-                R.drawable.scancoupon,
+                R.drawable.qr_code,
                 getString(R.string.scan_coupon) + ""
         ));
 
         dashBoardItem.add(new DashBoardItem(
-                R.drawable.vipcustomer,
+                R.drawable.vip_logo1,
                 getString(R.string.vip_customers) + ""
         ));
         dashBoardItem.add(new DashBoardItem(
