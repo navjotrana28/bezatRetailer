@@ -60,17 +60,18 @@
 			android:padding="@dimen/_10sdp">
 
 		<LinearLayout
+			android:background="@drawable/editshape"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical"
 				android:orientation="horizontal">
 
 			<EditText
+				android:background="@null"
 					android:id="@+id/etSearch"
 					android:layout_width="match_parent"
 					android:layout_height="@dimen/_38sdp"
 					android:layout_weight="1"
-					android:background="@drawable/editshape"
 					android:elevation="1dp"
 					android:fontFamily="@font/tajawal_medium"
 					android:hint="@string/email_phone"
@@ -80,10 +81,10 @@
 					android:textSize="@dimen/_12sdp" />
 
 			<ImageView
+				android:layout_alignParentRight="true"
 					android:id="@+id/imgSearch"
 					android:layout_width="@dimen/_20sdp"
 					android:layout_height="@dimen/_20sdp"
-				android:layout_marginLeft="-27dp"
 				android:layout_marginRight="8dp"
 					android:src="@drawable/search"
 					android:tint="@color/black" />
