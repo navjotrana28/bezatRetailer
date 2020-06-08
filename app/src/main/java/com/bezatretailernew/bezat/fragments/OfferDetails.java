@@ -5,16 +5,21 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import com.android.volley.*;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bezatretailernew.bezat.MyApplication;
 import com.bezatretailernew.bezat.R;
@@ -23,7 +28,9 @@ import com.bezatretailernew.bezat.utils.SharedPrefs;
 import com.bezatretailernew.bezat.utils.URLS;
 import com.bezatretailernew.bezat.utils.VolleyMultipartRequest;
 import com.squareup.picasso.Picasso;
+
 import net.glxn.qrgen.android.QRCode;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,8 +55,8 @@ public class OfferDetails extends Fragment implements View.OnClickListener {
     private String mParam1;
     private String mParam2;
     View rootView;
-    ImageView imgBarCode,offer_img;
-    TextView offer_coupon_code,store_name,offer_descp,discount_price,actual_price;
+    ImageView imgBarCode, offer_img;
+    TextView offer_coupon_code, store_name, offer_descp, discount_price, actual_price;
     Loader loader;
     Button btnRedeem;
     ImageView imgSaved;
@@ -57,7 +64,8 @@ public class OfferDetails extends Fragment implements View.OnClickListener {
     boolean is_saved;
     String offerId;
     ImageView imgBack;
-    String lang="";
+    String lang = "";
+
     public OfferDetails() {
         // Required empty public constructor
     }
@@ -93,29 +101,28 @@ public class OfferDetails extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        if (SharedPrefs.getKey(getActivity(),"selectedlanguage").contains("ar")) {
+        if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-            lang="_ar";
+            lang = "_ar";
         } else {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
-            lang="";
+            lang = "";
         }
-        rootView=inflater.inflate(R.layout.fragment_offer_details, container, false);
-        imgBarCode=rootView.findViewById(R.id.imgBarCode);
-        offer_img=rootView.findViewById(R.id.offer_img);
-        offer_coupon_code=rootView.findViewById(R.id.offer_coupon_code);
-        store_name=rootView.findViewById(R.id.store_name);
-        offer_descp=rootView.findViewById(R.id.offer_descp);
-        discount_price=rootView.findViewById(R.id.discount_price);
-        actual_price=rootView.findViewById(R.id.actual_price);
-        btnRedeem=rootView.findViewById(R.id.btnRedeem);
+        rootView = inflater.inflate(R.layout.fragment_offer_details, container, false);
+        imgBarCode = rootView.findViewById(R.id.imgBarCode);
+        offer_img = rootView.findViewById(R.id.offer_img);
+        offer_coupon_code = rootView.findViewById(R.id.offer_coupon_code);
+        store_name = rootView.findViewById(R.id.store_name);
+        offer_descp = rootView.findViewById(R.id.offer_descp);
+        discount_price = rootView.findViewById(R.id.discount_price);
+        actual_price = rootView.findViewById(R.id.actual_price);
+        btnRedeem = rootView.findViewById(R.id.btnRedeem);
         imgSaved = rootView.findViewById(R.id.imgSaved);
         imgBack = rootView.findViewById(R.id.imgBack);
-        loader=new Loader(getContext());
+        loader = new Loader(getContext());
         loader.show();
-         offerId=getArguments().getString("offerId");
-        getOfferDetails(SharedPrefs.getKey(getActivity(),"userId"),
-                offerId);
+        offerId = getArguments().getString("offerId");
+        getOfferDetails(SharedPrefs.getKey(getActivity(), "userId"), offerId);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,33 +134,33 @@ public class OfferDetails extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
-    private void getOfferDetails(String userId,String	offerId) {
+    private void getOfferDetails(String userId, String offerId) {
         JSONObject object = new JSONObject();
-        String Url= URLS.Companion.getOFFER_DETAILS()+"userId="+ userId
-                +"&offerId="+offerId;
-        Log.v("offerdetails",Url+" ");
+        String Url = URLS.Companion.getOFFER_DETAILS() + "userId=" + userId
+                + "&offerId=" + offerId;
+        Log.v("offerdetails", Url + " ");
         JsonObjectRequest jsonObjectRequest = new
                 JsonObjectRequest(Request.Method.GET,
-                        Url ,
+                        Url,
                         object,
                         response -> {
                             loader.dismiss();
                             try {
-                            JSONObject jsonResult=response.getJSONObject("result");
+                                JSONObject jsonResult = response.getJSONObject("result");
                                 Picasso.get().load(jsonResult.getString("offer_img")).into(offer_img);
                                 offer_coupon_code.setText(jsonResult.getString("offer_coupon_code"));
-                                store_name.setText(jsonResult.getString("store_name"+lang));
-                                offer_descp.setText(jsonResult.getString("offer_descp"+lang));
+                                store_name.setText(jsonResult.getString("store_name" + lang));
+                                offer_descp.setText(jsonResult.getString("offer_descp" + lang));
                                 discount_price.setText(jsonResult.getString("discount_price"));
                                 actual_price.setText(jsonResult.getString("actual_price"));
                                 Bitmap myBitmap = QRCode.from(jsonResult.getString("offer_coupon_code")).bitmap();
                                 imgBarCode.setImageBitmap(myBitmap);
                                 if (jsonResult.getString("is_saved").equalsIgnoreCase("1")) {
                                     imgSaved.setImageResource(R.drawable.ic_favorite_black_24dp);
-                                    is_saved=true;
+                                    is_saved = true;
                                 } else {
                                     imgSaved.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                                    is_saved=false;
+                                    is_saved = false;
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -194,24 +201,19 @@ public class OfferDetails extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId()==R.id.btnRedeem)
-        {
+        if (view.getId() == R.id.btnRedeem) {
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, new GetCoupon());
             ft.addToBackStack(null);
             ft.commit();
-        }
-        else if (view.getId()==R.id.imgSaved)
-        {
+        } else if (view.getId() == R.id.imgSaved) {
             loader.show();
-            if (is_saved)
-            {
-                removeOffers(SharedPrefs.getKey(getActivity(),"userId"),
-                        offerId );
-            }
-            else {
-                saveOffers(SharedPrefs.getKey(getActivity(),"userId"),
-                        offerId );
+            if (is_saved) {
+                removeOffers(SharedPrefs.getKey(getActivity(), "userId"),
+                        offerId);
+            } else {
+                saveOffers(SharedPrefs.getKey(getActivity(), "userId"),
+                        offerId);
             }
         }
     }
@@ -225,17 +227,15 @@ public class OfferDetails extends Fragment implements View.OnClickListener {
                 String res = new String(response.data);
                 try {
 
-                    JSONObject jsonObject=new JSONObject(res).getJSONObject("result");
+                    JSONObject jsonObject = new JSONObject(res).getJSONObject("result");
                     String status = jsonObject.getString("status");
-                    if (status.equalsIgnoreCase("success"))
-                    {
+                    if (status.equalsIgnoreCase("success")) {
                         imgSaved.setImageResource(R.drawable.ic_favorite_black_24dp);
-                        is_saved=true;
-                    } else
-                    {
+                        is_saved = true;
+                    } else {
                         imgSaved.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                        is_saved=false;
-                     }
+                        is_saved = false;
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -249,16 +249,16 @@ public class OfferDetails extends Fragment implements View.OnClickListener {
                 String json = null;
                 String Message;
                 NetworkResponse response = error.networkResponse;
-                Log.v("response",response.data+"");
+                Log.v("response", response.data + "");
             }
         }) {
             @Override
             public Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("userId",userId);
-                params.put("offerId",offerId);
-                params.put("apiKey","12345678");
-                System.out.println("object"+params+" ");
+                params.put("userId", userId);
+                params.put("offerId", offerId);
+                params.put("apiKey", "12345678");
+                System.out.println("object" + params + " ");
                 return params;
             }
 
@@ -279,6 +279,7 @@ public class OfferDetails extends Fragment implements View.OnClickListener {
         MyApplication.getInstance().addToRequestQueue(volleyMultipartRequest);
 
     }
+
     private void removeOffers(String userId, String offerId) {
 
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, URLS.Companion.getREMOVE_SAVE_OFFER(), new Response.Listener<NetworkResponse>() {
@@ -286,20 +287,17 @@ public class OfferDetails extends Fragment implements View.OnClickListener {
             public void onResponse(NetworkResponse response) {
                 loader.dismiss();
                 String res = new String(response.data);
-                Log.v("response",res+" ");
+                Log.v("response", res + " ");
                 try {
 
-                    JSONObject jsonObject=new JSONObject(res).getJSONObject("result");
+                    JSONObject jsonObject = new JSONObject(res).getJSONObject("result");
                     String status = jsonObject.getString("status");
-                    if (status.equalsIgnoreCase("success"))
-                    {
+                    if (status.equalsIgnoreCase("success")) {
                         imgSaved.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                        is_saved=false;
-                    }
-                    else
-                    {
+                        is_saved = false;
+                    } else {
                         imgSaved.setImageResource(R.drawable.ic_favorite_black_24dp);
-                        is_saved=true;
+                        is_saved = true;
                     }
 
                 } catch (JSONException e) {
@@ -314,16 +312,16 @@ public class OfferDetails extends Fragment implements View.OnClickListener {
                 String json = null;
                 String Message;
                 NetworkResponse response = error.networkResponse;
-                Log.v("response",response.data+"");
+                Log.v("response", response.data + "");
             }
         }) {
             @Override
             public Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("userId",userId);
-                params.put("offerId",offerId);
-                params.put("apikey","12345678");
-                System.out.println("object"+params+" ");
+                params.put("userId", userId);
+                params.put("offerId", offerId);
+                params.put("apikey", "12345678");
+                System.out.println("object" + params + " ");
                 return params;
             }
 

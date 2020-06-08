@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -286,18 +285,18 @@ public class Offers extends Fragment {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        try {
-                            OfferDetails offerDetails = new OfferDetails();
-                            Bundle args = new Bundle();
-                            args.putString("offerId", jsonArray.getJSONObject(getAdapterPosition()).getString("offer_id"));
-                            offerDetails.setArguments(args);
-                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                            ft.replace(R.id.container, offerDetails);
-                            ft.addToBackStack(null);
-                            ft.commit();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+//                        try {
+//                            OfferDetails offerDetails = new OfferDetails();
+//                            Bundle args = new Bundle();
+//                            args.putString("offerId", jsonArray.getJSONObject(getAdapterPosition()).getString("offer_id"));
+//                            offerDetails.setArguments(args);
+//                            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//                            ft.replace(R.id.container, offerDetails);
+//                            ft.addToBackStack(null);
+//                            ft.commit();
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
                     }
                 });
 
