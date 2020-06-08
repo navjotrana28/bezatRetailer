@@ -260,6 +260,7 @@ public class vipcustomer extends Fragment {
     String customerId = "";
 
     private void searchData(String data) {
+        Log.d("---test---","Search clicked");
         JSONObject object = new JSONObject();
         String Url = URLS.Companion.getSEARCH() + data;
         JsonObjectRequest jsonObjectRequest = new
