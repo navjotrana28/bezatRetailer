@@ -83,6 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
                 android:inputType="textCapCharacters"
+                android:textAllCaps="true"
                 android:id="@+id/et_customer_code"
                 android:hint="@string/customer_code"
                 android:gravity="center"

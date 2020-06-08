@@ -23,6 +23,7 @@ import com.bezatretailernew.bezat.interfaces.RedeemUserOfferCallback;
 import com.bezatretailernew.bezat.models.getOfferCodes.GetOfferCodesResponse;
 import com.bezatretailernew.bezat.models.redeemUserOffer.RedeemUserOfferRequest;
 import com.bezatretailernew.bezat.models.redeemUserOffer.RedeemUserOfferResponse;
+import com.bezatretailernew.bezat.utils.Loader;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
 
 /**
@@ -36,6 +37,7 @@ public class RedeemOffer extends Fragment {
     GridLayoutManager layoutManager;
     String retailerId;
     Button redeem;
+    Loader loader;
     EditText customer_code, phone_number;
     RedeemOfferAdapter adapter;
     TextView error;
@@ -69,6 +71,8 @@ public class RedeemOffer extends Fragment {
         customer_code = view.findViewById(R.id.et_customer_code);
         phone_number = view.findViewById(R.id.et_phone_number);
         error = view.findViewById(R.id.tv_redeem_offer);
+        loader = new Loader(getContext());
+        loader.show();
         loadOffers();
         onClickBackButton();
 
@@ -165,7 +169,7 @@ public class RedeemOffer extends Fragment {
                     adapter = new RedeemOfferAdapter(getActivity().getBaseContext(), responseResult);
                     recyclerViewOffers.setAdapter(adapter);
                 }
-
+                loader.dismiss();
             }
 
             @Override
