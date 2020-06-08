@@ -128,6 +128,13 @@ public class vipcustomer extends Fragment {
             txtCustomerPhone.setGravity(Gravity.LEFT);
         }
         imgFront = rootView.findViewById(R.id.imgFront);
+        String path = SharedPrefs.getKey(getActivity(), "image");
+        if (path.equals("")) {
+            Picasso.get().load(R.drawable.maleicon).into(imgFront);
+
+        } else {
+            Picasso.get().load(path).into(imgFront);
+        }
         btnaddVip = rootView.findViewById(R.id.btnaddVip);
         etSearch = rootView.findViewById(R.id.etSearch);
         imgSearch = rootView.findViewById(R.id.imgSearch);
