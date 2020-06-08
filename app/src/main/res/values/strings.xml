@@ -6,7 +6,7 @@
     <string name="redeem">REDEEM</string>
     <string name="password">Password</string>
     <string name="user_name">UserName</string>
-    <string name="forgot_password">Forgot Password ?</string>
+    <string name="forgot_password">Forgot Password</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -112,7 +112,7 @@
     <string name="resend">RESEND</string>
     <string name="didn_t_receive_the_otp">Didn\'t receive the OTP?</string>
     <string name="scan_coupon">Scan Coupon</string>
-    <string name="vip_customers">VIP customers</string>
+    <string name="vip_customers">VIP Customers</string>
     <string name="no_result_found">No Result Found</string>
     <string name="scan_qr_code">Scan QR Code</string>
     <string name="email_phone">Email,Phone</string>

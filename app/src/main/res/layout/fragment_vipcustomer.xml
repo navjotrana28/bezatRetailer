@@ -85,6 +85,7 @@
 					android:layout_height="@dimen/_20sdp"
 				android:layout_marginLeft="-27dp"
 				android:layout_marginRight="@dimen/_3sdp"
+				android:paddingRight="@dimen/_6sdp"
 					android:src="@drawable/search"
 					android:tint="@color/black" />
 		</LinearLayout>
