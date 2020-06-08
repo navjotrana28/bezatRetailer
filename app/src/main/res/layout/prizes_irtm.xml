@@ -34,6 +34,7 @@
               android:padding="@dimen/_3sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textSize="@dimen/_13sdp"
+            android:fontFamily="@font/tajawal_regular"
                 android:textColor="@color/colorPrimary"/>
 
         <TextView
