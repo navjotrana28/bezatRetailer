@@ -32,7 +32,7 @@ public class RedeemOfferAdapter extends RecyclerView.Adapter<RedeemOfferAdapter.
 
     public String[] getArray_offers() {
         String[] arr = new String[array_offers.size()];
-        for(int i=0;i<array_offers.size();i++){
+        for (int i = 0; i < array_offers.size(); i++) {
             arr[i] = array_offers.get(i);
         }
         return arr;
@@ -53,17 +53,17 @@ public class RedeemOfferAdapter extends RecyclerView.Adapter<RedeemOfferAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull RedeemOfferAdapter.MyViewHolder holder, int position) {
-       if(response.getData()!=null && response.getData().size()!=0){
-           OfferCodeData data = response.getData().get(position);
-           holder.offer_name.setText(data.getOffer_coupon_code());
-       }
+        if (response.getData() != null && response.getData().size() != 0) {
+            OfferCodeData data = response.getData().get(position);
+            holder.offer_name.setText(data.getOffer_coupon_code());
+        }
         holder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    array_offers.add(response.getMsg()+position);
-                }else{
-                    array_offers.remove(response.getMsg()+position);
+                if (isChecked) {
+                    array_offers.add(response.getData().get(position).getOffer_coupon_code());
+                } else {
+                    array_offers.remove(response.getData().get(position).getOffer_coupon_code());
                 }
             }
         });
@@ -72,7 +72,7 @@ public class RedeemOfferAdapter extends RecyclerView.Adapter<RedeemOfferAdapter.
     @Override
     public int getItemCount() {
 
-        if(response.getData()!=null){
+        if (response.getData() != null) {
             return response.getData().size();
         }
         return 0;

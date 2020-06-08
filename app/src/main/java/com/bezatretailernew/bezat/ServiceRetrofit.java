@@ -52,10 +52,9 @@ public interface ServiceRetrofit {
 
     @FormUrlEncoded
     @POST("staff/redeem_user_offer")
-    Observable<RedeemUserOfferResponse> redeemUserOffer(@Field("offer_code") String[] offer_code,
+    Observable<RedeemUserOfferResponse> redeemUserOffer(@Field("offer_code[]") String[] offer_code,
                                                         @Field("customer_code") String customer_code,
-                                                        @Field("phone_number") String phone_number
-                                               );
+                                                        @Field("phone_number") String phone_number);
 
 
 

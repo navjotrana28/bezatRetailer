@@ -76,30 +76,13 @@ public class RedeemOffer extends Fragment {
             @Override
             public void onClick(View v) {
 
-                boolean code = false, phone = false, offers = false;
-                if (!customer_code.getText().toString().trim().equals("")) {
+                boolean code = false,offers = false;
+                if (!customer_code.getText().toString().trim().equals("") || !phone_number.getText().toString().trim().equals("")) {
                     code = true;
                 } else {
                     new AlertDialog.Builder(getActivity())
-                            .setTitle("Customer code empty")
-                            .setMessage("Please enter customer code")
-
-                            // Specifying a listener allows you to take an action before dismissing the dialog.
-                            // The dialog is automatically dismissed when a dialog button is clicked.
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // Continue with delete operation
-                                }
-                            })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                }
-                if (!phone_number.getText().toString().trim().equals("")) {
-                    phone = true;
-                } else {
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle("Customer phone empty")
-                            .setMessage("Please enter customer phone number")
+                            .setTitle("Customer code or Phone No is empty")
+                            .setMessage("Please enter customer code or Phone No")
 
                             // Specifying a listener allows you to take an action before dismissing the dialog.
                             // The dialog is automatically dismissed when a dialog button is clicked.
@@ -128,7 +111,7 @@ public class RedeemOffer extends Fragment {
                 } else {
                     offers = true;
                 }
-                if (code && phone && offers) {
+                if (code  && offers) {
                     RedeemUserOfferRequest request = new RedeemUserOfferRequest();
                     request.setCustomer_code(customer_code.getText().toString());
                     request.setPhone_number(phone_number.getText().toString());

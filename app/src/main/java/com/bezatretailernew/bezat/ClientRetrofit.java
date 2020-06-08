@@ -242,7 +242,7 @@ public class ClientRetrofit {
     }
 
     public void redeemUserOffer(RedeemUserOfferRequest request,RedeemUserOfferCallback redeemUserOfferCallback){
-        serviceRetrofit.redeemUserOffer(request.getOffer_code(),request.getCustomer_code(),request.getCustomer_code())
+        serviceRetrofit.redeemUserOffer(request.getOffer_code(),request.getCustomer_code(),request.getPhone_number())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<RedeemUserOfferResponse>() {
