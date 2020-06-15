@@ -241,7 +241,6 @@ public class Settings extends Fragment implements View.OnClickListener {
             Pages pages = new Pages();
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, pages);
-
             pages.setArguments(bundle);
             ft.addToBackStack(null);
 
@@ -294,7 +293,6 @@ public class Settings extends Fragment implements View.OnClickListener {
                             retrofit.logOutAPi(SharedPrefs.getKey(getActivity(), "userId"), new LogoutCallback() {
                                 @Override
                                 public void onSuccess(LogoutResponse responseResult) {
-                                    SharedPrefs.deleteSharedPrefs(getActivity());
                                     startActivity(new Intent(getActivity(), LoginActivity.class));
                                     getActivity().finish();
                                 }
