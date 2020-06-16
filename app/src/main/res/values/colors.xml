@@ -32,4 +32,6 @@
         <item>@color/color_orange</item>
     </array>
 
+    <color name="tabdot">#7a257a</color>
+
 </resources>

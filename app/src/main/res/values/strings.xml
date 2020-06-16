@@ -165,4 +165,6 @@
     <string name="get_feedback">Feedback</string>
     <string name="know">Know More</string>
 
+    <string name="search_by_retailer_name_caps"><font size="15">SEARCH BY RETAILER NAME</font></string>
+
 </resources>
