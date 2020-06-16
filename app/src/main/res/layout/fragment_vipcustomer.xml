@@ -118,7 +118,7 @@
 				android:layout_marginTop="10dp"
 				android:background="@drawable/vip_list_outline"
 				android:orientation="vertical"
-				android:visibility="visible">
+				android:visibility="gone">
 
 			<de.hdodenhof.circleimageview.CircleImageView
 					android:id="@+id/imgFront"
