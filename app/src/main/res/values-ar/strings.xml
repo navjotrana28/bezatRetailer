@@ -6,7 +6,7 @@
     <string name="login">تسجيل الدخول</string>
     <string name="password">كلمه السر*</string>
     <string name="user_name">اسم المستخدم</string>
-    <string name="forgot_password">هل نسيت كلمة المرور ؟</string>
+    <string name="forgot_password">هل نسيت كلمة المرور</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">لوحة القيادة</string>
@@ -157,8 +157,15 @@
     <string name="feedback">ردود الفعل</string>
     <string name="search_by_retailer">البحث حسب بائع التجزئة</string>
     <string name="get_feedback">ردود الفعل</string>
-
+    <string name="enter_password">أدخل كلمة المرور*</string>
+    <string name="code_signup">Code*</string>
+    <string name="please_enter_code">Please enter Code</string>
+    <string name="please_enter_phone_number">يرجى إدخال رقم الهاتف</string>
+    <string name="please_enter_password">يرجى إدخال كلمة المرور</string>
+    <string name="please_enter_confirm_password">يرجى إدخال تأكيد كلمة المرور</string>
+    <string name="passwords_dont_match">كلمة المرور وتأكيد كلمة المرور غير متطابقين</string>
+    <string name="change_password_label">غير كلمة السر</string>
+    <string name="enter_code_customer_code">Enter Phone Number or Customer Code</string>
     <string name="search_by_retailer_name_caps"><font size="15">البحث حسب اسم بائع التجزئة</font></string>
-
     <string name="change_language_cap">غير اللغة</string>
 </resources>

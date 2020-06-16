@@ -1,9 +1,11 @@
 package com.bezatretailernew.bezat.fragments;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,8 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
+import java.util.Locale;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -45,12 +49,12 @@ public class ScanCoupon extends Fragment {
     private String mParam2;
     private CodeScanner mCodeScanner;
     Button btnScan;
-    EditText customer_phone,customer_code;
+    EditText customer_phone, customer_code;
     ImageView imgBack;
     String lang = "";
     CodeScannerView scannerView;
     private OnFragmentInteractionListener mListener;
-    private String userPhone="";
+    private String userPhone = "";
 
     public ScanCoupon() {
         // Required empty public constructor
@@ -90,9 +94,11 @@ public class ScanCoupon extends Fragment {
         if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             lang = "_ar";
+            setLocale("ar");
         } else {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
             lang = "";
+            setLocale("en");
         }
         View view = inflater.inflate(R.layout.fragment_scan_coupon, container, false);
 
@@ -103,8 +109,8 @@ public class ScanCoupon extends Fragment {
             imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
         }
         mCodeScanner = new CodeScanner(view.getContext(), scannerView);
-        customer_code=view.findViewById(R.id.customer_code);
-        customer_phone=view.findViewById(R.id.customer_phone);
+        customer_code = view.findViewById(R.id.customer_code);
+        customer_phone = view.findViewById(R.id.customer_phone);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +123,7 @@ public class ScanCoupon extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        getAutoLogin(result.getText(),"");
+                        getAutoLogin(result.getText(), "");
                         Toast.makeText(getActivity(), result.getText(), Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -127,7 +133,7 @@ public class ScanCoupon extends Fragment {
 //        scannerView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-                mCodeScanner.startPreview();
+        mCodeScanner.startPreview();
 //            }
 //        });
 
@@ -135,53 +141,53 @@ public class ScanCoupon extends Fragment {
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String qr="";
-                String userPhone="";
-                String customerCode=customer_code.getText().toString();
-                String customerPhone=customer_phone.getText().toString();
-                if (customerCode.isEmpty() && customerPhone.isEmpty()){
+                String qr = "";
+                String userPhone = "";
+                String customerCode = customer_code.getText().toString();
+                String customerPhone = customer_phone.getText().toString();
+                if (customerCode.isEmpty() && customerPhone.isEmpty()) {
                     openDialog();
-                }else {
+                } else {
                     if (customerCode.isEmpty()) {
                         userPhone = customerPhone;
                         getAutoLogin(qr, userPhone);
-                    }
-                    else if (customerPhone.isEmpty()){
+                    } else if (customerPhone.isEmpty()) {
                         qr = customerCode;
-                        getAutoLogin(qr,userPhone);
-                    }else {
+                        getAutoLogin(qr, userPhone);
+                    } else {
                         userPhone = customerPhone;
                         qr = customerCode;
                         getAutoLogin(qr, userPhone);
                     }
                 }
-//                mCodeScanner.setDecodeCallback(new DecodeCallback() {
-//                    @Override
-//                    public void onDecoded(@NonNull final Result result) {
-//                        getActivity().runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-
-                            }
-//                        });
-//                    }
-                });
-//            }
-//        });
-
+            }
+        });
         return view;
     }
-        public void openDialog(){
-            ExampleDialog exampleDialog=new ExampleDialog();
-            exampleDialog.show(getFragmentManager(),"example dialog");
 
-        }
-    private void getAutoLogin(String qr,String userPhone) {
+    public void openDialog() {
+        ExampleDialog exampleDialog = new ExampleDialog();
+        exampleDialog.show(getFragmentManager(), "example dialog");
+
+    }
+
+    public void setLocale(String lang) {
+
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+
+    }
+
+    private void getAutoLogin(String qr, String userPhone) {
         Loader loader = new Loader(getContext());
         loader.show();
 
         String url = "http://bezatapp.com/manage_App/admin/mobile_app/scan_coupon?" + "user_id=" + SharedPrefs.getKey(getActivity(), "userId") +
-                "&customer_code=" + qr +"&user_phone=" +userPhone;
+                "&customer_code=" + qr + "&user_phone=" + userPhone;
         Log.v("couponurl", url + " ");
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.container, new WebViewCoupon(url));

@@ -365,7 +365,7 @@ public class Dashboard extends Fragment {
                         if (dashBoardItems.get(getAdapterPosition())
                                 .getName().equalsIgnoreCase(getString(R.string.sign_out))) {
                             new AlertDialog.Builder(getActivity(), R.style.DialogTheme)
-                                    .setMessage(getString(R.string.are_you_sure_logout))
+                                    .setMessage(getString(R.string.logout_confirm))
 
                                     // Specifying a listener allows you to take an action before dismissing the dialog.
                                     // The dialog is automatically dismissed when a dialog button is clicked.
@@ -375,7 +375,6 @@ public class Dashboard extends Fragment {
                                             retrofit.logOutAPi(SharedPrefs.getKey(getActivity(), "userId"), new LogoutCallback() {
                                                 @Override
                                                 public void onSuccess(LogoutResponse responseResult) {
-                                                    SharedPrefs.deleteSharedPrefs(getActivity());
                                                     startActivity(new Intent(getActivity(), LoginActivity.class));
                                                     getActivity().finish();
                                                 }
@@ -383,7 +382,6 @@ public class Dashboard extends Fragment {
                                                 @Override
                                                 public void onFailure(Throwable e) {
                                                     Toast.makeText(getContext(), getString(R.string.someting_wrong), Toast.LENGTH_SHORT).show();
-
                                                 }
                                             });
 
