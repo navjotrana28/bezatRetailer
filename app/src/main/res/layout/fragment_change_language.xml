@@ -58,7 +58,6 @@
         <Spinner
             android:popupElevation="0dp"
             android:theme="@style/MatchSpinnerTheme"
-            android:popupBackground="@color/white"
             android:textAlignment="center"
             android:background="@drawable/round_corners"
             android:gravity="center"

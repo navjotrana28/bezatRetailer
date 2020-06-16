@@ -70,6 +70,7 @@
             android:name="com.bezatretailernew.bezat.activities.MainHomeActivty"
             android:label="@string/title_activity_main_home_activty"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.bezatretailernew.bezat.activities.RegistrationActivity"
@@ -78,6 +79,7 @@
         <activity
             android:name="com.bezatretailernew.bezat.activities.Homepage"
             android:label="@string/title_activity_home"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:theme="@style/HomePageTheme" />
         <activity

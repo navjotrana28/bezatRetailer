@@ -50,10 +50,10 @@ public class Intro extends AppCompatActivity implements View.OnClickListener {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
             public void onPageSelected(int position) {
-                if (position == 0) {
-                    btnSkip.setText(getString(R.string.skip));
-                } else {
+                if (position == 3) {
                     btnSkip.setText(getString(R.string.done));
+                } else {
+                    btnSkip.setText(getString(R.string.skip));
                 }
                 // Check if this is the page you want.
             }

@@ -138,9 +138,9 @@ public class PrizeDetails extends Fragment {
                                 String draw = "";
                                 JSONObject jsonObject = response.getJSONObject("result").getJSONObject("raffles");
                                 if (lang.equals("_ar")) {
-                                    txtPrize.setText(getString(R.string.prize_prizes_section) + " " + jsonObject.getString("prize_ar"));
+                                    txtPrize.setText(getString(R.string.prize_prizes_section) + " $" + jsonObject.getString("prize_ar"));
                                 } else {
-                                    txtPrize.setText(getString(R.string.prize_prizes_section) + " " + jsonObject.getString("prize"));
+                                    txtPrize.setText(getString(R.string.prize_prizes_section) + " $" + jsonObject.getString("prize"));
                                 }
                                 String difDate = getDifDays(jsonObject.getString("draw_date"));
                                 if (Integer.parseInt(difDate) > 1) {

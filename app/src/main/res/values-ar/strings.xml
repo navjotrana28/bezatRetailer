@@ -2,9 +2,9 @@
     <string name="app_name">Bezat</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="sign_up">سجل</string>
-    <string name="redeem">تخليص</string>
+    <string name="redeem">استرداد</string>
     <string name="login">تسجيل الدخول</string>
-    <string name="password">كلمه السر</string>
+    <string name="password">كلمه السر*</string>
     <string name="user_name">اسم المستخدم</string>
     <string name="forgot_password">هل نسيت كلمة المرور</string>
     <string name="title_activity_home">HomeActivity</string>
@@ -20,10 +20,10 @@
     <string name="contact_us">اتصل بنا</string>
     <string name="faq">التعليمات</string>
     <string name="change_password">غير كلمة السر</string>
-    <string name="change_language">اللغة تغيرت بنجاح</string>
-    <string name="logout">خروج</string>
-    <string name="push_notification">إخطارات</string>
-    <string name="name">اسم*</string>
+    <string name="change_language">غير اللغة</string>
+    <string name="logout">الخروج</string>
+    <string name="push_notification">دفع الإخطار</string>
+    <string name="name">اسم</string>
     <string name="email">البريد الإلكتروني*</string>
     <string name="country">بلد*</string>
     <string name="address">Address</string>
@@ -34,12 +34,12 @@
     <string name="total_coupon">إجمالي القسيمة</string>
     <string name="partners">شركاء</string>
     <string name="winners">الفائزين</string>
-    <string name="sign_out">الخروج</string>
+    <string name="sign_out">خروج</string>
     <string name="vip_offers">"عروض كبار الشخصيات</string>
     <string name="my_profile">ملفي</string>
-    <string name="packages">الحزم</string>
-    <string name="redeem_offer">تخليص</string>
-    <string name="save">حفظ"</string>
+    <string name="packages">Packages</string>
+    <string name="redeem_offer">استرداد</string>
+    <string name="save">حفظ</string>
     <string name="skip">Skip</string>
     <string name="done">Done</string>
     <string name="someting_wrong">Something, went wrong!</string>
@@ -83,16 +83,16 @@
     <string name="date">Date :</string>
     <string name="favourite_offer">العروض المفضلة</string>
     <string name="bezat_winner">الفائزين</string>
-    <string name="phone_number">رقم الهاتف</string>
+    <string name="phone_number">رقم الهاتف*</string>
     <string name="code">Code</string>
-    <string name="send">ارسال</string>
+    <string name="send">إرسال</string>
     <string name="please_enter_your_register_phone_number_below_we_will_send_a_code_to_reset_your_password">يرجى إدخال عنوان البريديرجى إدخال رقم هاتفك المسجل أدناه. سنرسل رمزًا لإعادة تعيين كلمة المرور الخاصة بك</string>
     <string name="my_favourite">My Favourite</string>
     <string name="google">GOOGLE</string>
     <string name="facebook">FACEBOOK</string>
     <string name="instagram">INSTAGRAM</string>
     <string name="twitter">TWITTER</string>
-    <string name="bezat_raffle_is_a_product_of_bezat_and_conducts_monthly_raffles_apple_is_not_involved_in_anyway_with_the_sweepstake_and_not_a_sponsor_of_this_application">السحب BEZAT هو نتاج BEZAT وإجراء السحوبات الشهرية. لا تشارك أبل في أي حال مع اليانصيب وليس راعيا لهذا التطبيق</string>
+    <string name="bezat_raffle_is_a_product_of_bezat_and_conducts_monthly_raffles_apple_is_not_involved_in_anyway_with_the_sweepstake_and_not_a_sponsor_of_this_application">BEZAT السحب هو نتاج BEZAT وتجري السحوبات الشهرية. لا تشارك Google في أي حال مع اليانصيب وليس راعية لهذا التطبيق</string>
     <string name="customer_qr_code">رمز الاستجابة السريعة للعملاء</string>
     <string name="customer_id">هوية الزبون</string>
     <string name="bill_no">مشروع قانون لا : </string>
@@ -104,18 +104,18 @@
     <string name="otp">مكتب المدعي العام</string>
     <string name="resend">إعادة إرسال</string>
     <string name="didn_t_receive_the_otp">لم أستلم OTP؟</string>
-    <string name="scan_coupon">مسح القسيمة</string>
-    <string name="vip_customers">كبار الشخصيات العملاء</string>
+    <string name="scan_coupon">Scan Coupon</string>
+    <string name="vip_customers">VIP Customers</string>
     <string name="no_result_found">لم يتم العثور على نتائج</string>
     <string name="scan_qr_code">مسح رمز الاستجابة السريعة</string>
     <string name="email_phone">البريد الإلكتروني، الهاتف</string>
     <string name="customer_name">اسم الزبون :</string>
-    <string name="customer_code">كود العميل:</string>
+    <string name="customer_code">Customer Code </string>
     <string name="customer_email">البريد الإلكتروني للعميل:</string>
-    <string name="customer_phone">هاتف العميل:</string>
+    <string name="customer_phone">Customer Mobile Number</string>
     <string name="add_vip">إضافة كبار الشخصيات</string>
     <string name="view_all_offers">عرض جميع العروض</string>
-    <string name="other_raffles">رافلز أخرى</string>
+    <string name="other_raffles">Other Raffles</string>
     <string name="bezat_raffles">  رافلز Bezat</string>
     <string name="prize_details">تفاصيل الجائزة</string>
     <string name="reports">Reports</string>
@@ -129,15 +129,15 @@
     <string name="get_name">اسم:</string>
     <string name="get_email">البريد الالكتروني:</string>
     <string name="get_comments">تعليقات:</string>
-    <string name="user_name_Login">اسم المستخدم / رقم الهاتف</string>
+    <string name="user_name_Login">البريد الإلكتروني / رقم الهاتف</string>
     <string name="are_you_sure_logout">هل أنت متأكد، تريد تسجيل الخروج؟</string>
     <string name="name_vip">اسم:</string>
     <string name="code_vip">التعليمات البرمجيه:</string>
     <string name="email_vip">البريد الالكتروني:</string>
     <string name="phone_vip">الهاتف:</string>
     <string name="vip_lists_vip">قوائم كبار الشخصيات</string>
-    <string name="bezat_yearly">بيزات سنويا</string>
-    <string name="bezat_monthly">بيزات شهريًا</string>
+    <string name="bezat_yearly">Bezat Yearly</string>
+    <string name="bezat_monthly">Bezat Monthly</string>
     <string name="prize_prizes_section">جائزه:</string>
     <string name="prize_details_prizes_section">تفاصيل الجائزة</string>
     <string name="raffle_draw_announce_tomorrow">السحب السحب يعلن غدا</string>
@@ -153,7 +153,7 @@
     <string name="offer_price">سعر العرض</string>
     <string name="original_prize_bd">السعر الأصلي: دينار بحريني</string>
     <string name="BD_offers">دينار بحريني</string>
-    <string name="know">تعرف أكثر</string>
+    <string name="know">Know More</string>
     <string name="feedback">ردود الفعل</string>
     <string name="search_by_retailer">البحث حسب بائع التجزئة</string>
     <string name="get_feedback">ردود الفعل</string>
@@ -168,4 +168,8 @@
     <string name="enter_code_customer_code">Enter Phone Number or Customer Code</string>
 
 
+
+    <string name="search_by_retailer_name_caps"><font size="15">البحث حسب اسم بائع التجزئة</font></string>
+
+    <string name="change_language_cap">غير اللغة</string>
 </resources>

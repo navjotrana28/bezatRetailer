@@ -23,6 +23,8 @@
     <color name="lightest_grey">#8BE9E9E9</color>
 	<color name="dark_grey">#B6B6B8</color>
     <color name="golden">#ffd700</color>
+    <color name="btn_skip_color">#FF5722</color>
+    <color name="tabdot">#7a257a</color>
 
     <array name="rect_color">
         <item>@color/color_blue</item>
@@ -31,5 +33,7 @@
         <item>@color/divider_grey</item>
         <item>@color/color_orange</item>
     </array>
+
+    <color name="tabdot">#7a257a</color>
 
 </resources>

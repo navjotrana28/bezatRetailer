@@ -79,14 +79,11 @@ public class RedeemOffer extends Fragment {
         redeem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                boolean code = false,offers = false;
-                if (!customer_code.getText().toString().trim().equals("") || !phone_number.getText().toString().trim().equals("")) {
-                    code = true;
-                } else {
+                boolean code = true,offers = true;
+                if(phone_number.getText().toString().trim().equals("")){
                     new AlertDialog.Builder(getActivity())
-                            .setTitle("Customer code or Phone No is empty")
-                            .setMessage("Please enter customer code or Phone No")
+                            .setTitle("Phone No is empty")
+                            .setMessage("Please enter Phone No")
 
                             // Specifying a listener allows you to take an action before dismissing the dialog.
                             // The dialog is automatically dismissed when a dialog button is clicked.
@@ -97,8 +94,21 @@ public class RedeemOffer extends Fragment {
                             })
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
-                }
-                if (adapter.getArray_offers() == null || adapter.getArray_offers().length == 0) {
+                }else if(customer_code.getText().toString().trim().equals("")){
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("Customer code is empty")
+                            .setMessage("Please enter customer code")
+
+                            // Specifying a listener allows you to take an action before dismissing the dialog.
+                            // The dialog is automatically dismissed when a dialog button is clicked.
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Continue with delete operation
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }else if(adapter.getArray_offers() == null || adapter.getArray_offers().length == 0){
                     new AlertDialog.Builder(getActivity())
                             .setTitle("No offers selected")
                             .setMessage("Please choose some offer to redeem")
@@ -112,10 +122,7 @@ public class RedeemOffer extends Fragment {
                             })
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
-                } else {
-                    offers = true;
-                }
-                if (code  && offers) {
+                }else{
                     RedeemUserOfferRequest request = new RedeemUserOfferRequest();
                     request.setCustomer_code(customer_code.getText().toString());
                     request.setPhone_number(phone_number.getText().toString());

@@ -27,6 +27,7 @@
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:padding="@dimen/_3sdp">
 
             <ImageView
@@ -51,6 +52,7 @@
             android:drawableEnd="@drawable/ic_keyboard_arrow_down_black_24dp"
             android:drawableTint="@color/white"
             android:fontFamily="@font/tajawal_regular"
+            android:id="@+id/select"
             android:text="@string/select_language"
             android:textSize="@dimen/_14sdp" />
 
@@ -65,7 +67,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_10sdp"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:id="@+id/pass">
 
             <ImageButton
                 android:layout_width="@dimen/_32sdp"
@@ -113,6 +117,16 @@
 
         </LinearLayout>
     </LinearLayout>
+    <Button
+        android:id="@+id/next"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="wrap_content"
+        android:text="NEXT"
+        android:visibility="invisible"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginVertical="@dimen/_45sdp"
+        android:background="@drawable/button_background"/>
 
 
 </LinearLayout>

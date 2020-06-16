@@ -90,8 +90,8 @@
 								android:layout_height="@dimen/icon_size_normal"
 								android:layout_gravity="center"
 								android:background="@color/white"
-								android:padding="6dp"
-								android:src="@drawable/ic_edit_borderless_8dp"
+								android:padding="0dp"
+								android:src="@drawable/ic_baseline_add_circle_24"
 								app:layout_constraintStart_toStartOf="parent"
 								app:layout_constraintTop_toTopOf="parent" />
 					</androidx.constraintlayout.widget.ConstraintLayout>
@@ -169,6 +169,7 @@
 					android:id="@+id/etPhone"
 					style="@style/field"
 					android:hint="@string/phone_number"
+				android:inputType="number"
 					/>
 			<EditText
 					android:id="@+id/etAddress"

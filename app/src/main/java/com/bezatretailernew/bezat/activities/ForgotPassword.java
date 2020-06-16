@@ -75,12 +75,11 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (etPhone.getText().toString().isEmpty()) {
-                    etPhone.setText(getString(R.string.empty_phone));
-                }
-                if (etCode.getText().toString().isEmpty()) {
-                    etCode.setText("country code is empty");
-                } else {
+                if (etCode.getText().toString().isEmpty() || etCode.getText().toString().equals("")) {
+                    dialog("Please enter country code");
+                }else  if (etPhone.getText().toString().isEmpty()) {
+                    dialog("Please enter Phone number");
+                }else {
                     getOTP(etPhone.getText().toString());
                 }
             }
@@ -88,10 +87,13 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         getCountryList();
     }
 
+    public void dialog(String content) {
+        ForgotPasswordDialog forgotPasswordDialog = new ForgotPasswordDialog(content);
+        forgotPasswordDialog.show(getSupportFragmentManager(), "Pass");
+    }
+
     private void getOTP(String phone) {
         loader.show();
-
-
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, URLS.Companion.getFORGOT_PASSWORD(), new Response.Listener<NetworkResponse>() {
             @Override
             public void onResponse(NetworkResponse response) {
