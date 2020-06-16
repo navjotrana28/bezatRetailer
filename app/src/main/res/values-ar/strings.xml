@@ -34,7 +34,7 @@
     <string name="total_coupon">إجمالي القسيمة</string>
     <string name="partners">شركاء</string>
     <string name="winners">الفائزين</string>
-    <string name="sign_out">الخروج</string>
+    <string name="sign_out">خروج</string>
     <string name="vip_offers">"عروض كبار الشخصيات</string>
     <string name="my_profile">ملفي</string>
     <string name="packages">الحزم</string>
@@ -110,9 +110,9 @@
     <string name="scan_qr_code">مسح رمز الاستجابة السريعة</string>
     <string name="email_phone">البريد الإلكتروني، الهاتف</string>
     <string name="customer_name">اسم الزبون :</string>
-    <string name="customer_code">كود العميل:</string>
+    <string name="customer_code">Customer Code </string>
     <string name="customer_email">البريد الإلكتروني للعميل:</string>
-    <string name="customer_phone">هاتف العميل:</string>
+    <string name="customer_phone">Customer Mobile Number</string>
     <string name="add_vip">إضافة كبار الشخصيات</string>
     <string name="view_all_offers">عرض جميع العروض</string>
     <string name="other_raffles">رافلز أخرى</string>
