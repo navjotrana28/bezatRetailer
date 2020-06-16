@@ -167,6 +167,7 @@
     <string name="please_enter_code">Please enter Code</string>
     <string name="please_enter_phone_number">Please enter Phone Number</string>
     <string name="please_enter_password">Please Enter Password*</string>
+    <string name="enter_password">Enter Password*</string>
     <string name="please_enter_confirm_password">Please enter Confirm Password</string>
     <string name="passwords_dont_match">Password and Confirm Password does not match</string>
     <string name="change_password_label">Change Password</string>

@@ -166,10 +166,6 @@
     <string name="passwords_dont_match">كلمة المرور وتأكيد كلمة المرور غير متطابقين</string>
     <string name="change_password_label">غير كلمة السر</string>
     <string name="enter_code_customer_code">Enter Phone Number or Customer Code</string>
-
-
-
     <string name="search_by_retailer_name_caps"><font size="15">البحث حسب اسم بائع التجزئة</font></string>
-
     <string name="change_language_cap">غير اللغة</string>
 </resources>
