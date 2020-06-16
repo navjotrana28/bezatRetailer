@@ -166,4 +166,6 @@
 
     <string name="search_by_retailer_name_caps"><font size="15">SEARCH BY RETAILER NAME</font></string>
 
+    <string name="change_language_cap">CHANGE LANGUAGE</string>
+
 </resources>

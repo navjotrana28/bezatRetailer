@@ -159,4 +159,6 @@
     <string name="get_feedback">ردود الفعل</string>
 
     <string name="search_by_retailer_name_caps"><font size="15">البحث حسب اسم بائع التجزئة</font></string>
+
+    <string name="change_language_cap">غير اللغة</string>
 </resources>

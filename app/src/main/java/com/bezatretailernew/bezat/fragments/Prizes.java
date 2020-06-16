@@ -388,6 +388,7 @@ public class  Prizes extends Fragment implements View.OnClickListener {
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
             try {
+                Log.d("---test---",jsonArray.getJSONObject(position).getString("prize" + lang));
                 holder.txtPrizeName.setText(jsonArray.getJSONObject(position).getString("raffle_name" + lang).toUpperCase());
                 holder.txtPrizePrice.setText("$"+jsonArray.getJSONObject(position).getString("prize" + lang));
                 Picasso.get().load(jsonArray.getJSONObject(position).getString("img")).into(holder.imageView);
