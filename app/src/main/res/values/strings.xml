@@ -20,7 +20,8 @@
     <string name="contact_us">Contact Us</string>
     <string name="faq">FAQ</string>
     <string name="change_password">Change Password</string>
-    <string name="confirm_password">Confirm Password</string>
+    <string name="confirm_password">Confirm Password*</string>
+    <string name="enter_password">Enter Password*</string>
     <string name="change_language">Change Language</string>
     <string name="logout">Logout</string>
     <string name="push_notification">Push Notification</string>
@@ -164,5 +165,14 @@
     <string name="search_by_retailer">Search by Retailer</string>
     <string name="get_feedback">Feedback</string>
     <string name="know">Know More</string>
+    <string name="code_signup">Code*</string>
+    <string name="please_enter_code">Please enter Code</string>
+    <string name="please_enter_phone_number">Please enter Phone Number</string>
+    <string name="please_enter_password">Please Enter Password*</string>
+    <string name="please_enter_confirm_password">Please enter Confirm Password</string>
+    <string name="passwords_dont_match">Password and Confirm Password does not match</string>
+    <string name="change_password_label">Change Password</string>
+    <string name="enter_code_customer_code">Enter Phone Number or Customer Code</string>
+
 
 </resources>

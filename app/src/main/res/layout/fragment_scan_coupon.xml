@@ -41,7 +41,6 @@
                 android:fontFamily="@font/tajawal_bold"
                 android:gravity="center"
                 android:text="@string/scan_coupon"
-                android:textAllCaps="true"
                 android:textSize="@dimen/_14sdp" />
 
 

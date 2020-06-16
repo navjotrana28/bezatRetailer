@@ -157,4 +157,15 @@
     <string name="feedback">ردود الفعل</string>
     <string name="search_by_retailer">البحث حسب بائع التجزئة</string>
     <string name="get_feedback">ردود الفعل</string>
+    <string name="enter_password">أدخل كلمة المرور*</string>
+    <string name="code_signup">Code*</string>
+    <string name="please_enter_code">Please enter Code</string>
+    <string name="please_enter_phone_number">يرجى إدخال رقم الهاتف</string>
+    <string name="please_enter_password">يرجى إدخال كلمة المرور</string>
+    <string name="please_enter_confirm_password">يرجى إدخال تأكيد كلمة المرور</string>
+    <string name="passwords_dont_match">كلمة المرور وتأكيد كلمة المرور غير متطابقين</string>
+    <string name="change_password_label">غير كلمة السر</string>
+    <string name="enter_code_customer_code">Enter Phone Number or Customer Code</string>
+
+
 </resources>
