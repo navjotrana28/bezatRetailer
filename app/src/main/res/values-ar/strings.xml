@@ -2,9 +2,9 @@
     <string name="app_name">Bezat</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="sign_up">سجل</string>
-    <string name="redeem">تخليص</string>
+    <string name="redeem">استرداد</string>
     <string name="login">تسجيل الدخول</string>
-    <string name="password">كلمه السر</string>
+    <string name="password">كلمه السر*</string>
     <string name="user_name">اسم المستخدم</string>
     <string name="forgot_password">هل نسيت كلمة المرور ؟</string>
     <string name="title_activity_home">HomeActivity</string>
@@ -37,7 +37,7 @@
     <string name="sign_out">خروج</string>
     <string name="vip_offers">"عروض كبار الشخصيات</string>
     <string name="my_profile">ملفي</string>
-    <string name="packages">الحزم</string>
+    <string name="packages">Packages</string>
     <string name="redeem_offer">استرداد</string>
     <string name="save">حفظ</string>
     <string name="skip">Skip</string>
@@ -85,7 +85,7 @@
     <string name="bezat_winner">الفائزين</string>
     <string name="phone_number">رقم الهاتف*</string>
     <string name="code">Code</string>
-    <string name="send">ارسال</string>
+    <string name="send">إرسال</string>
     <string name="please_enter_your_register_phone_number_below_we_will_send_a_code_to_reset_your_password">يرجى إدخال عنوان البريديرجى إدخال رقم هاتفك المسجل أدناه. سنرسل رمزًا لإعادة تعيين كلمة المرور الخاصة بك</string>
     <string name="my_favourite">My Favourite</string>
     <string name="google">GOOGLE</string>
@@ -104,8 +104,8 @@
     <string name="otp">مكتب المدعي العام</string>
     <string name="resend">إعادة إرسال</string>
     <string name="didn_t_receive_the_otp">لم أستلم OTP؟</string>
-    <string name="scan_coupon">مسح القسيمة</string>
-    <string name="vip_customers">كبار الشخصيات العملاء</string>
+    <string name="scan_coupon">Scan Coupon</string>
+    <string name="vip_customers">VIP Customers</string>
     <string name="no_result_found">لم يتم العثور على نتائج</string>
     <string name="scan_qr_code">مسح رمز الاستجابة السريعة</string>
     <string name="email_phone">البريد الإلكتروني، الهاتف</string>
@@ -115,7 +115,7 @@
     <string name="customer_phone">Customer Mobile Number</string>
     <string name="add_vip">إضافة كبار الشخصيات</string>
     <string name="view_all_offers">عرض جميع العروض</string>
-    <string name="other_raffles">رافلز أخرى</string>
+    <string name="other_raffles">Other Raffles</string>
     <string name="bezat_raffles">  رافلز Bezat</string>
     <string name="prize_details">تفاصيل الجائزة</string>
     <string name="reports">Reports</string>
@@ -129,15 +129,15 @@
     <string name="get_name">اسم:</string>
     <string name="get_email">البريد الالكتروني:</string>
     <string name="get_comments">تعليقات:</string>
-    <string name="user_name_Login">اسم المستخدم / رقم الهاتف</string>
+    <string name="user_name_Login">البريد الإلكتروني / رقم الهاتف</string>
     <string name="are_you_sure_logout">هل أنت متأكد، تريد تسجيل الخروج؟</string>
     <string name="name_vip">اسم:</string>
     <string name="code_vip">التعليمات البرمجيه:</string>
     <string name="email_vip">البريد الالكتروني:</string>
     <string name="phone_vip">الهاتف:</string>
     <string name="vip_lists_vip">قوائم كبار الشخصيات</string>
-    <string name="bezat_yearly">بيزات سنويا</string>
-    <string name="bezat_monthly">بيزات شهريًا</string>
+    <string name="bezat_yearly">Bezat Yearly</string>
+    <string name="bezat_monthly">Bezat Monthly</string>
     <string name="prize_prizes_section">جائزه:</string>
     <string name="prize_details_prizes_section">تفاصيل الجائزة</string>
     <string name="raffle_draw_announce_tomorrow">السحب السحب يعلن غدا</string>
@@ -153,7 +153,7 @@
     <string name="offer_price">سعر العرض</string>
     <string name="original_prize_bd">السعر الأصلي: دينار بحريني</string>
     <string name="BD_offers">دينار بحريني</string>
-    <string name="know">تعرف أكثر</string>
+    <string name="know">Know More</string>
     <string name="feedback">ردود الفعل</string>
     <string name="search_by_retailer">البحث حسب بائع التجزئة</string>
     <string name="get_feedback">ردود الفعل</string>
