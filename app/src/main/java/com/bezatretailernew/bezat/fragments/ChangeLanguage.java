@@ -108,6 +108,9 @@ public class ChangeLanguage extends Fragment implements View.OnClickListener {
         txtArabic = rootView.findViewById(R.id.txtArabic);
         txtEnglish = rootView.findViewById(R.id.txtEnglish);
         imgBack = rootView.findViewById(R.id.imgBack);
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -115,6 +115,9 @@ public class  Prizes extends Fragment implements View.OnClickListener {
         bezatRec = rootView.findViewById(R.id.bezatRec);
         otherRec = rootView.findViewById(R.id.otheraff);
         imgBack = rootView.findViewById(R.id.imgBack);
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         loader = new Loader(getContext());
         loader.show();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM", Locale.ENGLISH);

@@ -64,6 +64,9 @@ public class RedeemOffer extends Fragment {
         }
         retailerId = SharedPrefs.getKey(getActivity(), "storeID");
         imgBack = view.findViewById(R.id.imgBack);
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         recyclerViewOffers = view.findViewById(R.id.rv_get_offers);
         layoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerViewOffers.setLayoutManager(layoutManager);

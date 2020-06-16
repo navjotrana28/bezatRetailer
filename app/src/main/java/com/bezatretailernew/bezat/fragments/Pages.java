@@ -97,6 +97,9 @@ public class Pages extends Fragment {
         web=rootView.findViewById(R.id.web);
         loader=new Loader(getContext());
         imgBack = rootView.findViewById(R.id.imgBack);
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         txtPages=rootView.findViewById(R.id.txtPages);
 
         imgBack.setOnClickListener(new View.OnClickListener() {

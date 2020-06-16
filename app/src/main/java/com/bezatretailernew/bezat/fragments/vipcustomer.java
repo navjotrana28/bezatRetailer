@@ -144,6 +144,9 @@ public class vipcustomer extends Fragment {
         searchEditText.setHintTextColor(getResources().getColor(R.color.black));
         imgSearch = rootView.findViewById(R.id.imgSearch);
         imgBack = rootView.findViewById(R.id.imgBack);
+        if(lang.equals("a")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         layoutContent = rootView.findViewById(R.id.layoutContent);
         vip_list_linear = rootView.findViewById(R.id.vip_list_linear);
         recyclerView = rootView.findViewById(R.id.recycler_view_01);

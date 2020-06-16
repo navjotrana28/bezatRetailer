@@ -22,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.bezatretailernew.bezat.MyApplication;
 import com.bezatretailernew.bezat.R;
 import com.bezatretailernew.bezat.utils.Loader;
+import com.bezatretailernew.bezat.utils.SharedPrefs;
 import com.bezatretailernew.bezat.utils.URLS;
 import com.bruce.pickerview.popwindow.DatePickerPopWin;
 import com.squareup.picasso.Picasso;
@@ -91,6 +92,8 @@ public class BezatWinner extends Fragment {
         }
     }
 
+    String lang = "";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -99,6 +102,16 @@ public class BezatWinner extends Fragment {
 
         recWinner=rootView.findViewById(R.id.recWinner);
         imgBack=rootView.findViewById(R.id.imgBack);
+        if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            lang = "_ar";
+        } else {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+            lang = "";
+        }
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         txtDate=rootView.findViewById(R.id.txtDate);
         imgSearch=rootView.findViewById(R.id.imgSearch);
         loader= new Loader(getContext());
