@@ -1,5 +1,6 @@
 package com.bezatretailernew.bezat.adapter;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,14 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bezatretailernew.bezat.R;
 import com.bezatretailernew.bezat.models.vip_lists.VipResult;
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 public class VipAdapter extends RecyclerView.Adapter<VipAdapter.MyViewHolder> {
     private VipResult vipResult = new VipResult();
     String lang;
+    Context context;
 
-    public VipAdapter(String lang) {
+    public VipAdapter(Context context, String lang) {
         this.lang = lang;
+        this.context = context;
     }
 
     @NonNull
@@ -55,9 +59,15 @@ public class VipAdapter extends RecyclerView.Adapter<VipAdapter.MyViewHolder> {
         viewHolder.phone.setText(vipResult.getResult().get(i).getCustomerPhone());
         try {
             String path = vipResult.getResult().get(i).getCustomerImage();
-            Picasso.get().load(path).into(viewHolder.imgVip);
+            if(path.equals("") || path==null){
+                Glide.with(context).load(context.getResources().getDrawable(R.drawable.vip_default)).into(viewHolder.imgVip);
+            }else{
+                Picasso.get().load(path).into(viewHolder.imgVip);
+            }
+
         } catch (Exception e) {
-            Log.d("", e.toString());
+            Glide.with(context).load(context.getResources().getDrawable(R.drawable.vip_default)).into(viewHolder.imgVip);
+            Log.d("error", e.toString());
         }
     }
 

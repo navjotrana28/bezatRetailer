@@ -206,7 +206,7 @@ public class vipcustomer extends Fragment {
             @Override
             public void onSuccess(VipResult response) {
                 if (response.getResult().size() > 0) {
-                    adapter = new VipAdapter(lang);
+                    adapter = new VipAdapter(getActivity().getBaseContext(),lang);
                     layoutManager = new GridLayoutManager(getActivity(), 2);
                     adapter.setData(response);
                     recyclerView.setLayoutManager(layoutManager);
