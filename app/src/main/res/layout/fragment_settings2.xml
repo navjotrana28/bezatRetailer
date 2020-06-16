@@ -15,6 +15,7 @@
 			android:scaleType="fitCenter"
 			android:text="@string/title_settings"
 			android:textSize="@dimen/default_size"
+		android:fontFamily="@font/tajawal_bold"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent" />
