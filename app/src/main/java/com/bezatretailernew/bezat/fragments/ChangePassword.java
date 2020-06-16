@@ -57,7 +57,7 @@ public class ChangePassword extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
     View rootView;
-    EditText etConfirmPassword, etPassword, etPhone;
+    EditText etConfirmPassword, etPassword, etPhone,etEmail;
     TextView etCode;
     Button btnSave;
     ImageView imgBack;
