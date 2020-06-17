@@ -91,7 +91,7 @@
 								android:layout_width="@dimen/icon_size_normal"
 								android:layout_height="@dimen/icon_size_normal"
 								android:layout_gravity="center"
-								android:background="@color/colorPrimary"
+								android:background="@color/white"
 								android:padding="0dp"
 								android:src="@drawable/ic_24"
 								app:layout_constraintStart_toStartOf="parent"
@@ -136,13 +136,13 @@
 			</androidx.constraintlayout.widget.ConstraintLayout>
 
 			<EditText
-				android:textDirection="locale"
-				android:textAlignment="viewStart"
-				android:id="@+id/etName"
-				style="@style/field"
-				android:layout_height="31dp"
-                android:layout_marginTop="@dimen/_18sdp"
-				android:hint="@string/name" />
+                android:textDirection="locale"
+                android:textAlignment="viewStart"
+                android:id="@+id/etName"					style="@style/field"
+					android:layout_marginTop="@dimen/_18sdp"
+				android:paddingTop="@dimen/_20sdp"
+					android:hint="@string/name"
+					/>
 			<EditText
 				android:textDirection="locale"
 				android:textAlignment="viewStart"
