@@ -19,6 +19,7 @@ import com.bezatretailernew.bezat.interfaces.SearchRetaierInterface;
 import com.bezatretailernew.bezat.interfaces.SearchRetailerCallback;
 import com.bezatretailernew.bezat.models.searchRetailerResponses.SearchResponseData;
 import com.bezatretailernew.bezat.models.searchRetailerResponses.SearchResponseResult;
+import com.bezatretailernew.bezat.utils.SharedPrefs;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +38,8 @@ public class SearchRetailer extends Fragment {
         // Required empty public constructor
     }
 
+    String lang ="";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,6 +49,16 @@ public class SearchRetailer extends Fragment {
         recyclerViewVertical = view.findViewById(R.id.recyclerView_vertical);
         progressBar = view.findViewById(R.id.progress_bar_search);
         imgBack = view.findViewById(R.id.img_back);
+        if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            lang = "_ar";
+        } else {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+            lang = "";
+        }
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         setUpRecyclerView();
         setUpRecyclerViewVertical();
         loadSeachData();

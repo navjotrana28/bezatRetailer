@@ -26,10 +26,12 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.MyViewHo
 
     private Context mcontext;
     private PackageResponse packageResponse;
+    String lang;
 
-    public PackageAdapter(Context mcontext, PackageResponse packageResponse) {
+    public PackageAdapter(Context mcontext, PackageResponse packageResponse,String lang) {
         this.mcontext = mcontext;
         this.packageResponse = packageResponse;
+        this.lang = lang;
     }
 
     @NonNull
@@ -45,7 +47,11 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         PackageData data = packageResponse.getData().get(position);
 
-        holder.name.setText(data.getPackage_name());
+        if(lang.equals("_ar")){
+            holder.name.setText(data.getPackage_name_ar());
+        }else{
+            holder.name.setText(data.getPackage_name());
+        }
         holder.raffles.setText(data.getNo_of_raffles()+ " COUPONS");
         Glide.with(mcontext)
                 .load(data.getPkg_img())

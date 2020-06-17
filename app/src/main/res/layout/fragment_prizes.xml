@@ -86,13 +86,13 @@
 					app:contentPadding="@dimen/_12sdp">
 
 				<TextView
-						android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:fontFamily="@font/tajawal_medium"
-						android:gravity="center"
-						android:text="@string/bezat_yearly"
-						android:textColor="@color/colorPrimary"
-						android:textSize="@dimen/_15sdp" />
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:fontFamily="@font/tajawal_medium"
+					android:gravity="center"
+					android:text="@string/bezat_yearly"
+					android:textColor="@color/colorPrimary"
+					android:textSize="@dimen/_15sdp" />
 			</androidx.cardview.widget.CardView>
 
 			<androidx.recyclerview.widget.RecyclerView

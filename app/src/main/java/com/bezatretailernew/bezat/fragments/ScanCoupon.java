@@ -105,6 +105,9 @@ public class ScanCoupon extends Fragment {
         scannerView = view.findViewById(R.id.scanner_view);
         btnScan = view.findViewById(R.id.btnScan);
         imgBack = view.findViewById(R.id.imgBack);
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         mCodeScanner = new CodeScanner(view.getContext(), scannerView);
         customer_code = view.findViewById(R.id.customer_code);
         customer_phone = view.findViewById(R.id.customer_phone);

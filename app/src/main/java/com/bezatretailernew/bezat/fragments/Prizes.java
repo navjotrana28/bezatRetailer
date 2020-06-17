@@ -115,6 +115,9 @@ public class  Prizes extends Fragment implements View.OnClickListener {
         bezatRec = rootView.findViewById(R.id.bezatRec);
         otherRec = rootView.findViewById(R.id.otheraff);
         imgBack = rootView.findViewById(R.id.imgBack);
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         loader = new Loader(getContext());
         loader.show();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM", Locale.ENGLISH);
@@ -312,7 +315,7 @@ public class  Prizes extends Fragment implements View.OnClickListener {
         public void onBindViewHolder(MyViewHolder holder, int position) {
             try {
                 holder.txtPrizeName.setText(jsonArray.getJSONObject(position).getString("raffle_name" + lang));
-                holder.txtPrizePrice.setText("$"+jsonArray.getJSONObject(position).getString("prize" + lang));
+                holder.txtPrizePrice.setText(jsonArray.getJSONObject(position).getString("prize" + lang));
                 Picasso.get().load(jsonArray.getJSONObject(position).getString("img")).into(holder.imageView);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -390,7 +393,7 @@ public class  Prizes extends Fragment implements View.OnClickListener {
             try {
                 Log.d("---test---",jsonArray.getJSONObject(position).getString("prize" + lang));
                 holder.txtPrizeName.setText(jsonArray.getJSONObject(position).getString("raffle_name" + lang).toUpperCase());
-                holder.txtPrizePrice.setText("$"+jsonArray.getJSONObject(position).getString("prize" + lang));
+                holder.txtPrizePrice.setText(jsonArray.getJSONObject(position).getString("prize" + lang));
                 Picasso.get().load(jsonArray.getJSONObject(position).getString("img")).into(holder.imageView);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -467,7 +470,7 @@ public class  Prizes extends Fragment implements View.OnClickListener {
         public void onBindViewHolder(MyViewHolder holder, int position) {
             try {
                 holder.txtPrizeName.setText(jsonArray.getJSONObject(position).getString("raffle_name" + lang).toLowerCase());
-                holder.txtPrizePrice.setText("$"+jsonArray.getJSONObject(position).getString("prize" + lang));
+                holder.txtPrizePrice.setText(jsonArray.getJSONObject(position).getString("prize" + lang));
                 Picasso.get().load(jsonArray.getJSONObject(position).getString("img")).into(holder.imageView);
 
             } catch (Exception e) {

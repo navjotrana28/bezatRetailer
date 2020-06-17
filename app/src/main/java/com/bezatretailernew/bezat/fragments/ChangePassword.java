@@ -58,7 +58,7 @@ public class ChangePassword extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
     View rootView;
-    EditText etConfirmPassword, etPassword, etPhone;
+    EditText etConfirmPassword, etPassword, etPhone,etEmail;
     TextView etCode;
     Button btnSave;
     ImageView imgBack;
@@ -119,6 +119,10 @@ public class ChangePassword extends Fragment implements View.OnClickListener {
         etConfirmPassword = rootView.findViewById(R.id.etConfirmPassword);
         btnSave = rootView.findViewById(R.id.btnSave);
         imgBack = rootView.findViewById(R.id.imgBack);
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
+        etEmail = rootView.findViewById(R.id.etEmail);
         etCode.setOnClickListener(this);
         etCode.setText(SharedPrefs.getKey(getActivity(), "phone_code"));
         etPhone.setText(SharedPrefs.getKey(getActivity(), "phone"));

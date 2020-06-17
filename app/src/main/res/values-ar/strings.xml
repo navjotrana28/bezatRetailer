@@ -151,8 +151,8 @@
     <string name="available_tickets">التذاكر المتاحة </string>
     <string name="no_offer_found">لم يتم العثور على عرض</string>
     <string name="offer_price">سعر العرض</string>
-    <string name="original_prize_bd">السعر الأصلي: دينار بحريني</string>
-    <string name="BD_offers">دينار بحريني</string>
+    <string name="original_prize_bd">السعر الأصلي:BD</string>
+    <string name="BD_offers">BD</string>
     <string name="know">Know More</string>
     <string name="feedback">ردود الفعل</string>
     <string name="search_by_retailer">البحث حسب بائع التجزئة</string>

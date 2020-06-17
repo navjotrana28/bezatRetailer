@@ -17,6 +17,7 @@ import com.bezatretailernew.bezat.R;
 import com.bezatretailernew.bezat.api.contactusResponse.ContactUsRequest;
 import com.bezatretailernew.bezat.api.contactusResponse.ContactUsResponse;
 import com.bezatretailernew.bezat.interfaces.ContactUsSuccessResponse;
+import com.bezatretailernew.bezat.utils.SharedPrefs;
 
 
 public class ContactUsFragment extends Fragment {
@@ -89,6 +90,8 @@ public class ContactUsFragment extends Fragment {
 
     }
 
+    String lang = "";
+
     private void addViews(View view) {
         name = view.findViewById(R.id.contact_name_edit_text);
         email = view.findViewById(R.id.contact_email_edit_text);
@@ -100,6 +103,16 @@ public class ContactUsFragment extends Fragment {
         comments = view.findViewById(R.id.contact_comments_edit_text);
         sendBtn = view.findViewById(R.id.contact_button);
         imgBack = view.findViewById(R.id.img_back);
+        if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            lang = "_ar";
+        } else {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+            lang = "";
+        }
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         insta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -42,6 +42,7 @@ public class Feedback extends Fragment {
         // Required empty public constructor
     }
 
+    String lang = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +50,13 @@ public class Feedback extends Fragment {
         container.setClickable(true);
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_feedback, container, false);
+        if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            lang = "_ar";
+        } else {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+            lang = "";
+        }
         recFeedback = rootView.findViewById(R.id.recFeedback);
         loader = new Loader(getContext());
         loader.show();
@@ -87,6 +95,9 @@ public class Feedback extends Fragment {
 
     private void onClickBackButton(View view) {
         imgBack = view.findViewById(R.id.img_back);
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         imgBack.setOnClickListener(view1 -> getActivity().onBackPressed());
     }
 
