@@ -39,7 +39,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/tajawal_bold"
-                    android:gravity="center_vertical"
+                    android:textDirection="locale"
+                    android:textAlignment="viewStart"
                     android:paddingStart="@dimen/_12sdp"
                     android:text="Username "
                     android:textColor="@color/colorPrimary"
@@ -66,6 +67,8 @@
             </LinearLayout>
 
             <TextView
+                android:textDirection="locale"
+                android:textAlignment="viewStart"
                 android:id="@+id/txtFeedback"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,7 +76,6 @@
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/_11sdp"
                 android:text="User FeedBack"
-                android:textAlignment="viewEnd"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_11sdp" />
 
