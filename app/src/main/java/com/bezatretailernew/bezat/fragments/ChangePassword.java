@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -133,20 +134,22 @@ public class ChangePassword extends Fragment implements View.OnClickListener {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (etCode.getText().toString().isEmpty()) {
-                    etCode.setError(getActivity().getString(R.string.please_enter_code));
-                } else if (etPhone.getText().toString().isEmpty()) {
-                    etPhone.setError(getActivity().getString(R.string.please_enter_phone_number));
-                } else if (etPassword.getText().toString().isEmpty()) {
-                    etPhone.setError(getActivity().getString(R.string.please_enter_password));
-                } else if (etConfirmPassword.getText().toString().isEmpty()) {
-                    etConfirmPassword.setError(getActivity().getString(R.string.please_enter_confirm_password));
-                } else if (!etConfirmPassword.getText().toString().equals(etPassword.getText().toString())) {
-                    etConfirmPassword.setError(getActivity().getString(R.string.passwords_dont_match));
-                } else {
-                    String phone = etCode.getText().toString() + etPhone.getText().toString();
-                    String password = etPassword.getText().toString();
-                    changePassword(phone, password);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+                    if (etCode.getText().toString().isEmpty()) {
+                        etCode.setError(getActivity().getString(R.string.please_enter_code));
+                    } else if (etPhone.getText().toString().isEmpty()) {
+                        etPhone.setError(getActivity().getString(R.string.please_enter_phone_number));
+                    } else if (etPassword.getText().toString().isEmpty()) {
+                        etPhone.setError(getActivity().getString(R.string.please_enter_password));
+                    } else if (etConfirmPassword.getText().toString().isEmpty()) {
+                        etConfirmPassword.setError(getActivity().getString(R.string.please_enter_confirm_password));
+                    } else if (!etConfirmPassword.getText().toString().equals(etPassword.getText().toString())) {
+                        etConfirmPassword.setError(getActivity().getString(R.string.passwords_dont_match));
+                    } else {
+                        String phone = etCode.getText().toString() + etPhone.getText().toString();
+                        String password = etPassword.getText().toString();
+                        changePassword(phone, password);
+                    }
                 }
             }
         });
