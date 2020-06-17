@@ -141,7 +141,7 @@ public class vipcustomer extends Fragment {
         searchView = rootView.findViewById(R.id.search_total_coupons);
         EditText searchEditText = ((EditText)((SearchView)rootView.findViewById(R.id.search_total_coupons)).findViewById(((SearchView)rootView.findViewById(R.id.search_total_coupons)).getContext().getResources().getIdentifier("android:id/search_src_text", null, null)));
         searchEditText.setTextColor(getResources().getColor(R.color.black));
-        searchEditText.setHintTextColor(getResources().getColor(R.color.black));
+        searchEditText.setHintTextColor(getResources().getColor(R.color.dark_grey));
         imgSearch = rootView.findViewById(R.id.imgSearch);
         imgBack = rootView.findViewById(R.id.imgBack);
         if(lang.equals("a")){
