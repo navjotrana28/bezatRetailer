@@ -178,7 +178,7 @@
 
     <string name="change_language_cap">CHANGE LANGUAGE</string>
 
-    <string name="phone_login">Email / Phone number</string>
+    <string name="phone_login">Email / Phone Number</string>
     <string name="password_login">Enter Password</string>
 
 </resources>
