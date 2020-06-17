@@ -31,6 +31,8 @@
 					android:text="@string/save"
 					android:textColor="@color/white"
 					android:paddingEnd="@dimen/_10sdp"
+				android:textSize="@dimen/default_size"
+				android:fontFamily="@font/tajawal_bold"
 					android:layout_alignParentEnd="true"
 					android:gravity="center"
 					/>
@@ -89,9 +91,9 @@
 								android:layout_width="@dimen/icon_size_normal"
 								android:layout_height="@dimen/icon_size_normal"
 								android:layout_gravity="center"
-								android:background="@color/white"
+								android:background="@color/colorPrimary"
 								android:padding="0dp"
-								android:src="@drawable/ic_baseline_add_circle_24"
+								android:src="@drawable/ic_24"
 								app:layout_constraintStart_toStartOf="parent"
 								app:layout_constraintTop_toTopOf="parent" />
 					</androidx.constraintlayout.widget.ConstraintLayout>
@@ -136,7 +138,7 @@
 			<EditText
 					android:id="@+id/etName"
 					style="@style/field"
-					android:layout_marginTop="@dimen/_12sdp"
+					android:layout_marginTop="@dimen/_18sdp"
 					android:hint="@string/name"
 					/>
 			<EditText
