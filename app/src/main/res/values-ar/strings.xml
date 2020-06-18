@@ -135,7 +135,7 @@
     <string name="code_vip">التعليمات البرمجيه:</string>
     <string name="email_vip">البريد الالكتروني:</string>
     <string name="phone_vip">الهاتف:</string>
-    <string name="vip_lists_vip">قوائم كبار الشخصيات</string>
+    <string name="vip_lists_vip">VIP Lists</string>
     <string name="bezat_yearly">Bezat Yearly</string>
     <string name="bezat_monthly">Bezat Monthly</string>
     <string name="prize_prizes_section">جائزه:</string>
@@ -171,4 +171,6 @@
 
     <string name="phone_login">البريد الإلكتروني / رقم الهاتف</string>
     <string name="password_login">كلمه السر</string>
+
+    <string name="email_phone_vip">البريد الإلكتروني, رقم الهاتف</string>
 </resources>
