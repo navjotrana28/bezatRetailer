@@ -85,8 +85,8 @@ public class RedeemOffer extends Fragment {
                 boolean code = true,offers = true;
                 if(phone_number.getText().toString().trim().equals("")){
                     new AlertDialog.Builder(getActivity())
-                            .setTitle("Phone No is empty")
-                            .setMessage("Please enter Phone No")
+                            .setTitle("Information")
+                            .setMessage("Please enter Phone Number")
 
                             // Specifying a listener allows you to take an action before dismissing the dialog.
                             // The dialog is automatically dismissed when a dialog button is clicked.
@@ -99,8 +99,8 @@ public class RedeemOffer extends Fragment {
                             .show();
                 }else if(customer_code.getText().toString().trim().equals("")){
                     new AlertDialog.Builder(getActivity())
-                            .setTitle("Customer code is empty")
-                            .setMessage("Please enter customer code")
+                            .setTitle("Information")
+                            .setMessage("Please enter Customer Code")
 
                             // Specifying a listener allows you to take an action before dismissing the dialog.
                             // The dialog is automatically dismissed when a dialog button is clicked.

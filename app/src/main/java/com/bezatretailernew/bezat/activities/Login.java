@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Typeface;
+import android.text.method.PasswordTransformationMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +49,8 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         etEmail =findViewById(R.id.etEmail);
         etPassword =findViewById(R.id.etPassword);
+        etPassword.setTypeface(Typeface.DEFAULT);
+        etPassword.setTransformationMethod(new PasswordTransformationMethod());
         tvSignUp = findViewById(R.id.tvSignUp);
         txtForgot =  findViewById(R.id.txtForgot);
         btnLogin=findViewById(R.id.btnLogin);

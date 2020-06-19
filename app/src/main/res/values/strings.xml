@@ -178,4 +178,10 @@
 
     <string name="change_language_cap">CHANGE LANGUAGE</string>
 
+    <string name="phone_login">Email / Phone Number</string>
+    <string name="password_login">Password</string>
+
+    <string name="email_phone_vip">Email, Phone</string>
+
+
 </resources>

@@ -104,7 +104,7 @@
 			android:background="@drawable/round_corner_vip"
 			android:gravity="center_horizontal"
 			android:iconifiedByDefault="false"
-			android:queryHint="Email, Phone"
+			android:queryHint="@string/email_phone_vip"
 			android:searchHintIcon="@drawable/ic_search_black_24dp"
 			android:searchIcon="@drawable/ic_search_black_24dp"
 			app:layout_constraintEnd_toEndOf="parent"
@@ -159,10 +159,10 @@
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layoutDirection="ltr"
 				android:orientation="horizontal">
 
 				<TextView
+					android:textAlignment="viewStart"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginRight="8dp"

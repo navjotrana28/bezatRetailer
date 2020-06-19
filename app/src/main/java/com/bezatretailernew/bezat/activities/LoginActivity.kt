@@ -1,10 +1,13 @@
 package com.bezatretailernew.bezat.activities
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.InputType
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity
 import com.bezatretailernew.bezat.R
 import com.bezatretailernew.bezat.api.LoginRequest
 import com.bezatretailernew.bezat.utils.SharedPrefs
@@ -26,8 +29,10 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         initUI()
     }
-
-    fun initUI() {
+    fun initUI(){
+        etPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        etPassword.typeface = Typeface.DEFAULT
+        etPassword.transformationMethod = PasswordTransformationMethod()
         btnLogin.setOnClickListener {
             doLogin()
         }
