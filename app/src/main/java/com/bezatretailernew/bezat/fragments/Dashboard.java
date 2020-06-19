@@ -3,9 +3,12 @@ package com.bezatretailernew.bezat.fragments;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +52,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -77,6 +81,7 @@ public class Dashboard extends Fragment {
     RecyclerView recycle;
     ViewPager viewPager;
     TabLayout indicator;
+    String language = "";
     List<DashBoardItem> dashBoardItem;
     View rootView;
     String lang = "";
@@ -114,9 +119,13 @@ public class Dashboard extends Fragment {
         if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             lang = "_ar";
+            setLocale("ar");
+            language = "ar";
         } else {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
             lang = "";
+            setLocale("en");
+            language = "en";
         }
         rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
         initViewPager();
@@ -375,6 +384,8 @@ public class Dashboard extends Fragment {
                                             retrofit.logOutAPi(SharedPrefs.getKey(getActivity(), "userId"), new LogoutCallback() {
                                                 @Override
                                                 public void onSuccess(LogoutResponse responseResult) {
+                                                    SharedPrefs.deleteSharedPrefs(getActivity());
+                                                    setLocale(language);
                                                     startActivity(new Intent(getActivity(), LoginActivity.class));
                                                     getActivity().finish();
                                                 }
@@ -564,6 +575,16 @@ public class Dashboard extends Fragment {
                 };
 
         MyApplication.getInstance().addToRequestQueue(jsonObjectRequest);
+    }
+
+    public void setLocale(String lang) {
+        SharedPrefs.setKey(getActivity(), "selectedlanguage", lang);
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
     }
 
 }
