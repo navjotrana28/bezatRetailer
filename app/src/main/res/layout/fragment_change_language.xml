@@ -130,6 +130,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="English"
+                    android:fontFamily="@font/tajawal_medium"
                     android:padding="@dimen/_12sdp"
                     android:textColor="@color/black"/>
                 <View
@@ -141,6 +142,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="عربى"
+                    android:fontFamily="@font/tajawal_bold"
                     android:gravity="end"
                     android:padding="@dimen/_12sdp"
                     android:textColor="@color/black"/>

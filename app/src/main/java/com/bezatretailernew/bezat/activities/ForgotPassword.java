@@ -97,10 +97,10 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onClick(View view) {
                 if (etCode.getText().toString().isEmpty() || etCode.getText().toString().equals("")) {
-                    dialog("Please enter country code");
-                } else if (etPhone.getText().toString().isEmpty()) {
-                    dialog("Please enter Phone number");
-                } else {
+                    dialog("Please enter Country Code");
+                }else  if (etPhone.getText().toString().isEmpty()) {
+                    dialog("Please enter Phone Number");
+                }else {
                     getOTP(etPhone.getText().toString());
                 }
             }
