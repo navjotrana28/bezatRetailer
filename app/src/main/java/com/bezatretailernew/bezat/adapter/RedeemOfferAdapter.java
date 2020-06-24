@@ -1,6 +1,7 @@
 package com.bezatretailernew.bezat.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,9 @@ public class RedeemOfferAdapter extends RecyclerView.Adapter<RedeemOfferAdapter.
         return arr;
     }
 
+    boolean single = false;
+    private int selectedPosition = -1;
+
     public void setArray_offers(List<String> array_offers) {
         this.array_offers = array_offers;
     }
@@ -57,14 +61,33 @@ public class RedeemOfferAdapter extends RecyclerView.Adapter<RedeemOfferAdapter.
             OfferCodeData data = response.getData().get(position);
             holder.offer_name.setText(data.getOffer_coupon_code());
         }
+        if(selectedPosition == position){
+            holder.selected.setChecked(true);
+        }
+        else{
+            holder.selected.setChecked(false);
+        }
         holder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    array_offers.add(response.getData().get(position).getOffer_coupon_code());
+                    selectedPosition = holder.getAdapterPosition();
+                    notifyDataSetChanged();
+                    if(single){
+                        array_offers.clear();
+                        array_offers.add(response.getData().get(position).getOffer_coupon_code());
+                        single = true;
+                    }else{
+                        array_offers.clear();
+                        array_offers.add(response.getData().get(position).getOffer_coupon_code());
+                        single = true;
+                    }
+
                 } else {
                     array_offers.remove(response.getData().get(position).getOffer_coupon_code());
+                    single = false;
                 }
+                Log.d("---test---",array_offers.toString());
             }
         });
     }

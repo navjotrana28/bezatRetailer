@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +27,10 @@ import com.bezatretailernew.bezat.models.redeemUserOffer.RedeemUserOfferRequest;
 import com.bezatretailernew.bezat.models.redeemUserOffer.RedeemUserOfferResponse;
 import com.bezatretailernew.bezat.utils.Loader;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
+import com.budiyev.android.codescanner.CodeScanner;
+import com.budiyev.android.codescanner.CodeScannerView;
+import com.budiyev.android.codescanner.DecodeCallback;
+import com.google.zxing.Result;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +47,9 @@ public class RedeemOffer extends Fragment {
     EditText customer_code, phone_number;
     RedeemOfferAdapter adapter;
     TextView error;
+
+    private CodeScanner mCodeScanner;
+    CodeScannerView scannerView;
 
 
     public RedeemOffer() {
@@ -79,28 +88,29 @@ public class RedeemOffer extends Fragment {
         loadOffers();
         onClickBackButton();
 
+        scannerView = view.findViewById(R.id.scanner_view);
+        mCodeScanner = new CodeScanner(view.getContext(), scannerView);
+        mCodeScanner.setDecodeCallback(new DecodeCallback() {
+            @Override
+            public void onDecoded(@NonNull final Result result) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        customer_code.setText( result.getText());
+                    }
+                });
+            }
+        });
+        mCodeScanner.startPreview();
+
         redeem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean code = true,offers = true;
-                if(phone_number.getText().toString().trim().equals("")){
+                if(phone_number.getText().toString().trim().equals("") && customer_code.getText().toString().trim().equals("")) {
                     new AlertDialog.Builder(getActivity())
                             .setTitle("Information")
-                            .setMessage("Please enter Phone Number")
-
-                            // Specifying a listener allows you to take an action before dismissing the dialog.
-                            // The dialog is automatically dismissed when a dialog button is clicked.
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // Continue with delete operation
-                                }
-                            })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                }else if(customer_code.getText().toString().trim().equals("")){
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle("Information")
-                            .setMessage("Please enter Customer Code")
+                            .setMessage("Please enter Phone Number or Customer Code")
 
                             // Specifying a listener allows you to take an action before dismissing the dialog.
                             // The dialog is automatically dismissed when a dialog button is clicked.
