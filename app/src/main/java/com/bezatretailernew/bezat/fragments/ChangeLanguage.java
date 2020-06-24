@@ -108,6 +108,9 @@ public class ChangeLanguage extends Fragment implements View.OnClickListener {
         txtArabic = rootView.findViewById(R.id.txtArabic);
         txtEnglish = rootView.findViewById(R.id.txtEnglish);
         imgBack = rootView.findViewById(R.id.imgBack);
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,8 +122,9 @@ public class ChangeLanguage extends Fragment implements View.OnClickListener {
 
         List<String> l = new ArrayList<>();
         l.add("");
-        l.add("ENGLISH");
         l.add("عربى");
+        l.add("ENGLISH");
+
 
         Spinner spinner = (Spinner) rootView.findViewById(R.id.spinner_language);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getBaseContext(),
@@ -140,10 +144,10 @@ public class ChangeLanguage extends Fragment implements View.OnClickListener {
                 ImageView imageView = (ImageView) convertView.findViewById(R.id.iv_language);
                 if(position==1){
                     convertView.setBackgroundColor(0xFFF2F2F2);
-                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.english_icon));
-                }else if(position==2){
-                    convertView.setBackgroundColor(0xFFF2F2F2);
                     imageView.setImageDrawable(getResources().getDrawable(R.drawable.arabic_icon));
+                }else if(position==2){
+                    convertView.setBackgroundColor(0xFFF7F7F7);
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.english_icon));
                 }
                 else{
                     convertView.setBackgroundColor(0xFFFFFFFF);
@@ -193,13 +197,14 @@ public class ChangeLanguage extends Fragment implements View.OnClickListener {
                 if(position==0){
 
                 }else if(position==1){
-                    setLocale("en");
-                    ImageView v = view.findViewById(R.id.iv_language);
-                    v.setImageDrawable(getResources().getDrawable(R.drawable.english_icon));
-                }else{
                     setLocale("ar");
                     ImageView v = view.findViewById(R.id.iv_language);
                     v.setImageDrawable(getResources().getDrawable(R.drawable.arabic_icon));
+
+                }else{
+                    setLocale("en");
+                    ImageView v = view.findViewById(R.id.iv_language);
+                    v.setImageDrawable(getResources().getDrawable(R.drawable.english_icon));
                 }
             }
 

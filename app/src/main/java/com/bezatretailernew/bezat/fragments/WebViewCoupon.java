@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import androidx.fragment.app.Fragment;
 
 import com.bezatretailernew.bezat.R;
+import com.bezatretailernew.bezat.utils.SharedPrefs;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +22,7 @@ public class WebViewCoupon extends Fragment {
 
     private String url;
     ImageView imgBack;
+    String lang = "";
 
 
     public WebViewCoupon(String url) {
@@ -40,6 +42,16 @@ public class WebViewCoupon extends Fragment {
         WebSettings webSettings = view.getSettings();
         webSettings.setJavaScriptEnabled(true);
         imgBack = hview.findViewById(R.id.imgBack);
+        if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            lang = "_ar";
+        } else {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+            lang = "";
+        }
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         view.getSettings().setLoadWithOverviewMode(true);
         view.getSettings().setUseWideViewPort(true);
         view.getSettings().setBuiltInZoomControls(true);

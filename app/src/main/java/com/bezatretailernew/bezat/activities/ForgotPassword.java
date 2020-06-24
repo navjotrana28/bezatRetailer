@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +48,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     Button btnSend;
     EditText etPhone;
     ImageView imgBack;
+    String lang = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +59,21 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         } else {
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         }
+        if (SharedPrefs.getKey(this,"selectedlanguage").contains("ar")) {
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            lang="_ar";
+        } else {
+            getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+            lang="";
+        }
         setContentView(R.layout.activity_forgot_password);
         etCode = findViewById(R.id.txtCode);
         btnSend = findViewById(R.id.btnSend);
         etPhone = findViewById(R.id.etPhone);
         imgBack = findViewById(R.id.imgBack);
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         etCode.setOnClickListener(this);
         loader = new Loader(context);
         loader.show();
@@ -75,12 +87,11 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (etPhone.getText().toString().isEmpty()) {
-                    etPhone.setText(getString(R.string.empty_phone));
-                }
-                if (etCode.getText().toString().isEmpty()) {
-                    etCode.setText("country code is empty");
-                } else {
+                if (etCode.getText().toString().isEmpty() || etCode.getText().toString().equals("")) {
+                    dialog("Please enter country code");
+                }else  if (etPhone.getText().toString().isEmpty()) {
+                    dialog("Please enter Phone number");
+                }else {
                     getOTP(etPhone.getText().toString());
                 }
             }
@@ -88,10 +99,13 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         getCountryList();
     }
 
+    public void dialog(String content) {
+        ForgotPasswordDialog forgotPasswordDialog = new ForgotPasswordDialog(content);
+        forgotPasswordDialog.show(getSupportFragmentManager(), "Pass");
+    }
+
     private void getOTP(String phone) {
         loader.show();
-
-
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, URLS.Companion.getFORGOT_PASSWORD(), new Response.Listener<NetworkResponse>() {
             @Override
             public void onResponse(NetworkResponse response) {

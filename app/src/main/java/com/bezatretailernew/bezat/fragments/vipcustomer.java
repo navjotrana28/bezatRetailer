@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,6 +75,7 @@ public class vipcustomer extends Fragment {
     GridLayoutManager layoutManager;
     private RecyclerView recyclerView;
     String lang="a";
+    SearchView searchView;
 
 
     private OnFragmentInteractionListener mListener;
@@ -136,9 +138,15 @@ public class vipcustomer extends Fragment {
             Picasso.get().load(path).into(imgFront);
         }
         btnaddVip = rootView.findViewById(R.id.btnaddVip);
-        etSearch = rootView.findViewById(R.id.etSearch);
+        searchView = rootView.findViewById(R.id.search_total_coupons);
+        EditText searchEditText = ((EditText)((SearchView)rootView.findViewById(R.id.search_total_coupons)).findViewById(((SearchView)rootView.findViewById(R.id.search_total_coupons)).getContext().getResources().getIdentifier("android:id/search_src_text", null, null)));
+        searchEditText.setTextColor(getResources().getColor(R.color.black));
+        searchEditText.setHintTextColor(getResources().getColor(R.color.dark_grey));
         imgSearch = rootView.findViewById(R.id.imgSearch);
         imgBack = rootView.findViewById(R.id.imgBack);
+        if(lang.equals("a")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         layoutContent = rootView.findViewById(R.id.layoutContent);
         vip_list_linear = rootView.findViewById(R.id.vip_list_linear);
         recyclerView = rootView.findViewById(R.id.recycler_view_01);
@@ -153,14 +161,34 @@ public class vipcustomer extends Fragment {
             }
         });
 
-        imgSearch.setOnClickListener(view -> {
-            if (etSearch.getText().toString().isEmpty()) {
-                etSearch.setError("Field is empty");
-            } else {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d("---test---",query);
                 loader.show();
-                searchData(etSearch.getText().toString());
+                searchData(query);
+                return true;
             }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return true;
+            }
+
         });
+
+        /*searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (searchView.getQuery().toString().isEmpty()) {
+                    searchEditText.setError("Field is empty");
+                } else {
+                    loader.show();
+                    searchData(searchView.getQuery().toString());
+                }
+            }
+        });*/
+
         btnaddVip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -181,7 +209,7 @@ public class vipcustomer extends Fragment {
             @Override
             public void onSuccess(VipResult response) {
                 if (response.getResult().size() > 0) {
-                    adapter = new VipAdapter(lang);
+                    adapter = new VipAdapter(getActivity().getBaseContext(),lang);
                     layoutManager = new GridLayoutManager(getActivity(), 2);
                     adapter.setData(response);
                     recyclerView.setLayoutManager(layoutManager);

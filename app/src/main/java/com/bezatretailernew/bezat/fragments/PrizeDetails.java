@@ -108,6 +108,9 @@ public class PrizeDetails extends Fragment {
         txtPrize = rootView.findViewById(R.id.txtPrize);
         imgPrize = rootView.findViewById(R.id.imgPrize);
         imgBack = rootView.findViewById(R.id.imgBack);
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         btnDraw = rootView.findViewById(R.id.btnDraw);
         raffle_category = getArguments().getString("raffle_category");
         raffle_id = getArguments().getString("raffle_id");
@@ -138,9 +141,9 @@ public class PrizeDetails extends Fragment {
                                 String draw = "";
                                 JSONObject jsonObject = response.getJSONObject("result").getJSONObject("raffles");
                                 if (lang.equals("_ar")) {
-                                    txtPrize.setText(getString(R.string.prize_prizes_section) + " " + jsonObject.getString("prize_ar"));
+                                    txtPrize.setText(getString(R.string.prize_prizes_section) + " $" + jsonObject.getString("prize_ar"));
                                 } else {
-                                    txtPrize.setText(getString(R.string.prize_prizes_section) + " " + jsonObject.getString("prize"));
+                                    txtPrize.setText(getString(R.string.prize_prizes_section) + " $" + jsonObject.getString("prize"));
                                 }
                                 String difDate = getDifDays(jsonObject.getString("draw_date"));
                                 if (Integer.parseInt(difDate) > 1) {

@@ -273,7 +273,7 @@
 					android:layout_height="wrap_content"
 					android:fontFamily="@font/tajawal_medium"
 					android:padding="@dimen/_12sdp"
-					android:text="@string/logout"
+					android:text="@string/sign_out"
 					android:textColor="@color/black"
 					android:textSize="@dimen/_14sdp" />
 

@@ -39,7 +39,7 @@
                 android:gravity="center"
                 android:textSize="@dimen/_14sdp"
                 android:fontFamily="@font/tajawal_bold"
-                android:text="Change Language"/>
+                android:text="@string/change_language"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
@@ -58,7 +58,6 @@
         <Spinner
             android:popupElevation="0dp"
             android:theme="@style/MatchSpinnerTheme"
-            android:popupBackground="@color/white"
             android:textAlignment="center"
             android:background="@drawable/round_corners"
             android:gravity="center"
@@ -69,10 +68,10 @@
         </Spinner>
         <ImageView
             android:src="@drawable/ic_down"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_width="24dp"
             android:layout_height="24dp">
 

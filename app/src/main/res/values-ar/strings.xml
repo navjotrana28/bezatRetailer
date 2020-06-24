@@ -6,7 +6,7 @@
     <string name="login">تسجيل الدخول</string>
     <string name="password">كلمه السر*</string>
     <string name="user_name">اسم المستخدم</string>
-    <string name="forgot_password">هل نسيت كلمة المرور ؟</string>
+    <string name="forgot_password">هل نسيت كلمة المرور</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">لوحة القيادة</string>
@@ -30,15 +30,15 @@
     <string name="gender">جنس*</string>
     <string name="dob">*تاريخ الولادة</string>
     <string name="fav_offers">العروض المفضلة</string>
-    <string name="prizes">جوائز</string>
-    <string name="total_coupon">إجمالي القسيمة</string>
+    <string name="prizes">الجوائز</string>
+    <string name="total_coupon">اجمالي الكوبونات</string>
     <string name="partners">شركاء</string>
     <string name="winners">الفائزين</string>
     <string name="sign_out">خروج</string>
     <string name="vip_offers">"عروض كبار الشخصيات</string>
     <string name="my_profile">ملفي</string>
-    <string name="packages">Packages</string>
-    <string name="redeem_offer">استرداد</string>
+    <string name="packages">شراء الكوبونات</string>
+    <string name="redeem_offer">مسح العروض</string>
     <string name="save">حفظ</string>
     <string name="skip">Skip</string>
     <string name="done">Done</string>
@@ -97,15 +97,15 @@
     <string name="customer_id">هوية الزبون</string>
     <string name="bill_no">مشروع قانون لا : </string>
     <string name="store">مخازن</string>
-    <string name="offers">عروض</string>
+    <string name="offers">العروض</string>
     <string name="logout_confirm">هل أنت متأكد أنك تريد تسجيل الخروج ؟</string>
     <string name="select_language">غير اللغة</string>
     <string name="please_enter_the_otp_we_have_sent_to_your_registered_phone_number">يرجى إدخال كلمة المرور لمرة واحدة التي أرسلناها إلى رقم هاتفك المسجل</string>
     <string name="otp">مكتب المدعي العام</string>
     <string name="resend">إعادة إرسال</string>
     <string name="didn_t_receive_the_otp">لم أستلم OTP؟</string>
-    <string name="scan_coupon">Scan Coupon</string>
-    <string name="vip_customers">VIP Customers</string>
+    <string name="scan_coupon">مسح الكوبون</string>
+    <string name="vip_customers">عملاء</string>
     <string name="no_result_found">لم يتم العثور على نتائج</string>
     <string name="scan_qr_code">مسح رمز الاستجابة السريعة</string>
     <string name="email_phone">البريد الإلكتروني، الهاتف</string>
@@ -115,7 +115,7 @@
     <string name="customer_phone">Customer Mobile Number</string>
     <string name="add_vip">إضافة كبار الشخصيات</string>
     <string name="view_all_offers">عرض جميع العروض</string>
-    <string name="other_raffles">Other Raffles</string>
+    <string name="other_raffles">سحوبات اخرى</string>
     <string name="bezat_raffles">  رافلز Bezat</string>
     <string name="prize_details">تفاصيل الجائزة</string>
     <string name="reports">Reports</string>
@@ -135,9 +135,9 @@
     <string name="code_vip">التعليمات البرمجيه:</string>
     <string name="email_vip">البريد الالكتروني:</string>
     <string name="phone_vip">الهاتف:</string>
-    <string name="vip_lists_vip">قوائم كبار الشخصيات</string>
-    <string name="bezat_yearly">Bezat Yearly</string>
-    <string name="bezat_monthly">Bezat Monthly</string>
+    <string name="vip_lists_vip">VIP Lists</string>
+    <string name="bezat_yearly">سحوبات سنوية</string>
+    <string name="bezat_monthly">سحوبات شهرية</string>
     <string name="prize_prizes_section">جائزه:</string>
     <string name="prize_details_prizes_section">تفاصيل الجائزة</string>
     <string name="raffle_draw_announce_tomorrow">السحب السحب يعلن غدا</string>
@@ -151,10 +151,26 @@
     <string name="available_tickets">التذاكر المتاحة </string>
     <string name="no_offer_found">لم يتم العثور على عرض</string>
     <string name="offer_price">سعر العرض</string>
-    <string name="original_prize_bd">السعر الأصلي: دينار بحريني</string>
-    <string name="BD_offers">دينار بحريني</string>
+    <string name="original_prize_bd">السعر الأصلي:BD</string>
+    <string name="BD_offers">BD</string>
     <string name="know">Know More</string>
-    <string name="feedback">ردود الفعل</string>
+    <string name="feedback">آراء الزبائن</string>
     <string name="search_by_retailer">البحث حسب بائع التجزئة</string>
     <string name="get_feedback">ردود الفعل</string>
+    <string name="enter_password">أدخل كلمة المرور*</string>
+    <string name="code_signup">Code*</string>
+    <string name="please_enter_code">Please enter Code</string>
+    <string name="please_enter_phone_number">يرجى إدخال رقم الهاتف</string>
+    <string name="please_enter_password">يرجى إدخال كلمة المرور</string>
+    <string name="please_enter_confirm_password">يرجى إدخال تأكيد كلمة المرور</string>
+    <string name="passwords_dont_match">كلمة المرور وتأكيد كلمة المرور غير متطابقين</string>
+    <string name="change_password_label">غير كلمة السر</string>
+    <string name="enter_code_customer_code">Enter Phone Number or Customer Code</string>
+    <string name="search_by_retailer_name_caps"><font size="15">البحث حسب اسم بائع التجزئة</font></string>
+    <string name="change_language_cap">غير اللغة</string>
+
+    <string name="phone_login">البريد الإلكتروني / رقم الهاتف</string>
+    <string name="password_login">كلمه السر</string>
+
+    <string name="email_phone_vip">البريد الإلكتروني, رقم الهاتف</string>
 </resources>

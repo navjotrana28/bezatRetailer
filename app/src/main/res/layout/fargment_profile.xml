@@ -136,18 +136,23 @@
 			</androidx.constraintlayout.widget.ConstraintLayout>
 
 			<EditText
-					android:id="@+id/etName"
-					style="@style/field"
+                android:textDirection="locale"
+                android:textAlignment="viewStart"
+                android:id="@+id/etName"					style="@style/field"
 					android:layout_marginTop="@dimen/_18sdp"
 				android:paddingTop="@dimen/_20sdp"
 					android:hint="@string/name"
 					/>
 			<EditText
+				android:textDirection="locale"
+				android:textAlignment="viewStart"
 					android:id="@+id/etEmail"
 					style="@style/field"
 					android:hint="@string/email"
 					/>
 			<TextView
+				android:textDirection="locale"
+				android:textAlignment="viewStart"
 					android:id="@+id/etCountry"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -169,12 +174,16 @@
 					android:background="@color/colorPrimary"/>
 
 			<EditText
+				android:textDirection="locale"
+				android:textAlignment="viewStart"
 					android:id="@+id/etPhone"
 					style="@style/field"
 					android:hint="@string/phone_number"
 				android:inputType="number"
 					/>
 			<EditText
+				android:textDirection="locale"
+				android:textAlignment="viewStart"
 					android:id="@+id/etAddress"
 					style="@style/field"
 					android:visibility="gone"
@@ -186,6 +195,8 @@
 					/>
 
 			<TextView
+				android:textDirection="locale"
+				android:textAlignment="viewStart"
 					android:id="@+id/etGender"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -207,6 +218,8 @@
 					android:background="@color/colorPrimary"/>
 
 			<TextView
+				android:textDirection="locale"
+				android:textAlignment="viewStart"
 					android:id="@+id/etDob"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"

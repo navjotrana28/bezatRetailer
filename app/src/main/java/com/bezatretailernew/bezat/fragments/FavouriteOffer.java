@@ -94,6 +94,8 @@ public class FavouriteOffer extends Fragment {
         }
     }
 
+    String lang = "";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -103,6 +105,16 @@ public class FavouriteOffer extends Fragment {
         recOffer = rootView.findViewById(R.id.recOffer);
         loader = new Loader(getContext());
         loader.show();
+        if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            lang = "_ar";
+        } else {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+            lang = "";
+        }
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

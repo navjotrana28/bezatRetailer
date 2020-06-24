@@ -12,13 +12,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.android.volley.*;
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.bezatretailernew.bezat.ClientRetrofit;
 import com.bezatretailernew.bezat.MyApplication;
 import com.bezatretailernew.bezat.R;
@@ -58,6 +67,7 @@ public class Settings extends Fragment implements View.OnClickListener {
     Button btnSave;
     View rootView;
     LinearLayout layoutLanguage;
+    String lang = "";
     private OnFragmentInteractionListener mListener;
 
     public Settings() {
@@ -98,8 +108,11 @@ public class Settings extends Fragment implements View.OnClickListener {
         if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             setLocale("ar");
+            lang = "ar";
         } else {
             getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+            setLocale("en");
+            lang = "en";
         }
         rootView = inflater.inflate(R.layout.fragment_settings2, container, false);
 
@@ -241,7 +254,6 @@ public class Settings extends Fragment implements View.OnClickListener {
             Pages pages = new Pages();
             FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, pages);
-
             pages.setArguments(bundle);
             ft.addToBackStack(null);
 
@@ -295,6 +307,7 @@ public class Settings extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void onSuccess(LogoutResponse responseResult) {
                                     SharedPrefs.deleteSharedPrefs(getActivity());
+                                    setLocale(lang);
                                     startActivity(new Intent(getActivity(), LoginActivity.class));
                                     getActivity().finish();
                                 }
@@ -342,7 +355,7 @@ public class Settings extends Fragment implements View.OnClickListener {
     }
 
     public void setLocale(String lang) {
-
+        SharedPrefs.setKey(getActivity(), "selectedlanguage", lang);
         Locale myLocale = new Locale(lang);
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();

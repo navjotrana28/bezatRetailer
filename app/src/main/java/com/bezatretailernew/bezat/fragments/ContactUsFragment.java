@@ -17,6 +17,7 @@ import com.bezatretailernew.bezat.R;
 import com.bezatretailernew.bezat.api.contactusResponse.ContactUsRequest;
 import com.bezatretailernew.bezat.api.contactusResponse.ContactUsResponse;
 import com.bezatretailernew.bezat.interfaces.ContactUsSuccessResponse;
+import com.bezatretailernew.bezat.utils.SharedPrefs;
 
 
 public class ContactUsFragment extends Fragment {
@@ -51,8 +52,12 @@ public class ContactUsFragment extends Fragment {
     private void onClickSendButton() {
 
             sendBtn.setOnClickListener(v -> {
-                if(name.getText().toString().isEmpty() || email.getText().toString().isEmpty() || comments.getText().toString().isEmpty()){
-                    open();
+                if(name.getText().toString().isEmpty() ){
+                    open("Please enter your name");
+                }else if(email.getText().toString().isEmpty()){
+                    open("Please enter your email address");
+                }else if(comments.getText().toString().isEmpty()){
+                    open("Please add a comment");
                 }else {
                     ContactUsRequest request = new ContactUsRequest();
                     request.setName(name.getText().toString());
@@ -63,8 +68,8 @@ public class ContactUsFragment extends Fragment {
             });
 
     }
-    public void open(){
-        ContactUsDialog contactUsDialog=new ContactUsDialog();
+    public void open(String content){
+        ContactUsDialog contactUsDialog=new ContactUsDialog(content);
         contactUsDialog.show(getFragmentManager(),"ContantUs Dialog");
     }
 
@@ -85,6 +90,8 @@ public class ContactUsFragment extends Fragment {
 
     }
 
+    String lang = "";
+
     private void addViews(View view) {
         name = view.findViewById(R.id.contact_name_edit_text);
         email = view.findViewById(R.id.contact_email_edit_text);
@@ -96,6 +103,16 @@ public class ContactUsFragment extends Fragment {
         comments = view.findViewById(R.id.contact_comments_edit_text);
         sendBtn = view.findViewById(R.id.contact_button);
         imgBack = view.findViewById(R.id.img_back);
+        if (SharedPrefs.getKey(getActivity(), "selectedlanguage").contains("ar")) {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            lang = "_ar";
+        } else {
+            getActivity().getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+            lang = "";
+        }
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         insta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

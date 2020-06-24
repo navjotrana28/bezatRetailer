@@ -51,6 +51,9 @@ public class PurchaseCoupons extends Fragment {
             lang = "";
         }
         imgBack = view.findViewById(R.id.imgBack);
+        if(lang.equals("_ar")){
+            imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
+        }
         recyclerViewPackages = view.findViewById(R.id.rv_packages);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerViewPackages.setLayoutManager(layoutManager);
@@ -83,7 +86,7 @@ public class PurchaseCoupons extends Fragment {
     }
 
     private void setUpRecyclerView() {
-        adapter = new PackageAdapter(getActivity().getBaseContext(),response);
+        adapter = new PackageAdapter(getActivity().getBaseContext(),response,lang);
         recyclerViewPackages.setAdapter(adapter);
     }
 }
