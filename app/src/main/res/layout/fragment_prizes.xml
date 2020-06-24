@@ -148,7 +148,7 @@
 				<TextView
 						android:layout_width="match_parent"
 						android:layout_height="match_parent"
-						android:fontFamily="@font/muli_semibold"
+					android:fontFamily="@font/tajawal_medium"
 						android:gravity="center"
 						android:text="@string/other_raffles"
 						android:textColor="@color/colorPrimary"
@@ -177,6 +177,8 @@
 			android:visibility="visible" />
 
 	<TextView
+		android:textDirection="locale"
+		android:textAlignment="viewStart"
 			android:id="@+id/txtBottom"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"

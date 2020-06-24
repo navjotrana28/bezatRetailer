@@ -19,6 +19,8 @@ import com.bezatretailernew.bezat.api.contactusResponse.ContactUsResponse;
 import com.bezatretailernew.bezat.interfaces.ContactUsSuccessResponse;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
 
+import java.util.regex.Pattern;
+
 
 public class ContactUsFragment extends Fragment {
     ImageView imgBack;
@@ -52,22 +54,56 @@ public class ContactUsFragment extends Fragment {
     private void onClickSendButton() {
 
             sendBtn.setOnClickListener(v -> {
-                if(name.getText().toString().isEmpty() ){
-                    open("Please enter your name");
-                }else if(email.getText().toString().isEmpty()){
-                    open("Please enter your email address");
-                }else if(comments.getText().toString().isEmpty()){
-                    open("Please add a comment");
-                }else {
-                    ContactUsRequest request = new ContactUsRequest();
-                    request.setName(name.getText().toString());
-                    request.setEmail(email.getText().toString());
-                    request.setComments(comments.getText().toString());
-                    sendDataToServer(request);
+
+                if (lang==""){
+                    if(name.getText().toString().isEmpty() ){
+                        open("Please enter Name");
+                    }else if(email.getText().toString().isEmpty()){
+                        open("Please enter Email");
+                    }else if(!isValid(email.getText().toString())){
+                        open("Please enter valid Email");
+                    }else if(comments.getText().toString().isEmpty()){
+                        open("Please enter a comment");
+                    }else {
+                        ContactUsRequest request = new ContactUsRequest();
+                        request.setName(name.getText().toString());
+                        request.setEmail(email.getText().toString());
+                        request.setComments(comments.getText().toString());
+                        sendDataToServer(request);
+                    }}else {
+                    if(name.getText().toString().isEmpty() ){
+                        open("يرجى إدخال الاسم");
+                    }else if(email.getText().toString().isEmpty()){
+                        open("يرجى إدخال البريد الإلكتروني");
+                    }else if(!isValid(email.getText().toString())){
+                        open("الرجاء إدخال بريد إلكتروني صحيح");
+                    }else if(comments.getText().toString().isEmpty()){
+                        open("Please enter a comment");
+                    }else {
+                        ContactUsRequest request = new ContactUsRequest();
+                        request.setName(name.getText().toString());
+                        request.setEmail(email.getText().toString());
+                        request.setComments(comments.getText().toString());
+                        sendDataToServer(request);
+                    }
                 }
             });
 
     }
+
+    public static boolean isValid(String email)
+    {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
+    }
+
     public void open(String content){
         ContactUsDialog contactUsDialog=new ContactUsDialog(content);
         contactUsDialog.show(getFragmentManager(),"ContantUs Dialog");
@@ -78,7 +114,11 @@ public class ContactUsFragment extends Fragment {
         clientRetrofit.SendDataViaApi(request, new ContactUsSuccessResponse() {
             @Override
             public void onSuccess(ContactUsResponse response) {
-                Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
+                if(lang.equals("")){
+                    Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(getContext(), "لقد تم ارسال الرساله بنجاح. سوف يتم التواصل معاكم قريبا", Toast.LENGTH_LONG).show();
+                }
                 getActivity().onBackPressed();
             }
 
