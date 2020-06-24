@@ -29,7 +29,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         initUI()
     }
-    fun initUI(){
+
+    fun initUI() {
         etPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         etPassword.typeface = Typeface.DEFAULT
         etPassword.transformationMethod = PasswordTransformationMethod()
@@ -67,7 +68,8 @@ class LoginActivity : AppCompatActivity() {
         if (isValid())
             LoginRequest(
                 email = etEmail.text.toString(),
-                password = etPassword.text.toString()
+                password = etPassword.text.toString(),
+                os = "Android"
             ).login(
                 this, {
                     it.handleLogin(this, {
