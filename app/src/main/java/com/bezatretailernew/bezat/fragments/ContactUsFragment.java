@@ -78,7 +78,11 @@ public class ContactUsFragment extends Fragment {
         clientRetrofit.SendDataViaApi(request, new ContactUsSuccessResponse() {
             @Override
             public void onSuccess(ContactUsResponse response) {
-                Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
+                if (lang=="") {
+                    Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(getContext(),"لقد تم ارسال الرساله بنجاح. سوف يتم التواصل معاكم قريبا." ,Toast.LENGTH_LONG).show();
+                }
                 getActivity().onBackPressed();
             }
 
