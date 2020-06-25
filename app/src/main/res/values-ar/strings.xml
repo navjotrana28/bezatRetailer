@@ -153,7 +153,7 @@
     <string name="offer_price">سعر العرض</string>
     <string name="original_prize_bd">السعر الأصلي:BD</string>
     <string name="BD_offers">BD</string>
-    <string name="know">Know More</string>
+    <string name="know">اضغط لمزيد من التفاصيل</string>
     <string name="feedback">آراء الزبائن</string>
     <string name="search_by_retailer">البحث حسب بائع التجزئة</string>
     <string name="get_feedback">ردود الفعل</string>
@@ -173,4 +173,7 @@
     <string name="password_login">كلمه السر</string>
 
     <string name="email_phone_vip">البريد الإلكتروني, رقم الهاتف</string>
+
+    <string name="redeem_button">استبدل القسائم</string>
+
 </resources>
