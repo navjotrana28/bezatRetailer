@@ -67,6 +67,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"
+                    android:fontFamily="@font/tajawal_regular"
                         android:gravity="center"
                         android:text="@string/please_enter_the_otp_we_have_sent_to_your_registered_phone_number"/>
 

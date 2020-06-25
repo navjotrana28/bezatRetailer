@@ -91,6 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_12sdp"
+                    android:fontFamily="@font/tajawal_regular"
                     android:text="English"
                     android:textColor="@color/black" />
 
@@ -106,6 +107,7 @@
                     android:gravity="end"
                     android:padding="@dimen/_12sdp"
                     android:text="عربى"
+                    android:fontFamily="@font/tajawal_regular"
                     android:textColor="@color/black" />
 
                 <View
