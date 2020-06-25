@@ -79,7 +79,7 @@
                         android:layout_marginTop="@dimen/_25sdp"
                         android:hint="@string/otp"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/black"
+                        android:textColorHint="@color/dark_grey"
                         android:textSize="@dimen/_14sdp"
                         android:paddingStart="@dimen/_10sdp"
                         android:inputType="number"

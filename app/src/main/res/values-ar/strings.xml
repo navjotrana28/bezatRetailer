@@ -44,7 +44,7 @@
     <string name="done">Done</string>
     <string name="someting_wrong">Something, went wrong!</string>
     <string name="ok">حسنا</string>
-    <string name="confirm_password">تأكيد كلمة المرور</string>
+    <string name="confirm_password">تأكيد كلمة المرور*</string>
     <string name="phone">هاتف</string>
     <string name="valid_email">الرجاء إدخال بريد إلكتروني صحيح</string>
     <string name="empty_email">يرجى إدخال البريد الإلكتروني</string>
@@ -157,7 +157,7 @@
     <string name="feedback">آراء الزبائن</string>
     <string name="search_by_retailer">البحث حسب بائع التجزئة</string>
     <string name="get_feedback">ردود الفعل</string>
-    <string name="enter_password">أدخل كلمة المرور*</string>
+    <string name="enter_password">يرجى إدخال كلمة المرور*</string>
     <string name="code_signup">Code*</string>
     <string name="please_enter_code">Please enter Code</string>
     <string name="please_enter_phone_number">يرجى إدخال رقم الهاتف</string>
