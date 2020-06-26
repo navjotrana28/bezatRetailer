@@ -186,7 +186,7 @@ public class ScanCoupon extends Fragment {
         Loader loader = new Loader(getContext());
         loader.show();
 
-        String url = "http://bezatapp.com/manage_App/admin/mobile_app/scan_coupon?" + "user_id=" + SharedPrefs.getKey(getActivity(), "userId") +
+        String url = "https://bezatapp.com/manage_App/admin/mobile_app/scan_coupon?" + "user_id=" + SharedPrefs.getKey(getActivity(), "userId") +
                 "&customer_code=" + qr + "&user_phone=" + userPhone;
         Log.v("couponurl", url + " ");
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();

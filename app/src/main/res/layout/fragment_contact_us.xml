@@ -88,6 +88,8 @@
 			app:layout_constraintTop_toTopOf="parent">
 
 			<EditText
+				android:textDirection="inherit"
+				android:textAlignment="viewStart"
 				android:id="@+id/contact_name_edit_text"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
@@ -116,6 +118,8 @@
 			app:layout_constraintTop_toBottomOf="@+id/contact_name">
 
 			<EditText
+				android:textDirection="inherit"
+				android:textAlignment="viewStart"
 				android:id="@+id/contact_email_edit_text"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -145,6 +149,8 @@
 			app:layout_constraintTop_toBottomOf="@+id/contact_email">
 
 			<EditText
+				android:textDirection="inherit"
+				android:textAlignment="viewStart"
 				android:id="@+id/contact_comments_edit_text"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"

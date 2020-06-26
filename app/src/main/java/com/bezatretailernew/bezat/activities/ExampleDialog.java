@@ -13,7 +13,7 @@ public class ExampleDialog extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Information")
+        builder.setTitle("")
                 .setMessage(getActivity().getString(R.string.enter_code_customer_code))
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
