@@ -84,9 +84,9 @@ public class MyProfile extends Fragment implements View.OnClickListener {
     View rootView;
     private OnFragmentInteractionListener mListener;
     ImageView imgProfile;
-    EditText etName, etEmail, etAddress, etPhone;
+    EditText etName, etEmail, etAddress;
     Loader loader;
-    TextView etCountry, etDob, etGender;
+    TextView etCountry, etDob, etGender,etPhone;
     TextView txtSave;
     String phone_code;
     private int mYear, mMonth, mDay;
@@ -161,6 +161,7 @@ public class MyProfile extends Fragment implements View.OnClickListener {
 
         }
         etGender.setOnClickListener(this);
+        etPhone.setOnClickListener(this);
         txtSave.setOnClickListener(this);
 
         loader = new Loader(getContext());
@@ -445,6 +446,9 @@ public class MyProfile extends Fragment implements View.OnClickListener {
                     image
             );
         }
+        if (view.getId()==R.id.etPhone){
+            openPhoneDialog();
+        }
         if (view.getId() == R.id.etDob) {
             final Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
@@ -512,7 +516,10 @@ public class MyProfile extends Fragment implements View.OnClickListener {
     }
 
     Dialog countryDialog;
-
+        private void openPhoneDialog(){
+                PhoneDialog phoneDialog=new PhoneDialog();
+                phoneDialog.show(getFragmentManager(),"any");
+        }
     private void updateProfile(String userId, String user_name,
                                String phone_code, String phone,
                                String addres, String gender,
