@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -156,7 +157,7 @@ public class Homepage extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel
-                    ("MyNotifications", "MyNotifications", NotificationManager.IMPORTANCE_DEFAULT);
+                    ("MyNotifications", "MyNotifications", NotificationManager.IMPORTANCE_HIGH);
 
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
@@ -169,7 +170,7 @@ public class Homepage extends AppCompatActivity {
                         if (!task.isSuccessful()) {
                             msg = ("Failed");
                         }
-                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                        Log.d("FirebaseMessaging", msg);
                     }
                 });
 //-------------------------------------------------

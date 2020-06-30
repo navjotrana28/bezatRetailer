@@ -11,8 +11,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -20,7 +23,11 @@ import androidx.recyclerview.widget.OrientationHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.android.volley.*;
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bezatretailernew.bezat.MyApplication;
 import com.bezatretailernew.bezat.R;
@@ -49,6 +56,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     EditText etPhone;
     ImageView imgBack;
     String lang = "";
+    ImageView countryIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,18 +67,19 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         } else {
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
         }
-        if (SharedPrefs.getKey(this,"selectedlanguage").contains("ar")) {
+        if (SharedPrefs.getKey(this, "selectedlanguage").contains("ar")) {
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-            lang="_ar";
+            lang = "_ar";
         } else {
             getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
-            lang="";
+            lang = "";
         }
         setContentView(R.layout.activity_forgot_password);
         etCode = findViewById(R.id.txtCode);
         btnSend = findViewById(R.id.btnSend);
         etPhone = findViewById(R.id.etPhone);
         imgBack = findViewById(R.id.imgBack);
+        countryIcon = findViewById(R.id.countryIcon);
         if(lang.equals("_ar")){
             imgBack.setImageDrawable(getResources().getDrawable(R.drawable.ic_back_rtl));
         }
@@ -287,6 +296,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                     public void onClick(View view) {
 
                         try {
+                            Picasso.get().load(jsonArray.getJSONObject(getAdapterPosition()).getString("img")).into(countryIcon);
                             etCode.setText(jsonArray.getJSONObject(getAdapterPosition()).getString("phone_code"));
                             dialog.dismiss();
                         } catch (JSONException e) {

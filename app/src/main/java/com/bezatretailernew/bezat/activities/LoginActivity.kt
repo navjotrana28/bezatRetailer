@@ -11,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bezatretailernew.bezat.R
 import com.bezatretailernew.bezat.api.LoginRequest
 import com.bezatretailernew.bezat.utils.SharedPrefs
+
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.*
-
 
 class LoginActivity : AppCompatActivity() {
 
@@ -67,7 +67,8 @@ class LoginActivity : AppCompatActivity() {
         if (isValid())
             LoginRequest(
                 email = etEmail.text.toString(),
-                password = etPassword.text.toString()
+                password = etPassword.text.toString(),
+                os = "Android"
             ).login(
                 this, {
                     it.handleLogin(this, {
