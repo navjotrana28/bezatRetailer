@@ -127,6 +127,9 @@ public class Dashboard extends Fragment {
             setLocale("en");
             language = "en";
         }
+
+        Log.d("---yo---",SharedPrefs.getKey(getActivity(), "storeID"));
+
         rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
         initViewPager();
         setDashboardData();

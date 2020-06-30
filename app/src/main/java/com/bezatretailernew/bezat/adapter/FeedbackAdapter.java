@@ -44,6 +44,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
         holder.title.setText(responseResult.getData().get(position).getUserName());
         holder.feedback.setText(responseResult.getData().get(position).getFeedback());
         holder.ratingBar.setRating(Integer.parseInt(responseResult.getData().get(position).getRatings()));
+        //holder.datetime.setText(responseResult.getData().get(position).getDatetime());
         Glide.with(mcontext)
                 .load(responseResult.getData().get(position).getImage())
                 .centerInside()
@@ -60,7 +61,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView title, feedback;
+        TextView title, feedback,datetime;
         RatingBar ratingBar;
 
         MyViewHolder(View view) {
@@ -69,6 +70,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
             title = view.findViewById(R.id.userName);
             feedback = view.findViewById(R.id.txtFeedback);
             ratingBar = view.findViewById(R.id.rating);
+            datetime = view.findViewById(R.id.tv_datetime);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

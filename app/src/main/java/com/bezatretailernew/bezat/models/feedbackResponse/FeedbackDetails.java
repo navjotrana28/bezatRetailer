@@ -18,6 +18,18 @@ public class FeedbackDetails {
     @Expose
     private String image;
 
+    @SerializedName("datetime")
+    @Expose
+    private String datetime;
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
+    }
+
     public String getFeedback() {
         return feedback;
     }

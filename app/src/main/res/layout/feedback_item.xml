@@ -50,20 +50,6 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"/>
 
-                <RatingBar
-
-                    android:id="@+id/rating"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="right"
-                    android:gravity="right"
-                    android:isIndicator="?android:attr/ratingBarStyleIndicator"
-                    android:numStars="5"
-                    android:progressBackgroundTint="@color/divider_grey"
-                    android:progressTint="@color/golden"
-                    android:stepSize="1.5" />
-
             </LinearLayout>
 
             <TextView
@@ -79,6 +65,36 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_11sdp" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RatingBar
+
+                android:id="@+id/rating"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:isIndicator="?android:attr/ratingBarStyleIndicator"
+                android:numStars="5"
+                android:progressBackgroundTint="@color/divider_grey"
+                android:progressTint="@color/golden"
+                android:stepSize="1.5" />
+
+            <TextView
+                android:id="@+id/tv_datetime"
+                android:textColor="@color/colorPrimary"
+                android:textSize="11sp"
+                android:text="Date n Time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
         </LinearLayout>
 
     </LinearLayout>

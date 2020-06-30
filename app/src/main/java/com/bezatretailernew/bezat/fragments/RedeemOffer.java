@@ -3,6 +3,8 @@ package com.bezatretailernew.bezat.fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +24,13 @@ import com.bezatretailernew.bezat.R;
 import com.bezatretailernew.bezat.adapter.RedeemOfferAdapter;
 import com.bezatretailernew.bezat.interfaces.GetOfferCodeCallback;
 import com.bezatretailernew.bezat.interfaces.RedeemUserOfferCallback;
+import com.bezatretailernew.bezat.interfaces.UserCodeInterface;
+import com.bezatretailernew.bezat.interfaces.UserPhoneInterface;
+import com.bezatretailernew.bezat.models.UserCodeResponse;
 import com.bezatretailernew.bezat.models.getOfferCodes.GetOfferCodesResponse;
 import com.bezatretailernew.bezat.models.redeemUserOffer.RedeemUserOfferRequest;
 import com.bezatretailernew.bezat.models.redeemUserOffer.RedeemUserOfferResponse;
+import com.bezatretailernew.bezat.models.userPhoneResponse;
 import com.bezatretailernew.bezat.utils.Loader;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
 import com.budiyev.android.codescanner.CodeScanner;
@@ -96,12 +102,80 @@ public class RedeemOffer extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        customer_code.setText( result.getText());
+                        ClientRetrofit clientRetrofit = new ClientRetrofit();
+                        clientRetrofit.getUserPhone(result.getText(), new UserPhoneInterface() {
+                            @Override
+                            public void onSuccess(userPhoneResponse responseResult) {
+                                if(result.getText()!="" && result.getText()!=null){
+                                    Log.d("---scanner---",retailerId);
+                                    phone_number.setText(responseResult.getData().getUser_phone());
+                                    customer_code.setText( result.getText());
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Throwable e) {
+
+                            }
+                        });
+
                     }
                 });
             }
         });
         mCodeScanner.startPreview();
+
+        customer_code.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus && customer_code.getText().toString()!="" && customer_code.getText().toString()!=null && !customer_code.getText().toString().isEmpty()){
+                    ClientRetrofit clientRetrofit = new ClientRetrofit();
+                    clientRetrofit.getUserPhone(customer_code.getText().toString(), new UserPhoneInterface() {
+                        @Override
+                        public void onSuccess(userPhoneResponse responseResult) {
+                            Log.d("---response---",customer_code.getText().toString());
+                            if(responseResult.getStatus().startsWith("suc")){
+                                Log.d("---code---",retailerId);
+                                phone_number.setText(responseResult.getData().getUser_phone());
+                                phone_number.clearFocus();
+                                customer_code.clearFocus();
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Throwable e) {
+
+                        }
+                    });
+                }
+            }
+        });
+
+        phone_number.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus && phone_number.getText().toString()!="" && phone_number.getText().toString()!=null){
+                    ClientRetrofit clientRetrofit = new ClientRetrofit();
+                    clientRetrofit.getUserCode(phone_number.getText().toString(), new UserCodeInterface() {
+                        @Override
+                        public void onSuccess(UserCodeResponse responseResult) {
+                            if(responseResult.getStatus().startsWith("suc")){
+                                customer_code.setText(responseResult.getData().getUser_code());
+                                phone_number.clearFocus();
+                                customer_code.clearFocus();
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Throwable e) {
+
+                        }
+                    });
+                }
+            }
+        });
 
         redeem.setOnClickListener(new View.OnClickListener() {
             @Override

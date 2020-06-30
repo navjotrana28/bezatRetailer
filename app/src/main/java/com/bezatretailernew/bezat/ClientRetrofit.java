@@ -11,8 +11,11 @@ import com.bezatretailernew.bezat.interfaces.RedeemUserOfferCallback;
 import com.bezatretailernew.bezat.interfaces.SearchPackageInterface;
 import com.bezatretailernew.bezat.interfaces.LogoutCallback;
 import com.bezatretailernew.bezat.interfaces.SearchRetaierInterface;
+import com.bezatretailernew.bezat.interfaces.UserCodeInterface;
+import com.bezatretailernew.bezat.interfaces.UserPhoneInterface;
 import com.bezatretailernew.bezat.interfaces.VipListResponse;
 import com.bezatretailernew.bezat.models.LogoutResponse;
+import com.bezatretailernew.bezat.models.UserCodeResponse;
 import com.bezatretailernew.bezat.models.feedbackResponse.FeedbackDetails;
 import com.bezatretailernew.bezat.models.feedbackResponse.FeedbackResponse;
 import com.bezatretailernew.bezat.models.getOfferCodes.GetOfferCodesResponse;
@@ -20,12 +23,14 @@ import com.bezatretailernew.bezat.models.packageResponse.PackageResponse;
 import com.bezatretailernew.bezat.models.redeemUserOffer.RedeemUserOfferRequest;
 import com.bezatretailernew.bezat.models.redeemUserOffer.RedeemUserOfferResponse;
 import com.bezatretailernew.bezat.models.searchRetailerResponses.SearchResponseResult;
+import com.bezatretailernew.bezat.models.userPhoneResponse;
 import com.bezatretailernew.bezat.models.vip_lists.VipResult;
 import com.bezatretailernew.bezat.utils.URLS;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.internal.operators.observable.ObservableSerialized;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -267,6 +272,64 @@ public class ClientRetrofit {
 
                     }
                 });
+    }
+
+    public void getUserPhone(String usercode, UserPhoneInterface userPhoneInterface){
+        serviceRetrofit.getUserPhone(usercode)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<userPhoneResponse>() {
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(userPhoneResponse redeemOfferResponse) {
+                        userPhoneInterface.onSuccess(redeemOfferResponse);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+    }
+
+    public void getUserCode(String phone, UserCodeInterface userCodeInterface){
+        serviceRetrofit.getUserCode(phone)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<UserCodeResponse>() {
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(UserCodeResponse redeemOfferResponse) {
+                        userCodeInterface.onSuccess(redeemOfferResponse);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
 
 }
