@@ -19,8 +19,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bezatretailernew.bezat.ClientRetrofit;
 import com.bezatretailernew.bezat.R;
 import com.bezatretailernew.bezat.activities.ExampleDialog;
+import com.bezatretailernew.bezat.interfaces.UserCodeInterface;
+import com.bezatretailernew.bezat.interfaces.UserPhoneInterface;
+import com.bezatretailernew.bezat.models.UserCodeResponse;
+import com.bezatretailernew.bezat.models.userPhoneResponse;
 import com.bezatretailernew.bezat.utils.Loader;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
 import com.budiyev.android.codescanner.CodeScanner;
@@ -123,8 +128,21 @@ public class ScanCoupon extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        getAutoLogin(result.getText(), "");
-                        Toast.makeText(getActivity(), result.getText(), Toast.LENGTH_SHORT).show();
+                        ClientRetrofit clientRetrofit = new ClientRetrofit();
+                        clientRetrofit.getUserPhone(result.getText(), new UserPhoneInterface() {
+                            @Override
+                            public void onSuccess(userPhoneResponse responseResult) {
+                                if(result.getText()!="" && result.getText()!=null){
+                                    getAutoLogin(result.getText(), responseResult.getData().getUser_phone());
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Throwable e) {
+
+                            }
+                        });
+
                     }
                 });
             }
@@ -134,6 +152,58 @@ public class ScanCoupon extends Fragment {
 //            @Override
 //            public void onClick(View view) {
         mCodeScanner.startPreview();
+
+        customer_code.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus && customer_code.getText().toString()!="" && customer_code.getText().toString()!=null && !customer_code.getText().toString().isEmpty()){
+                    ClientRetrofit clientRetrofit = new ClientRetrofit();
+                    clientRetrofit.getUserPhone(customer_code.getText().toString(), new UserPhoneInterface() {
+                        @Override
+                        public void onSuccess(userPhoneResponse responseResult) {
+                            Log.d("---response---",customer_code.getText().toString());
+                            if(responseResult.getStatus().startsWith("suc")){
+                                //Log.d("---code---",retailerId);
+                                customer_phone.setText(responseResult.getData().getUser_phone());
+                                customer_phone.clearFocus();
+                                customer_code.clearFocus();
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Throwable e) {
+
+                        }
+                    });
+                }
+            }
+        });
+
+        customer_phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus && customer_phone.getText().toString()!="" && customer_phone.getText().toString()!=null){
+                    ClientRetrofit clientRetrofit = new ClientRetrofit();
+                    clientRetrofit.getUserCode(customer_phone.getText().toString(), new UserCodeInterface() {
+                        @Override
+                        public void onSuccess(UserCodeResponse responseResult) {
+                            if(responseResult.getStatus().startsWith("suc")){
+                                customer_code.setText(responseResult.getData().getUser_code());
+                                customer_phone.clearFocus();
+                                customer_code.clearFocus();
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Throwable e) {
+
+                        }
+                    });
+                }
+            }
+        });
 //            }
 //        });
 

@@ -87,6 +87,7 @@
                 android:stepSize="1.5" />
 
             <TextView
+                android:gravity="center"
                 android:id="@+id/tv_datetime"
                 android:textColor="@color/colorPrimary"
                 android:textSize="11sp"
