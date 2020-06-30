@@ -45,7 +45,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.MyView
         holder.feedback.setText(responseResult.getData().get(position).getFeedback());
         holder.ratingBar.setRating(Integer.parseInt(responseResult.getData().get(position).getRatings()));
         String arr[] = responseResult.getData().get(position).getDatetime().split(" ");
-        holder.datetime.setText(arr[0]+"\n"+arr[1]);
+        holder.datetime.setText(arr[0]+"\n"+arr[1].substring(0,arr[1].length()-3));
         Glide.with(mcontext)
                 .load(responseResult.getData().get(position).getImage())
                 .centerInside()
