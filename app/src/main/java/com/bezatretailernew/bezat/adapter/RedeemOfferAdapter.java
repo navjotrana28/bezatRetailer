@@ -23,10 +23,12 @@ public class RedeemOfferAdapter extends RecyclerView.Adapter<RedeemOfferAdapter.
 
     private Context mcontext;
     private GetOfferCodesResponse response;
+    String lang;
 
-    public RedeemOfferAdapter(Context mcontext, GetOfferCodesResponse response) {
+    public RedeemOfferAdapter(Context mcontext, GetOfferCodesResponse response, String lang) {
         this.mcontext = mcontext;
         this.response = response;
+        this.lang = lang;
     }
 
     List<String> array_offers = new ArrayList<>();
@@ -59,7 +61,12 @@ public class RedeemOfferAdapter extends RecyclerView.Adapter<RedeemOfferAdapter.
     public void onBindViewHolder(@NonNull RedeemOfferAdapter.MyViewHolder holder, int position) {
         if (response.getData() != null && response.getData().size() != 0) {
             OfferCodeData data = response.getData().get(position);
-            holder.offer_name.setText(data.getOffer_coupon_code());
+            if(lang.equals("")){
+                holder.offer_name.setText(data.getOffer_name());
+            }else{
+                holder.offer_name.setText(data.getOffer_name_ar());
+            }
+
         }
         if(selectedPosition == position){
             holder.selected.setChecked(true);

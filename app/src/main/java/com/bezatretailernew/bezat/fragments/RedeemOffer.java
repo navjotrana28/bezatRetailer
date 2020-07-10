@@ -256,11 +256,11 @@ public class RedeemOffer extends Fragment {
                     recyclerViewOffers.setVisibility(View.GONE);
                     error.setVisibility(View.VISIBLE);
                     error.setText(responseResult.getMsg());
-                    adapter = new RedeemOfferAdapter(getActivity().getBaseContext(), responseResult);
+                    //adapter = new RedeemOfferAdapter(getActivity().getBaseContext(), responseResult);
                 } else {
                     recyclerViewOffers.setVisibility(View.VISIBLE);
                     error.setVisibility(View.GONE);
-                    adapter = new RedeemOfferAdapter(getActivity().getBaseContext(), responseResult);
+                    adapter = new RedeemOfferAdapter(getActivity().getBaseContext(), responseResult,lang);
                     recyclerViewOffers.setAdapter(adapter);
                 }
                 loader.dismiss();

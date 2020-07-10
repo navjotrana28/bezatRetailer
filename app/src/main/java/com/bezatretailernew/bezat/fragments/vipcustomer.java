@@ -240,12 +240,13 @@ public class vipcustomer extends Fragment {
             public void onResponse(NetworkResponse response) {
                 loader.dismiss();
                 String res = new String(response.data);
-                Log.v("changepassword", res);
+                //Toast.makeText(getActivity().getBaseContext(), res, Toast.LENGTH_SHORT).show();
+                Log.d("---error---",res);
                 try {
                     JSONObject jsonObject = new JSONObject(res);
                     showMessage(jsonObject.getString("message"));
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.d("---error---",e.getMessage());
                 }
 
             }
@@ -256,6 +257,7 @@ public class vipcustomer extends Fragment {
                 String json = null;
                 String Message;
                 NetworkResponse response = error.networkResponse;
+                Toast.makeText(getActivity().getBaseContext(), response.data+"", Toast.LENGTH_SHORT).show();
                 Log.v("response", response.data + "");
             }
         }) {

@@ -9,6 +9,30 @@ public class OfferCodeData {
     @Expose
     private String offer_coupon_code;
 
+    @SerializedName("offer_name")
+    @Expose
+    private String offer_name;
+
+    @SerializedName("offer_name_ar")
+    @Expose
+    private String offer_name_ar;
+
+    public String getOffer_name() {
+        return offer_name;
+    }
+
+    public void setOffer_name(String offer_name) {
+        this.offer_name = offer_name;
+    }
+
+    public String getOffer_name_ar() {
+        return offer_name_ar;
+    }
+
+    public void setOffer_name_ar(String offer_name_ar) {
+        this.offer_name_ar = offer_name_ar;
+    }
+
     public String getOffer_coupon_code() {
         return offer_coupon_code;
     }
