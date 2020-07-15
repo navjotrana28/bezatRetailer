@@ -66,6 +66,7 @@
             </com.budiyev.android.codescanner.CodeScannerView>
 
             <EditText
+                android:inputType="number|phone"
                 android:maxLines="1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"

@@ -2,6 +2,7 @@ package com.bezatretailernew.bezat.fragments;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bezatretailernew.bezat.R;
 import com.bezatretailernew.bezat.utils.SharedPrefs;
@@ -55,7 +58,20 @@ public class WebViewCoupon extends Fragment {
         view.getSettings().setLoadWithOverviewMode(true);
         view.getSettings().setUseWideViewPort(true);
         view.getSettings().setBuiltInZoomControls(true);
-        view.setWebViewClient(new WebViewClient());
+        view.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                System.out.println("when you click on any interlink on webview that time you got url :-" + url);
+                if(url.equals("https://bezatapp.com/manage_App/admin/mobile_app/success")){
+                    Log.d("---Found---",url);
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+                        fm.popBackStack();
+                    }
+                }
+                return super.shouldOverrideUrlLoading(view, url);
+            }
+        });
         view.loadUrl(url);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
