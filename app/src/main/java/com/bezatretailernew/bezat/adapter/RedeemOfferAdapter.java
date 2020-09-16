@@ -17,14 +17,16 @@ import com.bezatretailernew.bezat.models.getOfferCodes.GetOfferCodesResponse;
 import com.bezatretailernew.bezat.models.getOfferCodes.OfferCodeData;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RedeemOfferAdapter extends RecyclerView.Adapter<RedeemOfferAdapter.MyViewHolder> {
 
     private Context mcontext;
     private GetOfferCodesResponse response;
     String lang;
-
+    Map<Integer,MyViewHolder> map = new HashMap<>();
     public RedeemOfferAdapter(Context mcontext, GetOfferCodesResponse response, String lang) {
         this.mcontext = mcontext;
         this.response = response;
@@ -74,12 +76,15 @@ public class RedeemOfferAdapter extends RecyclerView.Adapter<RedeemOfferAdapter.
         else{
             holder.selected.setChecked(false);
         }
+        map.put(position,holder);
         holder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    if(selectedPosition!=-1){
+                        map.get(selectedPosition).selected.setChecked(false);
+                    }
                     selectedPosition = holder.getAdapterPosition();
-                    notifyDataSetChanged();
                     if(single){
                         array_offers.clear();
                         array_offers.add(response.getData().get(position).getOffer_coupon_code());
